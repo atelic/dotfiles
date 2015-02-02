@@ -27,10 +27,13 @@ Bundle 'honza/vim-snippets'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'scrooloose/nerdtree'
+Plugin 'tpope/vim-rails'
+Plugin 'othree/html5.vim'
 " Color Themes
 Bundle 'flazz/vim-colorschemes'
+Bundle 'morhetz/gruvbox'
 colorscheme Monokai
-
+set background=dark
 """"""""
 if has('autocmd')
   filetype plugin indent on
@@ -49,6 +52,8 @@ set smarttab
 
 set nrformats-=octal
 set shiftround
+set cursorline
+hi cursorline term=bold cterm=bold guibg=Grey40
 
 set ttimeout
 set ttimeoutlen=50
@@ -101,7 +106,6 @@ set textwidth=0
 set wrapmargin=0
 set formatoptions+=l
 map <C-n> :NERDTreeToggle<CR>
-autocmd bufenter * if (winnr("$") == 1 && exists('b:NERDTreeType') && b:NERDTreeType == 'primary') |q| endif
 
 set nobackup
 set nowritebackup
