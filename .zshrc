@@ -1,11 +1,10 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
-
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="jreese"
+ZSH_THEME="agnoster"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -20,18 +19,18 @@ ZSH_THEME="jreese"
 # DISABLE_LS_COLORS="true"
 
 # Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
@@ -45,24 +44,24 @@ ZSH_THEME="jreese"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git command-not-found debian)
 
 # User configuration
 
-export PATH="/home/eric/.rvm/gems/ruby-2.0.0-p598/bin:/home/eric/.rvm/gems/ruby-2.0.0-p598@global/bin:/home/eric/.rvm/rubies/ruby-2.0.0-p598/bin:/usr/local/share/npm/bin:/usr/lib/node_modules:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/eric/.rvm/bin"
+export PATH=$HOME/bin:/usr/local/bin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='mvim'
+fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -76,5 +75,39 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+alias zshconfig="mate ~/.zshrc"
+alias ohmyzsh="mate ~/.oh-my-zsh"
+force_color_prompt=yes
+export PATH="/usr/lib/node_modules:$PATH"
+export PATH="/usr/local/share/npm/bin:$PATH"
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+
+############
+#Aliases
+###########
+alias c="clear"
+alias ..="cd .."
+alias composer="sudo php composer.phar"
+alias gS="git status"
+alias lamp="cd ~/beerlamp"
+alias e="exit"
+alias cd..='cd ..'
+alias bc='bc -l'
+alias vi='vim'
+alias svi='sudo vim'
+alias edit='vim'
+alias apt-get-'sudo apt-get'
+alias update='sudo apt-get update && sudo apt-get upgrade'
+alias root='sudo -i'
+alias su='sudo -i'
+alias df='df -h'
+alias gc='git checkout'
+alias apache='sudo /opt/lampp/lampp start'
+alias speed-test=' wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip'
+alias t='/home/eric/todo.sh'
+
+##############
+#Scripts
+##############
+alias google='sudo python /bin/goog.py'

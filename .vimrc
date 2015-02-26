@@ -1,39 +1,22 @@
-" vim-sublime - A minimal Sublime Text -like vim experience bundle
-"               http://github.com/grigio/vim-sublime
-" Best view with a 256 color terminal and Powerline fonts
-
 set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 Bundle 'gmarik/vundle'
-Bundle 'mattn/emmet-vim'
-" Emmet config
-let g:user_emmet_leader_key='<C-M>'
 Bundle 'tpope/vim-surround'
+Bundle 'morhetz/gruvbox'
 Bundle 'gcmt/breeze.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'SirVer/ultisnips'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'bling/vim-airline'
+Bundle 'scrooloose/nerdtree'
 Bundle 'airblade/vim-gitgutter'
-Bundle 'xsbeats/vim-blade'
-Plugin 'pangloss/vim-javascript'
-Plugin 'jelera/vim-javascript-syntax'
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'tomtom/tlib_vim'
-Bundle 'garbas/vim-snipmate'
-Bundle 'honza/vim-snippets'
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'scrooloose/nerdtree'
-Plugin 'tpope/vim-rails'
-Plugin 'othree/html5.vim'
-" Color Themes
-Bundle 'flazz/vim-colorschemes'
-Bundle 'morhetz/gruvbox'
-colorscheme Monokai
+Bundle 'Raimondi/delimitMate'
+Bundle 'mattn/emmet-vim'
+set t_Co=256
 set background=dark
+
 """"""""
 if has('autocmd')
   filetype plugin indent on
@@ -41,6 +24,10 @@ endif
 if has('syntax') && !exists('g:syntax_on')
   syntax enable
 endif
+
+" Color Themes
+Bundle 'flazz/vim-colorschemes'
+colorscheme badwolf
 
 " Use :help 'option' to see the documentation for the given option.
 set autoindent
@@ -52,8 +39,6 @@ set smarttab
 
 set nrformats-=octal
 set shiftround
-set cursorline
-hi cursorline term=bold cterm=bold guibg=Grey40
 
 set ttimeout
 set ttimeoutlen=50
@@ -77,11 +62,13 @@ set listchars=tab:▒░,trail:▓
 set list
 
 inoremap <C-U> <C-G>u<C-U>
-
+inoremap jk <Esc>
 set number
 set hlsearch
 set ignorecase
 set smartcase
+" Shows all open buffers and their number
+nnoremap <F5> :buffers<CR>:buffer<Space>
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
@@ -93,19 +80,6 @@ endif
 
 " do not history when leavy buffer
 set hidden
-
-" FIXME: (broken) ctrl s to save
-noremap  <C-S> :update<CR>
-vnoremap <C-S> <C-C>:update<CR>
-inoremap <C-S> <Esc>:update<CR>
-nnoremap <C-g> :!chromium-browser %<CR>
-set wrap
-set linebreak
-set nolist
-set textwidth=0
-set wrapmargin=0
-set formatoptions+=l
-map <C-n> :NERDTreeToggle<CR>
 
 set nobackup
 set nowritebackup
@@ -121,15 +95,11 @@ set completeopt=menuone,longest,preview
 " Plugins config
 "
 
+" NERDTree
+nmap <silent> <C-n> :NERDTreeToggle<CR>
+
 " CtrlP
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/* 
-
-" Ultisnip
-" NOTE: <f1> otherwise it overrides <tab> forever
-let g:UltiSnipsExpandTrigger="<f1>"
-let g:UltiSnipsJumpForwardTrigger="<f1>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-let g:did_UltiSnips_vim_after = 1
 
 " vim-airline
 let g:airline#extensions#tabline#enabled = 1
@@ -137,9 +107,8 @@ let g:airline_powerline_fonts = 1
 
 "
 " Basic shortcuts definitions
-"  most in visual mode / selection (v or ⇧ v)
+" most in visual mode / selection (v or ⇧ v)
 "
-
 " Find
 map <C-f> /
 " indend / deindent after selecting the text with (⇧ v), (.) to repeat.
@@ -149,24 +118,22 @@ vnoremap <S-Tab> <
 vmap <C-m> gc
 " Disable tComment to escape some entities
 let g:tcomment#replacements_xml={}
-" Text wrap simpler, then type the open tag or ',"
-vmap <C-w> S
-" Cut, Paste, Copy
-vmap <C-x> d
-vmap <C-v> p
-vmap <C-c> y
-" Tabs
-let g:airline_theme='badwolf'
+
+"Tabs
+let g:airline_theme='solarized'
 let g:airline#extensions#tabline#enabled = 1
-nnoremap <C-b>  :tabprevious<CR>
-inoremap <C-b>  <Esc>:tabprevious<CR>i
-nnoremap <C-t>  :tabnew<CR>
-inoremap <C-t>  <Esc>:tabnew<CR>i
-nnoremap <C-k>  :tabclose<CR>
-inoremap <C-k>  <Esc>:tabclose<CR>i
+nnoremap <C-b>      :tabprevious<CR>
+inoremap <C-b>      <Esc>:tabprevious<CR>i
+nnoremap <C-l>      :tabnext<CR>
+inoremap <C-l>      <Esc>:tabnext<CR>i
+nnoremap <C-t>      :tabnew<CR>
+inoremap <C-t>      <Esc>:tabnew<CR>i
+nnoremap <C-w>      :tabclose<CR>
+inoremap <C-w>      <Esc>:tabclose<CR>i
 
 " lazy ':'
 map \ :
+
 
 let mapleader = ','
 nnoremap <Leader>p :set paste<CR>
