@@ -1,7 +1,7 @@
 set nocompatible
 filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/vundle
+call vundle#begin()
 Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-surround'
 Bundle 'morhetz/gruvbox'
@@ -14,6 +14,7 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'Raimondi/delimitMate'
 Bundle 'mattn/emmet-vim'
+Bundle 'flazz/vim-colorschemes'
 set t_Co=256
 set background=dark
 
@@ -26,8 +27,8 @@ if has('syntax') && !exists('g:syntax_on')
 endif
 
 " Color Themes
-Bundle 'flazz/vim-colorschemes'
-colorscheme badwolf
+colorscheme gruvbox
+call vundle#end()
 
 " Use :help 'option' to see the documentation for the given option.
 set autoindent
@@ -120,19 +121,28 @@ vmap <C-m> gc
 let g:tcomment#replacements_xml={}
 
 "Tabs
-let g:airline_theme='solarized'
-let g:airline#extensions#tabline#enabled = 1
-nnoremap <C-b>      :tabprevious<CR>
-inoremap <C-b>      <Esc>:tabprevious<CR>i
-nnoremap <C-l>      :tabnext<CR>
-inoremap <C-l>      <Esc>:tabnext<CR>i
-nnoremap <C-t>      :tabnew<CR>
-inoremap <C-t>      <Esc>:tabnew<CR>i
-nnoremap <C-w>      :tabclose<CR>
-inoremap <C-w>      <Esc>:tabclose<CR>i
+"  let g:airline_theme='gruvbox'
+"  let g:airline#extensions#tabline#enabled = 1
+"  nnoremap <C-b>      :tabprevious<CR>
+"  inoremap <C-b>      <Esc>:tabprevious<CR>i
+"  nnoremap <C-l>      :tabnext<CR>
+"  inoremap <C-l>      <Esc>:tabnext<CR>i
+"  nnoremap <C-t>      :tabnew<CR>
+"  inoremap <C-t>      <Esc>:tabnew<CR>i
+"  nnoremap <C-w>      :tabclose<CR>
+"  inoremap <C-w>      <Esc>:tabclose<CR>i
+
+fun! <SID>StripTrailingWhitespaces()
+  let l = line(".")
+  let c = col(".")
+  %s/\s\+$//e
+  call cursor(l,c)
+endfun
+
+autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
 " lazy ':'
-map \ :
+map ; :
 
 
 let mapleader = ','
