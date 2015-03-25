@@ -17,7 +17,11 @@ cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
 #### Mass install of packages
 sudo yum update -y
 
-sudo yum install -y unrar unzip ranger vim emacs geary corebird filezilla gimp inkscape scribus vlc eclipse terminator gnome-tweak-tool
+sudo yum install -y unrar unzip ranger vim emacs geary corebird filezilla gimp inkscape scribus vlc eclipse terminator gnome-tweak-tool ncmpcpp irssi git
+
+git clone git://github.com/VitaliyRodnenko/geeknote.git .evernote && cd .evernote
+sudo python setup.py install
+geeknote login
 
 #### Google chrome
 su -
@@ -50,7 +54,19 @@ Cry
 
 #### Dotfiles
 
-cp ~/Dropbox/dot/.zshrc ~ && cp ~/Dropbox/dot/.bashrc && ~/Dropbox/dot/.vimrc
+cp ~/Dropbox/dot/.zshrc ~ && cp ~/Dropbox/dot/.bashrc && ~/Dropbox/dot/.vimrc && ~/Dropbox/dot/.space.sh ~
 cd && git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 vim .vimrc and run :PluginInstall
+
+wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O - | sh
+chsh -s /bin/zsh
+
+cpan Term::ExtendedColor
+git clone git://github.com/trapd00r/ls--.git && cd ls--
+perl Makefile.PL
+make && su -c 'make install'
+cp ls++.conf $HOME/.ls++.conf
+
+#### IDEs
+Install phpstorm and android-studio from jetbeans online
