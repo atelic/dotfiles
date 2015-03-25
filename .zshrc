@@ -11,7 +11,7 @@ ZSH_THEME="cloud"
 # CASE_SENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
@@ -23,10 +23,10 @@ ZSH_THEME="cloud"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -45,11 +45,12 @@ ZSH_THEME="cloud"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git colored-man colorize copydir yum)
 
 # User configuration
+export TERM="xterm-256color"
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl"
+export PATH="/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/home/eric/.gem/ruby/1.8/bin:/opt/nginx/sbin:/home/eric/.local/bin:/home/eric/bin:/home/eric/.gem/ruby/1.8/bin:/opt/nginx/sbin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -58,11 +59,7 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+export EDITOR='vim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -70,13 +67,17 @@ source $ZSH/oh-my-zsh.sh
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
 ############
 #Aliases
 ###########
 alias c="clear"
 alias ..="cd .."
 alias composer="sudo php composer.phar"
-alias gS="git status"
 alias lamp="cd ~/beerlamp"
 alias e="exit"
 alias cd..='cd ..'
@@ -84,23 +85,37 @@ alias bc='bc -l'
 alias vi='vim'
 alias svi='sudo vim'
 alias edit='vim'
-alias apt-get-'sudo apt-get'
-alias update='sudo apt-get update && sudo apt-get upgrade'
-alias root='sudo -i'
-alias su='sudo -i'
 alias df='df -h'
-alias gc='git checkout'
 alias apache='sudo /opt/lampp/lampp start'
 alias speed-test=' wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip'
-alias t='/home/eric/todo.sh'
-
+alias en='geeknote'
+alias clock='while true; do tput clear; date +"%H : %M" | figlet ; sleep 1; done'
+alias lss='ls++'
+alias yiy='sudo yum install -y '
+alias yuy='sudo yum update -y'
+alias clip='xclip'
+alias v='xclip -o'
+alias hdd="df -h | grep /dev/sda1"
 ##############
 #Scripts
 ##############
 alias google='sudo python /bin/goog.py'
-
+export TERM=xterm-256color
 up (){
  for i in $(seq ${1: -1});do
    cd ../
  done
 }
+
+#mkdir and follow into it
+function mkcd {
+  if [ ! -n "$1" ]; then
+      echo "Enter a directory name"
+  elif [ -d $1 ]; then
+      echo "\`$1' already exists"
+  else
+      mkdir $1 && cd $1
+  fi
+}
+alias batt='upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep -E "state|to\ full|percentage"'
+alias coltest='cd ~/ && ./.space.sh'

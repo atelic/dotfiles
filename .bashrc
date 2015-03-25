@@ -17,8 +17,8 @@ export BASH_IT_THEME='bobby'
 export GIT_HOSTING='git@git.domain.com'
 
 # Set my editor and git editor
-export EDITOR="/usr/bin/mate -w"
-export GIT_EDITOR='/usr/bin/mate -w'
+export EDITOR="/usr/bin/vim"
+export GIT_EDITOR='/usr/bin/vim'
 
 # Set the path nginx
 export NGINX_PATH='/opt/nginx'
@@ -55,18 +55,36 @@ alias edit='vim'
 alias df='df -h'
 alias apache='sudo /opt/lampp/lampp start'
 alias speed-test=' wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip'
+alias en='geeknote'
+alias clock='while true; do tput clear; date +"%H : %M" | figlet ; sleep 1; done'
+alias lss='ls++'
+alias yi='sudo yum install'
+alias yiy='sudo yum install -y'
+alias yu='sudo yum update'
+alias yuy='sudo yum update -y'
+
 
 ##############
 #Scripts
 ##############
 alias google='sudo python /bin/goog.py'
-
+export TERM=xterm-256color
 up (){
  for i in $(seq ${1: -1});do
    cd ../
  done
 }
 
+#mkdir and follow into it
+function mkcd {
+  if [ ! -n "$1" ]; then
+      echo "Enter a directory name"
+      elif [ -d $1 ]; then
+          echo "\`$1' already exists"
+          else
+              mkdir $1 && cd $1
+              fi
+            }
 
 # Load Bash It
 source $BASH_IT/bash_it.sh
