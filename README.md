@@ -73,3 +73,6 @@ cp ls++.conf $HOME/.ls++.conf
 
 #### IDEs
 Install phpstorm and android-studio from jetbeans online
+  ##### Android Studio:
+    wget -O android-studio-ide.zip https://dl.google.com/dl/android/studio/ide-zips/1.1.0/android-studio-ide-135.1740770-linux.zip
+
