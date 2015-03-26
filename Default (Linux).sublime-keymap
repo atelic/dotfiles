@@ -1,0 +1,141 @@
+[
+	/*****  VINTAGE KEYMAPS *****/
+
+	// Mode control
+
+	// `jk` exit insert mode
+	{ "keys": ["j", "k"], "command": "exit_insert_mode",
+		"context":
+		[
+			{ "key": "setting.command_mode", "operand": false },
+			{ "key": "setting.is_widget", "operand": false }
+		]
+	},
+	{"keys": [";"], "command": "open_command_palette "}
+		"context":
+		[
+			{ "key": "setting.command_mode", "operand": false },
+			{ "key": "setting.is_widget", "operand": false }
+		]
+
+	},
+
+
+	// Window controls
+
+	// `,cc` close window
+	{ "keys": [",", "c", "c"], "command": "close",
+		"context": [{"key": "setting.vintage_ctrl_keys"}, {"key": "setting.command_mode"}]
+	},
+
+	// `,k` move window focus up
+	{ "keys": [",", "k"], "command": "move_group_focus",
+		"args": {"direction": "up"},
+		"context": [{"key": "setting.vintage_ctrl_keys"}, {"key": "setting.command_mode"}]
+	},
+
+	// `,j` move window focus down
+	{ "keys": [",", "j"], "command": "move_group_focus",
+		"args": {"direction": "down"},
+		"context": [{"key": "setting.vintage_ctrl_keys"}, {"key": "setting.command_mode"}]
+	},
+
+	// `,l` move window focus right
+	{ "keys": [",", "l"], "command": "move_group_focus",
+		"args": {"direction": "right"},
+		"context": [{"key": "setting.vintage_ctrl_keys"}, {"key": "setting.command_mode"}]
+	},
+
+	// `,h` move window focus left
+	{ "keys": [",", "h"], "command": "move_group_focus",
+		"args": {"direction": "left"},
+		"context": [{"key": "setting.vintage_ctrl_keys"}, {"key": "setting.command_mode"}]
+	},
+
+
+	/***** SUBLIME COMMANDS *****/
+
+	// Window Group Layouts
+
+	// `,w` one column
+	{
+		"keys": [",", "w"],
+		"command": "set_layout",
+		"args":
+		{
+			"cols": [0.0, 1.0],
+			"rows": [0.0, 1.0],
+			"cells": [[0, 0, 1, 1]]
+		}
+	},
+
+	// `,vs` vertical split columns
+	{
+		"keys": [",", "v", "s"],
+		"command": "set_layout",
+		"args":
+		{
+			"cols": [0.0, 0.5, 1.0],
+			"rows": [0.0, 1.0],
+			"cells": [[0, 0, 1, 1], [1, 0, 2, 1]]
+		}
+	},
+	// `,vj` three vertical split columns
+	{
+		"keys": [",", "v", "j"],
+		"command": "set_layout",
+		"args":
+		{
+			"cols": [0.0, 0.33, 0.66, 1.0],
+			"rows": [0.0, 1.0],
+			"cells": [[0, 0, 1, 1], [1, 0, 2, 1], [2, 0, 3, 1]]
+		}
+	},
+
+	// `,sj` two row horizonatal
+	{
+		"keys": [",", "s", "j"],
+		"command": "set_layout",
+		"args":
+		{
+			"cols": [0.0, 1.0],
+			"rows": [0.0, 0.5, 1.0],
+			"cells": [[0, 0, 1, 1], [0, 1, 1, 2]]
+		}
+	},
+
+	// `,sv` quadrants
+	{
+		"keys": [",", "s", "v"],
+		"command": "set_layout",
+		"args":
+		{
+			"cols": [0.0, 0.5, 1.0],
+			"rows": [0.0, 0.5, 1.0],
+			"cells":
+			[
+				[0, 0, 1, 1], [1, 0, 2, 1],
+				[0, 1, 1, 2], [1, 1, 2, 2]
+			]
+		}
+	},
+
+
+	// Group Window Movements
+
+	// `,mh` move to group 1
+	{ "keys": [",", "m", "h"], "command": "move_to_group", "args": { "group": 0 } },
+
+	// `,ml` move to group 2
+	{ "keys": [",", "m", "l"], "command": "move_to_group", "args": { "group": 1 } },
+
+	// `,m3` move to group 3
+	{ "keys": [",", "m", "3"], "command": "move_to_group", "args": { "group": 2 } },
+
+	// `,m4` move to group 4
+	{ "keys": [",", "m", "4"], "command": "move_to_group", "args": { "group": 3 } },
+
+	// `,mt` move to tree
+	{ "keys": [",", "m", "t"], "command": "focus_side_bar" }
+
+]
