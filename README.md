@@ -46,14 +46,13 @@ sudo yum-config-manager --add-repo=http://negativo17.org/repos/fedora-spotify.re
 
 #### XAMPP
 
-su -
-cd /opt && wget http://jaist.dl.sourceforge.net/project/xampp/XAMPP%20Linux/1.8.3/xampp-linux-1.8.3-4-installer.run
-chmod +x  xampp-linux-1.8.3-4-installer.run && ./xampp-linux-1.8.3-4-installer.run
-
-ln -s ~/directory /opt/lampp/htdocs
-chmod 775 -R /opt/lampp/htdocs && setenforce 0
-/opt/lampp/lampp restart
-Cry
+    *su -
+    *cd /opt && wget http://jaist.dl.sourceforge.net/project/xampp/XAMPP%20Linux/1.8.3/xampp-linux-1.8.3-4-installer.run
+    * chmod +x  xampp-linux-1.8.3-4-installer.run && ./xampp-linux-1.8.3-4-installer.run
+    *ln -s ~/directory /opt/lampp/htdocs
+    *chmod 775 -R /opt/lampp/htdocs && setenforce 0
+    */opt/lampp/lampp restart
+    *Cry becuase you're still using Apache. Come on Eric
 
 #### Dotfiles
 
