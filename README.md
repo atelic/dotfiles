@@ -6,21 +6,31 @@ This repo serves as a backup for a number of my dotfiles as well as a compilatio
 ### Fedora and RHEL Systems:
 
 #### RPMFusion repos
+```
 su -c 'yum localinstall --nogpgcheck http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm'
+```
 
 #### Fedy installer for nice and easy config
+```
 su -c "curl https://satya164.github.io/fedy/fedy-installer -o fedy-installer && chmod +x fedy-installer && ./fedy-installer"
+```
 
 Run fedy and fix fonts and install skype and sublime. May need to do first to add sudo to user
 
 #### Dropbox
+```
 cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
+``` 
+```
 ~/.dropbox-dist/dropboxd
+```
 
 #### Mass install of packages
+```
 sudo yum update -y
 
 sudo yum install -y unrar unzip ranger vim emacs geary corebird filezilla gimp inkscape scribus vlc eclipse terminator gnome-tweak-tool ncmpcpp irssi git
+```
 
 git clone git://github.com/VitaliyRodnenko/geeknote.git .evernote && cd .evernote
 sudo python setup.py install
