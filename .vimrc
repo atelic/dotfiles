@@ -25,6 +25,8 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'airblade/vim-gitgutter'
 "Some more color schemes
 Bundle 'flazz/vim-colorschemes'
+"For distraction free writing
+Plugin 'junegunn/goyo.vim'
 
 "L33t hackers use dark themes
 set t_Co=256
