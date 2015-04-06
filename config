@@ -10,6 +10,7 @@
 set $mod Mod4
 
 font pango:Ubuntu Mono 9
+gap_size 12
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -22,6 +23,9 @@ bindsym $mod+Shift+Q kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d execdmenu_run -b -f  -i -l 3 -p "$" -nb "#2d2d2d" -nf "#cccccc" -sb "#515151" -sf "#f99157"
+
+for_window [class="^.*"] border pixel 1
+bindsym Control+Shift+1 [class="^.*"] border toggle
 
 # change focus
 # default keys altered to match those of vim
@@ -86,11 +90,11 @@ bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 # move focused container to workspace
 bindsym $mod+Shift+exclam move workspace 1
-bindsym $mod+Shift+quotedbl move workspace 2
-bindsym $mod+Shift+sterling move workspace 3
+bindsym $mod+Shift+at move workspace 2
+bindsym $mod+Shift+numbersign move workspace 3
 bindsym $mod+Shift+dollar move workspace 4
 bindsym $mod+Shift+percent move workspace 5
-bindsym $mod+Shift+asciicircum move workspace 6
+bindsym $mod+Shift+dead_circumflex move workspace 6
 bindsym $mod+Shift+ampersand move workspace 7
 bindsym $mod+Shift+asterisk move workspace 8
 bindsym $mod+Shift+parenleft move workspace 9
@@ -137,6 +141,7 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information # i3status
 # finds out, if available)
 bar {
+  position top
   status_command i3status
   colors {
     separator #666666
@@ -154,8 +159,9 @@ bar {
 # class border backgr. text
 # Run unclutter when starting
 exec --no-startup-id unclutter
+exec --no-startup-id setxkbmap -option ctrl:nocaps
+exec --no-startup-id xinput set-prop "SynPS/2 Synaptics TouchPad" "Synaptics Scrolling Distance" -107, -107
 client.focused #0088CC #0088CC #ffffff #dddddd
 client.focused_inactive #333333 #333333 #888888 #292d2e
 client.unfocused #333333 #333333 #888888 #292d2e
 client.urgent #2f343a #900000 #ffffff #900000
-exec --no-startup-id setxkbmap -option ctrl:nocaps

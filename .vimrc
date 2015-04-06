@@ -25,6 +25,7 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'airblade/vim-gitgutter'
 "Some more color schemes
 Bundle 'flazz/vim-colorschemes'
+Bundle 'chriskempson/base16-vim'
 "For distraction free writing
 Plugin 'junegunn/goyo.vim'
 
@@ -42,7 +43,8 @@ if has('syntax') && !exists('g:syntax_on')
 endif
 
 " Set color schem and stop Vundle
-colorscheme gruvbox
+let base16colorspace=256
+colorscheme zenburn
 call vundle#end()
 
 " Use :help 'option' to see the documentation for the given option.

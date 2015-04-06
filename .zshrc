@@ -5,7 +5,11 @@ export ZSH=/home/eric/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="cloud"
+ZSH_THEME="bira"
+
+# Base16 Shell
+BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"
+[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -96,11 +100,15 @@ alias yuy='sudo yum update -y'
 alias clip='xclip'
 alias v='xclip -o'
 alias hdd="df -h | grep /dev/sda1"
+alias batt='upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep -E "state|to\ full|percentage"'
+alias coltest='cd ~/ && ./.space.sh'
+alias wifi='sudo wicd-client'
+alias todo='cd ~ && ./todo'
+alias lock='cd ~ && ./flock'
 alias brightness='xbacklight -set'
 ##############
 #Scripts
 ##############
-alias google='sudo python /bin/goog.py'
 export TERM=xterm-256color
 up (){
  for i in $(seq ${1: -1});do
@@ -140,5 +148,4 @@ function mkcd {
       mkdir $1 && cd $1
   fi
 }
-alias batt='upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep -E "state|to\ full|percentage"'
-alias coltest='cd ~/ && ./.space.sh'
+
