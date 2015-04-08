@@ -75,7 +75,10 @@ export EDITOR='vim'
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-#
+export HISTCONTROL="erasedups:ignoreboth"
+export HISTFILESIZE=500000
+export HISTSIZE=100000
+export HISTIGNORE="&:[ ]*:e"
 ############
 #Aliases
 ###########
@@ -97,7 +100,7 @@ alias clock='while true; do tput clear; date +"%H : %M" | figlet ; sleep 1; done
 alias lss='ls++'
 alias yiy='sudo yum install -y '
 alias yuy='sudo yum update -y'
-alias clip='xclip'
+alias xclip='xclip -selection clipboard'
 alias v='xclip -o'
 alias hdd="df -h | grep /dev/sda1"
 alias batt='upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep -E "state|to\ full|percentage"'
