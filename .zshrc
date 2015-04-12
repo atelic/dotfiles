@@ -1,7 +1,6 @@
 export ZSH=/home/eric/.oh-my-zsh
 
-ZSH_THEME="bira"
-
+ZSH_THEME="cloud"
 # Base16 Shell
 BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
@@ -36,6 +35,7 @@ alias c="clear"
 alias e="exit"
 alias ..="cd .."
 alias cd..='cd ..'
+alias ls='ls --color --group-directories-first'
 alias composer="sudo php composer.phar"
 alias bc='bc -l'
 alias vi='vim'
@@ -51,6 +51,7 @@ alias update='sudo yum update -y'
 #alias install='sudo apt-get install'
 #alias update='sudo apt-get update && sudo apt-get upgrade'
 alias xclip='xclip -selection clipboard'
+alias pacman='sudo pacman'
 alias hdd="df -h | grep /dev/sda1"
 alias todo='cd ~ && ./todo'
 alias lock='cd ~ && ./flock'
