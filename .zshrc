@@ -47,12 +47,13 @@ alias en='geeknote'
 ## Fedora/RHEL yum alias
 alias install='sudo yum install -y '
 alias update='sudo yum update -y'
+alias ox='chmod o+x'
 ### Debian / Ubuntu
 #alias install='sudo apt-get install'
 #alias update='sudo apt-get update && sudo apt-get upgrade'
 alias xclip='xclip -selection clipboard'
 alias pacman='sudo pacman'
-alias hdd="df -h | grep /dev/sda1"
+alias hdd="df -h | grep /dev/sda"
 alias todo='cd ~ && ./todo'
 alias lock='cd ~ && ./flock'
 alias brightness='xbacklight -set'
