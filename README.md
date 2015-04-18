@@ -3,6 +3,55 @@ Dotfiles
 
 This repo serves as a backup for a number of my dotfiles as well as a compilation of commands and programs that I find myself running/needing when installing a new linux system
 
+### Arch Linux post install
+
+Antergos live USB -- Install as only OS on HDD with Gnome
+
+#### Installing needed packages
+sudo pacman -Syu 
+sudo pacman -S unrar unzip ranger vim emacs geary corebird filezilla gimp inkscape scribus vlc eclipse terminator gnome-tweak-tool ncmpcpp irssi git i3 i3-status dmenu
+yaourt spotify google-chrome i3-gap-git phpstorm android-studio dropbox
+
+#### Projects
+cd && git clone https://github.com/barbour-em/greenstogrounds.git
+
+cd && git clone https://github.com/BeerLamp/BeerLamp.git && cd BeerLamp && git checkout development
+
+#### Dotfiles and configs
+cd && git clone https://github.com/barbour-em/dotfiles.git
+sh ~/dotfiles/makesymlinks.sh
+OR
+ln -s ~/dotfiles/.vimrc .
+ln -s ~/dotfiles/.zshrc .
+ln -s ~/dotfiles/.i3status.conf .
+cp .config/terminator/config .config/terminator/config.bak && ln -s ~/dotfiles/terminator/config .config/terminator/config
+
+### Web server fun
+```
+git config core.fileMode false
+sudo -i
+cd /opt && wget http://jaist.dl.sourceforge.net/project/xampp/XAMPP%20Linux/1.8.3/xampp-linux-1.8.3-4 installer.run
+chmod +x xampp-linux-1.8.3-4-installer.run && ./xampp-linux-1.8.3-4-installer.run
+ln -s ~/BeerLamp /opt/lampp/htdocs
+chmod 775 -R /opt/lampp/htdocs
+/opt/lampp/lampp restart
+```
+
+##### Reminder about mounting USB:
+```
+sudo -i
+fdisk -l
+mkdir /mnt/sdb1
+vim /etc/fstab
+```
+```
+/dev/sdb1       /mnt/sdb1           vfat    defaults        0       0 
+```
+```
+mount -a OR mount /dev/sdb1
+```
+
+
 ### Fedora and RHEL Systems:
 
 #### RPMFusion repos
