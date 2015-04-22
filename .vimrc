@@ -1,5 +1,5 @@
 "Load Vundle plugin manager
-set nocompatible
+set nocompatible "Be iMproved
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -28,7 +28,6 @@ Bundle 'flazz/vim-colorschemes'
 Bundle 'chriskempson/base16-vim'
 "For distraction free writing
 Plugin 'junegunn/goyo.vim'
-
 "L33t hackers use dark themes
 set t_Co=256
 set background=dark

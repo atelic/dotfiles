@@ -2,10 +2,44 @@
 set $mod Mod4
 
 # Set font
-font pango:Ubuntu Mono 10
+font pango: Monospace 8
 #Using i3-gaps-git from AUR. Number in pixels
-gap_size 12
+#gap_size 12
+gaps inner 12
+gaps outer 2
+set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+bindsym $mod+Shift+g mode "$mode_gaps"
 
+mode "$mode_gaps" {
+  bindsym o      mode "$mode_gaps_outer"
+  bindsym i      mode "$mode_gaps_inner"
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+
+mode "$mode_gaps_inner" {
+  bindsym plus  gaps inner current plus 5
+  bindsym minus gaps inner current minus 5
+  bindsym 0     gaps inner current set 0
+  bindsym Shift+plus  gaps inner all plus 5
+  bindsym Shift+minus gaps inner all minus 5
+  bindsym Shift+0     gaps inner all set 0
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+
+mode "$mode_gaps_outer" {
+  bindsym plus  gaps outer current plus 5
+  bindsym minus gaps outer current minus 5
+  bindsym 0     gaps outer current set 0
+  bindsym Shift+plus  gaps outer all plus 5
+  bindsym Shift+minus gaps outer all minus 5
+  bindsym Shift+0     gaps outer all set 0
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -73,28 +107,28 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 # switch to workspace
-bindsym $mod+1 workspace main
-bindsym $mod+2 workspace web
-bindsym $mod+3 workspace term
-bindsym $mod+4 workspace music
-bindsym $mod+5 workspace code
-bindsym $mod+6 workspace code
-bindsym $mod+7 workspace code
-bindsym $mod+8 workspace code
-bindsym $mod+9 workspace writing
-bindsym $mod+0 workspace mail
+bindsym $mod+1 workspace 1:main
+bindsym $mod+2 workspace 2:web
+bindsym $mod+3 workspace 3:term
+bindsym $mod+4 workspace 4:music
+bindsym $mod+5 workspace 5:code
+bindsym $mod+6 workspace 6:code
+bindsym $mod+7 workspace 7:code
+bindsym $mod+8 workspace 8:code
+bindsym $mod+9 workspace 9:writing
+bindsym $mod+0 workspace 0:mail
 
 # move focused container to workspace
-bindsym $mod+Shift+exclam move workspace main
-bindsym $mod+Shift+at move workspace web
-bindsym $mod+Shift+numbersign move workspace term
-bindsym $mod+Shift+dollar move workspace music
-bindsym $mod+Shift+percent move workspace code
-bindsym $mod+Shift+dead_circumflex move workspace code
-bindsym $mod+Shift+ampersand move workspace code
-bindsym $mod+Shift+asterisk move workspace code
-bindsym $mod+Shift+parenleft move workspace writing
-bindsym $mod+Shift+parenright move workspace mail
+bindsym $mod+Shift+exclam move workspace 1:main
+bindsym $mod+Shift+at move workspace 2:web
+bindsym $mod+Shift+numbersign move workspace 3:term
+bindsym $mod+Shift+dollar move workspace 4:music
+bindsym $mod+Shift+percent move workspace 5:code
+bindsym $mod+Shift+dead_circumflex move workspace 6:code
+bindsym $mod+Shift+ampersand move workspace 7:code
+bindsym $mod+Shift+asterisk move workspace 8:code
+bindsym $mod+Shift+parenleft move workspace 9:writing
+bindsym $mod+Shift+parenright move workspace 0:mail
 
 # reload the configuration file
 bindsym $mod+Shift+C reload
@@ -147,26 +181,42 @@ exec --no-startup-id nm-applet
 exec --no-startup-id dropbox
 # tlp for battery life
 exec --no-startup-id sudo tlp start
+bindsym Print exec scrot '%Y-%m-%d-%T_$wx$h_scrot.png' -e 'mv $f ~/dotfiles/screenshots'
 # Start i3bar to display a workspace bar (plus the system information # i3status
 # finds out, if available)
 bar {
   position top
   status_command i3status
   colors {
-    separator #666666
-    background #222222
-    statusline #dddddd
-    focused_workspace #0088CC #0088CC #ffffff
-    active_workspace #333333 #333333 #ffffff
-    inactive_workspace #333333 #333333 #888888
-    urgent_workspace #2f343a #900000 #ffffff
+    #Between text
+    separator #93b3a3 #3f3f3f #93b3a3
+    #Light gray background
+    background #3f3f3f
+    statusline #dcdccc
+    #Zenburn colors
+    focused_workspace  #93b3a3 #3f3f3f #93b3a3
+    active_workspace   #ffcfaf #3f3f3f #ffcfaf
+    inactive_workspace #636363 #3f3f3f #dcdccc
+    urgent_workspace   #dca3a3 #3f3f3f #dca3a3
+
+    ###OLD BLUE CONFIG COLORS ###
+    #focused_workspace #0088CC #0088CC #ffffff
+    #active_workspace #333333 #333333 #ffffff
+    #inactive_workspace #333333 #333333 #888888
+    #urgent_workspace #2f343a #900000 #ffffff
   }
 }
 # change colour to match root window
-#client.background #342826
-# changed these colours for readability
-# class border backgr. text
-client.focused #0088CC #0088CC #ffffff #dddddd
-client.focused_inactive #333333 #333333 #888888 #292d2e
-client.unfocused #333333 #333333 #888888 #292d2e
-client.urgent #2f343a #900000 #ffffff #900000
+#Zenburn colors
+client.background           #342826
+client.focused              #688060 #688060 #303030 #ffcfaf
+client.focused_inactive     #3f3f3f #3F3F3F #7f9f7f #3f3f3f
+client.unfocused            #3f3f3f #3F3F3F #DCDCCC #3f3f3f
+client.urgent               #dca3a3 #dca3a3 #DCDCCC #3f3f3f
+
+
+###OLD BLUE CONFIG COLORS ###
+#client.focused #f99157 #0088CC #ffffff #dddddd
+#client.focused_inactive #333333 #333333 #888888 #292d2e
+#client.unfocused #333333 #333333 #888888 #292d2e
+#client.urgent #2f343a #900000 #ffffff #900000
