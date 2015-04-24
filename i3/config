@@ -2,7 +2,7 @@
 set $mod Mod4
 
 # Set font
-font pango: Monospace 8
+font pango: Inconsolata 9, FontAwesome 8
 #Using i3-gaps-git from AUR. Number in pixels
 #gap_size 12
 gaps inner 12
@@ -106,32 +106,45 @@ bindsym $mod+space focus mode_toggle
 # focus the parent container
 bindsym $mod+a focus parent
 
+set $WS1 1:main
+set $WS2 2:web
+set $WS3 3:term
+set $WS4 4:music
+set $WS5 5:code
+set $WS6 6:code
+set $WS7 7:code
+set $WS8 8:code
+set $WS9 9:writing
+set $WS0 0:mail
+
 # switch to workspace
-bindsym $mod+1 workspace 1:main
-bindsym $mod+2 workspace 2:web
-bindsym $mod+3 workspace 3:term
-bindsym $mod+4 workspace 4:music
-bindsym $mod+5 workspace 5:code
-bindsym $mod+6 workspace 6:code
-bindsym $mod+7 workspace 7:code
-bindsym $mod+8 workspace 8:code
-bindsym $mod+9 workspace 9:writing
-bindsym $mod+0 workspace 0:mail
+bindsym $mod+1 workspace $WS1
+bindsym $mod+2 workspace $WS2
+bindsym $mod+3 workspace $WS3
+bindsym $mod+4 workspace $WS4
+bindsym $mod+5 workspace $WS5
+bindsym $mod+6 workspace $WS6
+bindsym $mod+7 workspace $WS7
+bindsym $mod+8 workspace $WS8
+bindsym $mod+9 workspace $WS9
+bindsym $mod+0 workspace $WS0
 
 # move focused container to workspace
-bindsym $mod+Shift+exclam move workspace 1:main
-bindsym $mod+Shift+at move workspace 2:web
-bindsym $mod+Shift+numbersign move workspace 3:term
-bindsym $mod+Shift+dollar move workspace 4:music
-bindsym $mod+Shift+percent move workspace 5:code
-bindsym $mod+Shift+dead_circumflex move workspace 6:code
-bindsym $mod+Shift+ampersand move workspace 7:code
-bindsym $mod+Shift+asterisk move workspace 8:code
-bindsym $mod+Shift+parenleft move workspace 9:writing
-bindsym $mod+Shift+parenright move workspace 0:mail
+bindsym $mod+Shift+exclam           move workspace $WS1
+bindsym $mod+Shift+at               move workspace $WS2
+bindsym $mod+Shift+numbersign       move workspace $WS3
+bindsym $mod+Shift+dollar           move workspace $WS4
+bindsym $mod+Shift+percent          move workspace $WS5
+bindsym $mod+Shift+dead_circumflex  move workspace $WS6
+bindsym $mod+Shift+ampersand        move workspace $WS7
+bindsym $mod+Shift+asterisk         move workspace $WS8
+bindsym $mod+Shift+parenleft        move workspace $WS9
+bindsym $mod+Shift+parenright       move workspace $WS0
 
 # reload the configuration file
 bindsym $mod+Shift+C reload
+# lock the screen and overlay image
+bindsym $mod+Shift+P exec sh ~/.lock.sh ~/dotfiles/walls/lock.png
 # restart i3 inplace (preserves your layout/session, can be used to
 # upgrade i3)
 bindsym $mod+Shift+R restart
@@ -139,7 +152,7 @@ bindsym $mod+Shift+R restart
 bindsym $mod+Shift+E exit
 # resize window (you can also use the mouse for that)
 mode "resize" {
-# These bindings trigger as soon as you enter the resize mode #
+# These bindings trigger as soon as you enter the resize mode
 # They resize the border in the direction you pressed, e.g.
 # when pressing left, the window is resized so that it has
 # more space on its left
@@ -177,10 +190,13 @@ exec --no-startup-id xinput set-prop "SynPS/2 Synaptics TouchPad" "Synaptics Scr
 bindsym $mod+r mode "resize"
 # Start network manager so WiFi isn't a pain
 exec --no-startup-id nm-applet
-# Always run dropbox
+# Always run dropbox, gotta have those files
 exec --no-startup-id dropbox
 # tlp for battery life
 exec --no-startup-id sudo tlp start
+#stop the fucking beeping
+exec --no-startup-id xset -b
+# prt sc takes a screenshot like normal. Requires scrot package
 bindsym Print exec scrot '%Y-%m-%d-%T_$wx$h_scrot.png' -e 'mv $f ~/dotfiles/screenshots'
 # Start i3bar to display a workspace bar (plus the system information # i3status
 # finds out, if available)

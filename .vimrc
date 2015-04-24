@@ -28,6 +28,7 @@ Bundle 'flazz/vim-colorschemes'
 Bundle 'chriskempson/base16-vim'
 "For distraction free writing
 Plugin 'junegunn/goyo.vim'
+Plugin 'mhinz/vim-startify'
 "L33t hackers use dark themes
 set t_Co=256
 set background=dark
@@ -45,7 +46,6 @@ endif
 let base16colorspace=256
 colorscheme zenburn
 call vundle#end()
-
 " Use :help 'option' to see the documentation for the given option.
 " Lots of misc settings that make vim make more sense
 " Don't remove unless you're feeling bold

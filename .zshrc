@@ -15,7 +15,7 @@ plugins=(git colored-man colorize copydir yum)
 export TERM="xterm-256color"
 
 export PATH="/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/home/eric/.gem/ruby/1.8/bin:/opt/nginx/sbin:/home/eric/.local/bin:/home/eric/bin:/home/eric/.gem/ruby/1.8/bin:/opt/nginx/sbin"
-# export MANPATH="/usr/local/man:$MANPATH"
+export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -64,6 +64,7 @@ alias speed-test=' wget -O /dev/null http://speedtest.wdc01.softlayer.com/downlo
 ##############
 #Scripts
 ##############
+[ -z "$PS1" ] && return
 alias dna='cd /home/eric/.script/fun && ./dna && cd'
 alias pacscr='cd /home/eric/.script/fun && ./pacman && cd'
 alias stats='cd /home/eric/.script/fun && ./fetch && cd'
@@ -109,6 +110,8 @@ function mkcd {
       mkdir $1 && cd $1
   fi
 }
-
+function cd {
+    builtin cd "$@" && ls -F
+}
 PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 #if [ -f /usr/bin/screenfetch ]; then screenfetch -A "Arch Linux" -t; fi
