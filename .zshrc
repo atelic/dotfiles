@@ -1,6 +1,7 @@
 export ZSH=/home/eric/.oh-my-zsh
 
 ZSH_THEME="cloud"
+
 # Base16 Shell
 BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
@@ -14,7 +15,7 @@ plugins=(git colored-man colorize copydir yum)
 
 export TERM="xterm-256color"
 
-export PATH="/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/home/eric/.gem/ruby/1.8/bin:/opt/nginx/sbin:/home/eric/.local/bin:/home/eric/bin:/home/eric/.gem/ruby/1.8/bin:/opt/nginx/sbin"
+export PATH="/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/home/eric/.gem/ruby/1.8/bin:/opt/nginx/sbin:/home/eric/.local/bin:/home/eric/bin:/home/eric/.gem/ruby/1.8/bin:/opt/nginx/sbin:/usr/bin/core_perl"
 export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -31,6 +32,10 @@ export HISTIGNORE="&:[ ]*:e"
 ############
 #Aliases
 ###########
+alias php='/opt/lampp/bin/php'
+alias open='rifle'
+alias update_repos='cd /home/eric/repos/ > /dev/null && for i in ./*/; do (cd $i && git pull); done > /dev/null && cd > /dev/null'
+alias todo='cd ~/.todoGist/ > /dev/null && git pull && git add -A && git commit -m "update todo list" && git push && cd'
 alias c="clear"
 alias e="exit"
 alias ..="cd .."
@@ -53,8 +58,7 @@ alias ox='chmod o+x'
 #alias update='sudo apt-get update && sudo apt-get upgrade'
 alias xclip='xclip -selection clipboard'
 alias pacman='sudo pacman'
-alias hdd="df -h | grep /dev/sda"
-alias todo='cd ~ && ./todo'
+alias hdd="df -h | grep /dev/sda2"
 alias lock='cd ~ && ./flock'
 alias brightness='xbacklight -set'
 ## Status and complex scripts ##

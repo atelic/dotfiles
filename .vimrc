@@ -138,6 +138,9 @@ map <C-f> /
 vnoremap <Tab> >
 vnoremap <S-Tab> <
 
+nmap <S-Enter> O<Esc>j
+nmap <CR> o<Esc>k
+
 " comment / decomment & normal comment behavior
 vmap <C-m> gc
 

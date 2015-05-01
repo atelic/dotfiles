@@ -36,7 +36,7 @@
     icon_bell = False
     show_titlebar = False
     scroll_on_keystroke = False
-    font = Inconsolata-dz for Powerline Medium 10
+    font = Terminess Powerline 10
     background_color = "#3f3f3f"
     allow_bold = False
 [layouts]

@@ -3,7 +3,7 @@ set $mod Mod4
 
 # Set font
 font pango: Inconsolata 9, FontAwesome 8
-#Using i3-gaps-git from AUR. Number in pixels
+#Using i3-gaps-git from AUR. Number in pixels:
 #gap_size 12
 gaps inner 12
 gaps outer 2
@@ -55,7 +55,7 @@ for_window [class="^.*"] border pixel 1
 bindsym Control+Shift+1 [class="^.*"] border toggle
 
 # start dmenu (a program launcher)
-bindsym $mod+d execdmenu_run -b -f  -i -l 3 -p "$" -nb "#2d2d2d" -nf "#cccccc" -sb "#515151" -sf "#f99157"
+bindsym $mod+d execdmenu_run -b -f  -i -l 3 -p "$(whoami)@$(hostname)" -nb "#2d2d2d" -nf "#cccccc" -sb "#515151" -sf "#f99157"
 
 # change focus
 # default keys altered to match those of vim
@@ -106,16 +106,16 @@ bindsym $mod+space focus mode_toggle
 # focus the parent container
 bindsym $mod+a focus parent
 
-set $WS1 1:main
-set $WS2 2:web
-set $WS3 3:term
-set $WS4 4:music
-set $WS5 5:code
-set $WS6 6:code
-set $WS7 7:code
-set $WS8 8:code
-set $WS9 9:writing
-set $WS0 0:mail
+set $WS1 1
+set $WS2 2
+set $WS3 3
+set $WS4 4
+set $WS5 5
+set $WS6 6
+set $WS7 7
+set $WS8 8
+set $WS9 9
+set $WS0 10
 
 # switch to workspace
 bindsym $mod+1 workspace $WS1
@@ -196,11 +196,17 @@ exec --no-startup-id dropbox
 exec --no-startup-id sudo tlp start
 #stop the fucking beeping
 exec --no-startup-id xset -b
+exec --no-startup-id i3-msg '$WS1; exec google-chrome-stable; $WS2; exec spotify;'
 # prt sc takes a screenshot like normal. Requires scrot package
 bindsym Print exec scrot '%Y-%m-%d-%T_$wx$h_scrot.png' -e 'mv $f ~/dotfiles/screenshots'
+# A script to start up web dev work
+bindsym $mod+Shift+B exec /usr/bin/beerlamp.sh
+# An awesome dmenu2 script with statuses and all
+bindsym $mod+Shift+D exec sh /home/eric/dotfiles/scripts/dmenu2.sh
 # Start i3bar to display a workspace bar (plus the system information # i3status
 # finds out, if available)
 bar {
+  mode hide
   position top
   status_command i3status
   colors {
