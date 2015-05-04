@@ -1,9 +1,0 @@
-{
-  "name": "Improved new tab page",
-  "description": "Display bookmarks on the new tab page",
-  "version": "0.1",
-  "incognito": "split",
-  "chrome_url_overrides": {"newtab": "start-page.html"},
-  "permissions": ["storage", "bookmarks", "history"],
-  "manifest_version": 2
-}
