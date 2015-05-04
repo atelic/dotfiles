@@ -183,16 +183,16 @@
     window.location.href = 'http://www.reddit.com/r/' + s;
   });
   addSearch('issue', function(s) {
-    window.location.href = 'https://github.counsyl.com/dev/website/issues/' + s;
+    window.location.href = 'https://aur.archlinux.org/packages/?O=0&K=' + s;
   });
   addSearch('weather', function(s) {
     window.location.href = 'http://www.wunderground.com/cgi-bin/findweather/getForecast?query=' + s;
   });
   addSearch('testp', function(s) {
-    window.location.href = 'https://testp-' + s + '.counsyl.com/helpdesk/';
+    window.location.href = 'https://github.com/search?utf8=%E2%9C%93&q=' + s;
   });
   addSearch('playground', function(s) {
-    window.location.href = 'https://playground.charlesleifer.com/?q=' + s;
+    window.location.href = 'https://www.youtube.com/results?search_query=' + s;
   });
 
   updateClock();
