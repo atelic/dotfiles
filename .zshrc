@@ -34,8 +34,8 @@ export HISTIGNORE="&:[ ]*:e"
 ###########
 alias php='/opt/lampp/bin/php'
 alias open='rifle'
+alias skype-'skype --disable-cleanlooks'
 alias update_repos='cd /home/eric/repos/ > /dev/null && for i in ./*/; do (cd $i && git pull); done > /dev/null && cd > /dev/null'
-alias todo='cd ~/.todoGist/ > /dev/null && git pull && git add -A && git commit -m "update todo list" && git push && cd'
 alias c="clear"
 alias e="exit"
 alias ..="cd .."

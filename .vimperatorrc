@@ -1,0 +1,58 @@
+"3.9 (created: 2015/02/15 15:49:05)
+" vim: set ft=vim:
+
+inoremap jk <Esc>
+inoremap <C-Tab> gt
+inoremap <C-S-Tab> gT
+map ; :
+nnoremap <BS> :back<Return>
+noremap j 3j
+noremap k 3k
+source! /home/eric/.vimperatorrc.local
+source! /home/eric/.vimperator/colors
+set hintchars=hjklasdfgyuiopqwertnmzxcvb
+
+set! javascript.options.jit.chrome=true
+"===[ Custom commands ]=================================================
+" Load configuration file into current browser
+command! sourcerc :source ~/.vimperatorrc
+"===[ Mappings ]====================
+
+" Press 'F10' to toggle Vimperator
+noremap <F10> :vimperatortoggle<CR>
+
+" Press 'c' to change to a buffer, instead of 'b'
+noremap c b
+
+" Press 'b' to page up, instead of crazy CTRL-B
+noremap b <PageUp>
+
+" Press 'm' to go to previous tab
+noremap m :tabprevious<CR>
+" Press ',' to go to next tab
+noremap , :tabnext<CR>
+" Press 'q' to delete current tab
+noremap q :bdelete<CR>
+
+" Press 'C-a' to select all
+noremap <C-a> <C-v><C-a>
+
+" Press 'C-c' to copy, 'C-v' or 'S-Insert' to paste, or 'C-x' to cut
+noremap <C-c> <C-v><C-c>
+noremap <C-v> <C-v><C-v>
+noremap <C-x> <C-v><C-x>
+cnoremap <C-c> <C-v><C-c>
+cnoremap <C-v> <C-v><C-v>
+cnoremap <S-Insert> <C-v><C-v>
+cnoremap <C-x> <C-v><C-x>
+inoremap <C-c> <C-v><C-c>
+inoremap <C-v> <C-v><C-v>
+inoremap <S-Insert> <C-v><C-v>
+inoremap <C-x> <C-v><C-x>
+inoremap <C-Tab> gt
+inoremap <C-S-Tab> gT
+noremap <C-Tab> gt
+noremap <C-S-Tab> gT
+cnoremap <C-Tab> gt
+cnoremap <C-S-Tab> gT
+
