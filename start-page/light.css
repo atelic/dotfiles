@@ -49,10 +49,17 @@ input#search {
   font-size: 18px;
 }
 div#time { font-size: 72px; }
-div.toolbar { 
+div.toolbar {
   position: absolute;
   top: 0;
   right: 0;
   padding: 10px;
 }
 textarea#noteText {height: 75px; width: 200px;}
+div.notes {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  width: 35%;
+}

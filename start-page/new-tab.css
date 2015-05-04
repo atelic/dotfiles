@@ -61,7 +61,7 @@ div.history {
   display: none;
 }
 input#historyText {width: 100%;}
-div.notes { 
+div.notes {
   position: absolute;
   top: 0;
   right: 0;
