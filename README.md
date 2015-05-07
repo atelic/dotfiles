@@ -12,20 +12,16 @@ sudo pacman -Syu && \
 sudo pacman -S unrar unzip ranger vim emacs geary corebird filezilla gimp inkscape scribus vlc eclipse terminator gnome-tweak-tool ncmpcpp irssi git i3 i3-status dmenu
 yaourt spotify google-chrome i3-gap-git phpstorm android-studio dropbox
 
-#### Projects
-cd && git clone https://github.com/barbour-em/greenstogrounds.git
-
-cd && git clone https://github.com/BeerLamp/BeerLamp.git && cd BeerLamp && git checkout development
-
 #### Dotfiles and configs
 cd && git clone https://github.com/barbour-em/dotfiles.git
 sh ~/dotfiles/makesymlinks.sh
 OR
-ln -s ~/dotfiles/.vimrc .
-ln -s ~/dotfiles/.zshrc .
-ln -s ~/dotfiles/.i3status.conf .
+ln -s ~/dotfiles/vim/.vimrc . && \
+ln -s ~/dotfiles/vim/.zshrc . && \
+ln -s ~/dotfiles/i3/.i3status.conf . && \
 cp .config/terminator/config .config/terminator/config.bak && ln -s ~/dotfiles/terminator/config .config/terminator/config
 
+vim .vimrc and run :PluginInstall
 ### Web server fun
 ```
 git config core.fileMode false
@@ -45,13 +41,12 @@ mkdir /mnt/sdb1
 vim /etc/fstab
 ```
 ```
-/dev/sdb1       /mnt/sdb1           vfat    defaults        0       0 
+/dev/sdb1       /mnt/sdb1           vfat    defaults        0       0
 ```
 ```
 mount -a OR mount /dev/sdb1
 ```
 
-vim .vimrc and run :PluginInstall
 #### Oh-my-zsh
 pacman -S zsh && \
 wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O - | sh
