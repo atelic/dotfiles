@@ -3,6 +3,8 @@ Dotfiles
 
 This repo serves as a backup for a number of my dotfiles as well as a compilation of commands and programs that I find myself running/needing when installing a new linux system
 
+![Screenshot](/../master/screenshots/term_desktop.png?raw=true "Current system")
+
 ### Arch Linux post install
 
 Antergos live USB -- Install as only OS on HDD with Gnome
