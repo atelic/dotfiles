@@ -5,6 +5,8 @@ This repo serves as a backup for a number of my dotfiles as well as a compilatio
 
 ![Screenshot](/../master/screenshots/term_desktop.png?raw=true "Current system")
 
+![Info and colors](/../master/screenshots/info.png?raw=true "Info and colors")
+
 ### Arch Linux post install
 
 #### Installing needed packages
