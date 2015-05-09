@@ -11,7 +11,7 @@ ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 HIST_STAMPS="mm/dd/yyyy"
-plugins=(git colored-man colorize copydir yum)
+plugins=( git colored-man colorize )
 
 export TERM="xterm-256color"
 
@@ -49,9 +49,6 @@ alias edit='vim'
 alias df='df -h'
 alias apache='sudo /opt/lampp/lampp start'
 alias en='geeknote'
-## Fedora/RHEL yum alias
-alias install='sudo yum install -y '
-alias update='sudo yum update -y'
 alias ox='chmod o+x'
 ### Debian / Ubuntu
 #alias install='sudo apt-get install'
