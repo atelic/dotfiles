@@ -1,6 +1,6 @@
 export ZSH=/home/eric/.oh-my-zsh
 
-ZSH_THEME="cloud"
+ZSH_THEME="norm"
 
 # Base16 Shell
 BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"
@@ -32,6 +32,7 @@ export HISTIGNORE="&:[ ]*:e"
 ############
 #Aliases
 ###########
+alias skype='skype --disable-cleanlooks'
 alias php='/opt/lampp/bin/php'
 alias open='rifle'
 alias skype-'skype --disable-cleanlooks'
@@ -111,8 +112,6 @@ function mkcd {
       mkdir $1 && cd $1
   fi
 }
-function cd {
-    builtin cd "$@" && ls -F
-}
+
 PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 #if [ -f /usr/bin/screenfetch ]; then screenfetch -A "Arch Linux" -t; fi
