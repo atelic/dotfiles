@@ -32,6 +32,7 @@ export HISTIGNORE="&:[ ]*:e"
 ############
 #Aliases
 ###########
+alias emacs='emacs -nw'
 alias skype='skype --disable-cleanlooks'
 alias php='/opt/lampp/bin/php'
 alias open='rifle'
