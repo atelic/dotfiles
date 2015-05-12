@@ -1,0 +1,51 @@
+;;; -*- coding: utf-8 -*-
+
+;; ----- ido-last-directory-list -----
+(
+ ("/home/eric/doc/" . "org/")
+ ("/home/eric/dotfiles/" . "zsh/")
+ ("/home/eric/" . "dotfiles/")
+ ("/home/" . "eric/")
+ ("/" . "home/")
+)
+
+;; ----- ido-work-directory-list -----
+(
+ "/home/eric/"
+ "/home/eric/doc/org/"
+ "/home/eric/dotfiles/zsh/"
+)
+
+;; ----- ido-work-file-list -----
+(
+ ".emacs"
+ "beerlamp.org"
+ ".zshrc"
+ "yesno.rb"
+)
+
+;; ----- ido-dir-file-cache -----
+(
+ ("/home/eric/" (21841 37264 105844 567000) ".newsrc-dribble" ".zshrc" ".gnome2_private/" ".bashrc" ".config/" ".m2/" ".viminfo" "../" ".newsrc" ".archey3.cfg" ".dmrc" ".xscreensaver" "src/" ".ICEauthority" ".profile" ".emacs" ".xsession-errors.old" ".zshrc.bak" ".vim/" ".zlogout.bak" "tmp/" ".git-credential-cache/" ".authinfo" ".gstreamer-0.10/" ".python_history" ".java/" ".zhistory" ".zprezto/" "./" ".esd_auth" ".oh-my-zsh/" ".emacs.d/" ".i3/" ".gnome/" ".ipython/" ".mysql/" ".gitconfig" ".fonts/" ".weechat/" ".zshenv" ".mozilla/" ".zcompdump-hera-5.0.7" ".i3status.conf" ".lyrics/" "dotfiles/" ".bash_logout" ".WebIde80/" ".ncmpcpp/" ".Xauthority" "beerlamp/" ".lein/" ".ssh/" ".zpreztorc" ".zlogout" ".gnus" ".zlogin.bak" ".cache/" ".hplip/" ".gem/" ".zshenv.bak" "doc/" "bin/" ".eclipse/" ".vimrc" ".nanorc" ".zsh_history" ".zlogin" ".pki/" ".Xdefaults" ".emacs.d.pre-prelude.tar" ".thumbnails/" "incoming/" ".zprofile" ".gnupg/" ".bash_profile" ".bash_history" ".zcompdump" ".zprofile.bak" ".newsrc.eld" ".Skype/" ".local/" ".xsession-errors" ".gnome2/")
+
+ ("/home/eric/doc/org/" (21841 924 518514 658000) "../" ".git/" "./" ".gitignore" "README.md" "beerlamp.org")
+
+ ("/home/eric/doc/" (21840 49530 244007 927000) "../" "org/" "./")
+
+ ("/home/eric/dotfiles/zsh/" (21840 19522 446116 379000) ".zshrc" "../" "./")
+
+ ("/home/eric/dotfiles/" (21837 30510 934356 415000) "sublime/" "screenshots/" "scripts/" "../" "pacman/" ".git/" "./" "i3/" "firefox/" "walls/" "vim/" ".gitignore" "README.md" "nmp_packages.txt" "bash/" "emacs/" "zsh/" "terminator/" "new-tab/")
+
+ ("/home/eric/.zprezto/" (21841 32622 237744 271000) "../" ".git/" "CONTRIBUTING.md" ".gitmodules" "./" ".gitignore" "init.zsh" "README.md" "modules/" "runcoms/")
+
+ ("/home/eric/.zprezto/runcoms/" (21841 32622 241077 634000) "../" "zpreztorc" "zlogout" "./" "README.md" "zshenv" "zprofile" "zlogin" "zshrc")
+
+ ("/home/" (21837 30368 29186 13000) "../" "eric/" "./")
+
+ ("/home/eric/Documents/" (21840 49530 244007 927000) "../" "org/" "./")
+
+ ("/home/eric/Documents/org/" (21841 306 402052 119000) "../" ".git/" "./" ".#beerlamp.org" ".gitignore" "README.md" "#beerlamp.org#" "beerlamp.org")
+)
+
+;; ----- ido-unc-hosts-cache -----
+t
