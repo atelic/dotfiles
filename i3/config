@@ -1,10 +1,13 @@
+# Windows = Mod4
+# Alt     = Mod1
 # Use Windows key as Mod
 set $mod Mod4
-
+set $browser google-chrome-stable
 # Set font
-font pango: Inconsolata 9, FontAwesome 8
-#Using i3-gaps-git from AUR. Number in pixels:
-#gap_size 12
+font -*-tamsyn-medium-*-*-*-8-*-*-*-*-*-*-*
+#pango: DejaVu Sans Mono Book 8
+# Using i3-gaps-git from AUR.
+# Number in pixels
 gaps inner 12
 gaps outer 2
 set $mode_gaps Gaps: (o) outer, (i) inner
@@ -42,19 +45,13 @@ mode "$mode_gaps_outer" {
 }
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
-
-# start a terminal
-bindsym $mod+Return exec terminator
-
-# kill focused window
-bindsym $mod+Shift+Q kill
-
 #Make windows play nice with gaps and don't give them a title in tiling mode
 new_window 1pixel
 for_window [class="^.*"] border pixel 1
 bindsym Control+Shift+1 [class="^.*"] border toggle
 
 # start dmenu (a program launcher)
+# bindsym $mod+d exec dmenu_run -b -f  -i -l 3 -p "$(whoami)@$(hostname)" -nb "#2d2d2d" -nf "#cccccc" -sb "#515151" -sf "#f99157"
 bindsym $mod+d execdmenu_run -b -f  -i -l 3 -p "$(whoami)@$(hostname)" -nb "#2d2d2d" -nf "#cccccc" -sb "#515151" -sf "#f99157"
 
 # change focus
@@ -73,7 +70,14 @@ bindsym $mod+Right focus right
 #Bind audio keys for volume
 bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+ unmute
 bindsym XF86AudioLowerVolume exec amixer -q set Master 5%- unmute
+bindsym $mod+XF86AudioRaiseVolume exec "amixer -D pulse sset Master '10%+'"
+bindsym $mod+XF86AudioLowerVolume exec "amixer -D pulse sset Master '10%-'"
 bindsym XF86AudioMute exec amixer -q set Master toggle
+
+# Brightness shit
+bindsym XF86MonBrightnessUp exec xbacklight +10 -time 0
+bindsym XF86MonBrightnessDown exec xbacklight -10 -time 0
+bindsym $mod+XF86MonBrightnessUp exec xbacklight =100 -time 10
 
 # move focused window
 # default keys altered to match those of vim
@@ -141,12 +145,11 @@ bindsym $mod+Shift+asterisk         move workspace $WS8
 bindsym $mod+Shift+parenleft        move workspace $WS9
 bindsym $mod+Shift+parenright       move workspace $WS0
 
+bindsym $mod+r mode "resize"
 # reload the configuration file
 bindsym $mod+Shift+C reload
-# lock the screen and overlay image
-bindsym $mod+Shift+P exec sh ~/.lock.sh ~/dotfiles/walls/lock.png
-# restart i3 inplace (preserves your layout/session, can be used to
-# upgrade i3)
+
+# restart i3 inplace
 bindsym $mod+Shift+R restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+E exit
@@ -178,33 +181,10 @@ bindsym Return mode "default"
 bindsym Escape mode "default"
 }
 
-# Restores nitrogen background
-exec --no-startup-id nitrogen --restore
-# Run unclutter when starting
-exec --no-startup-id unclutter
-# Sets Caps Lock as a ctrl
-exec --no-startup-id setxkbmap -option ctrl:nocaps
-# Natural two-finger scrolling
-exec --no-startup-id xinput set-prop "SynPS/2 Synaptics TouchPad" "Synaptics Scrolling Distance" -107, -107
-# Enter resize mode
-bindsym $mod+r mode "resize"
-# Start network manager so WiFi isn't a pain
-exec --no-startup-id nm-applet
-# Always run dropbox, gotta have those files
-exec --no-startup-id dropbox
-# tlp for battery life
-exec --no-startup-id sudo tlp start
-#stop the fucking beeping
-exec --no-startup-id xset -b
-exec --no-startup-id i3-msg '$WS1; exec google-chrome-stable; $WS2; exec spotify;'
-# prt sc takes a screenshot like normal. Requires scrot package
-bindsym Print exec scrot '%Y-%m-%d-%T_$wx$h_scrot.png' -e 'mv $f ~/dotfiles/screenshots'
-# A script to start up web dev work
-bindsym $mod+Shift+B exec /usr/bin/beerlamp.sh
-# An awesome dmenu2 script with statuses and all
-bindsym $mod+Shift+D exec sh /home/eric/dotfiles/scripts/dmenu2.sh
-# Start i3bar to display a workspace bar (plus the system information # i3status
-# finds out, if available)
+#####################
+# i3bar and i3status
+#####################
+
 bar {
   mode hide
   position top
@@ -221,24 +201,48 @@ bar {
     inactive_workspace #636363 #3f3f3f #dcdccc
     urgent_workspace   #dca3a3 #3f3f3f #dca3a3
 
-    ###OLD BLUE CONFIG COLORS ###
-    #focused_workspace #0088CC #0088CC #ffffff
-    #active_workspace #333333 #333333 #ffffff
-    #inactive_workspace #333333 #333333 #888888
-    #urgent_workspace #2f343a #900000 #ffffff
   }
 }
-# change colour to match root window
-#Zenburn colors
+
+#####################
+# Zenburn Colors
+#####################
+
 client.background           #342826
 client.focused              #688060 #688060 #303030 #ffcfaf
 client.focused_inactive     #3f3f3f #3F3F3F #7f9f7f #3f3f3f
 client.unfocused            #3f3f3f #3F3F3F #DCDCCC #3f3f3f
 client.urgent               #dca3a3 #dca3a3 #DCDCCC #3f3f3f
 
+#####################
+# Start up commands
+#####################
 
-###OLD BLUE CONFIG COLORS ###
-#client.focused #f99157 #0088CC #ffffff #dddddd
-#client.focused_inactive #333333 #333333 #888888 #292d2e
-#client.unfocused #333333 #333333 #888888 #292d2e
-#client.urgent #2f343a #900000 #ffffff #900000
+exec xbacklight -set 40
+exec --no-startup-id nitrogen --restore
+exec --no-startup-id unclutter
+exec --no-startup-id setxkbmap -option ctrl:nocaps
+exec --no-startup-id xinput set-prop "SynPS/2 Synaptics TouchPad" "Synaptics Scrolling Distance" -107, -107
+exec --no-startup-id nm-applet
+exec --no-startup-id sudo tlp start
+exec --no-startup-id xset -b
+exec --no-startuo-id xflux -z 22904
+
+
+#######################
+# Custom exec commands
+#######################
+
+bindsym $mod+Return exec urxvt
+bindsym $mod+c exec $browser
+bindsym $mod+Shift+Q kill
+bindsym $mod+q subl3
+bindsym Print exec scrot -q 100 '%Y-%m-%d-%T_$wx$h_scrot.png' -e 'mv $f ~/dotfiles/screenshots'
+bindsym $mod+Shift+B exec /usr/bin/beerlamp.sh
+bindsym $mod+Shift+D exec /bin/sh /home/eric/dotfiles/scripts/dmenu2.sh
+
+###############
+# Lock screen
+###############
+# bindsym $mod+Shift+P exec --no-startup-id dm-tool lock
+bindsym $mod+Shift+P exec /bin/sh /home/eric/bin/blurlock
