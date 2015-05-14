@@ -21,7 +21,8 @@ export MANPATH="/usr/local/man:$MANPATH"
 source $ZSH/oh-my-zsh.sh
 
 export LANG=en_US.UTF-8
-export EDITOR='vim'
+export ALTERNATE_EDITOR=""
+export EDITOR=emacsclient
 export TERM=xterm-256color
 export ARCHFLAGS="-arch x86_64"
 export HISTCONTROL="erasedups:ignoreboth"
@@ -32,12 +33,12 @@ export HISTIGNORE="&:[ ]*:e"
 ############
 #Aliases
 ###########
-alias emacs='emacs -nw'
+alias emacs='emacsclient'
 alias skype='skype --disable-cleanlooks'
 alias php='/opt/lampp/bin/php'
 alias open='rifle'
 alias skype-'skype --disable-cleanlooks'
-alias update_repos='cd /home/eric/repos/ > /dev/null && for i in ./*/; do (cd $i && git pull); done > /dev/null && cd > /dev/null'
+alias update_repos='cd /home/eric/src/  && for i in ./*/; do (cd $i && git pull); done'
 alias c="clear"
 alias e="exit"
 alias ..="cd .."
@@ -47,7 +48,7 @@ alias composer="sudo php composer.phar"
 alias bc='bc -l'
 alias vi='vim'
 alias svi='sudo vim'
-alias edit='vim'
+alias edit='emacsclient'
 alias df='df -h'
 alias apache='sudo /opt/lampp/lampp start'
 alias en='geeknote'
