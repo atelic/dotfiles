@@ -1,0 +1,32 @@
+#! /usr/bin/env ruby
+
+if ARGV.empty?
+  puts "Please enter a file"
+  exit
+end
+
+out_file = File.new("out.txt", "w+")
+
+puts "Appending to output file..."
+
+ARGV.each do |file|
+
+  line_num = 1
+  out_file.puts("File: " + file + ":\n" )
+  out_file.puts("-----------------------" + "\n" )
+
+  File.readlines(file).each do |line|
+
+    if line.downcase.include? "todo"
+
+      out_file.puts("Line " +  line_num.to_s + ": " + line.chomp + "\n")
+
+    end
+    line_num += 1
+  end #end of loop for each line in the file
+
+  out_file.puts("-----------------------" + "\n" )
+
+end #end of loop for each arg
+puts "Done! The results can be found in the out.txt file"
+out_file.close

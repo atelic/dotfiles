@@ -1,7 +1,7 @@
 ;; Include needed files
 (add-to-list 'load-path "~/.emacs.d/modes/")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+
 
 ;;Highliting for php
 (require 'php-mode)
@@ -43,8 +43,8 @@
 (key-chord-define-global "jk" 'evil-normal-state)
 
 ;; vim-like indenting
-(setq-default tab-width 4 indent-tabs-mode nil)
-(setq-default c-basic-offset 4 c-default-style "bsd")
+(setq-default tab-width 4 indent-tabs-mode t)
+(setq-default c-basic-offset 4 c-default-style "linux")
 (define-key global-map (kbd "RET") 'newline-and-indent)
 
 ;; same as map ; :
@@ -105,6 +105,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(haskell-process-suggest-remove-import-lines t)
+ '(haskell-process-auto-import-loaded-modules t)
+ '(haskell-process-log t)
+ '(haskell-tags-on-save t)
+ '(haskell-process-type 'cabal-repl)
  )
 
 (require 'neotree)
@@ -137,6 +142,128 @@
 (ac-config-default)
 (global-auto-complete-mode t)
 
-;; Plugin to google selected text 
 (google-this-mode 1)
-(global-set-key (kbd "C-x g") 'google-this-mode-submap)
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+(add-hook 'haskell-mode-hook 'turn-on-hi2)
+(eval-after-load 'haskell-mode
+            '(define-key haskell-mode-map [f6] 'haskell-navigate-imports))
+
+(let ((my-cabal-path (expand-file-name "~/.cabal/bin")))
+  (setenv "PATH" (concat my-cabal-path ":" (getenv "PATH")))
+  (add-to-list 'exec-path my-cabal-path))
+
+(eval-after-load 'haskell-mode '(progn
+  (define-key haskell-mode-map (kbd "C-c C-l") 'haskell-process-load-or-reload)
+  (define-key haskell-mode-map (kbd "C-c C-z") 'haskell-interactive-switch)
+  (define-key haskell-mode-map (kbd "C-c C-n C-t") 'haskell-process-do-type)
+  (define-key haskell-mode-map (kbd "C-c C-n C-i") 'haskell-process-do-info)
+  (define-key haskell-mode-map (kbd "C-c C-n C-c") 'haskell-process-cabal-build)
+  (define-key haskell-mode-map (kbd "C-c C-n c") 'haskell-process-cabal)
+  (define-key haskell-mode-map (kbd "SPC") 'haskell-mode-contextual-space)))
+(eval-after-load 'haskell-cabal '(progn
+  (define-key haskell-cabal-mode-map (kbd "C-c C-z") 'haskell-interactive-switch)
+  (define-key haskell-cabal-mode-map (kbd "C-c C-k") 'haskell-interactive-mode-clear)
+  (define-key haskell-cabal-mode-map (kbd "C-c C-c") 'haskell-process-cabal-build)
+  (define-key haskell-cabal-mode-map (kbd "C-c c") 'haskell-process-cabal)))
+
+(evil-define-key 'insert haskell-interactive-mode-map (kbd "RET") 'haskell-interactive-mode-return)
+(evil-define-key 'normal haskell-interactive-mode-map (kbd "RET") 'haskell-interactive-mode-return)
+
+(eval-after-load 'haskell-mode
+    '(define-key haskell-mode-map (kbd "C-c C-c") 'haskell-compile))
+(eval-after-load 'haskell-cabal
+    '(define-key haskell-cabal-mode-map (kbd "C-c C-c") 'haskell-compile))
+
+(require 'rainbow-delimiters)
+(add-hook 'haskell-mode-hook #'rainbow-delimiters-mode)
+(server-start t)
+
+(require 'auto-complete-clang-async)
+(define-key c++-mode-map (kbd "C-S-<return>") 'ac-complete-clang)
+
+(autoload 'expand-member-functions "member-functions" "Expand C++ member function declarations" t)
+(add-hook 'c++-mode-hook (lambda () (local-set-key "\C-cm" #'expand-member-functions)))
+
+(defun notes ()
+    "Switch to my work dir."
+	 (interactive)
+	 (find-file "/home/eric/doc/org"))
+
+(autoload 'auto-update-file-header "header2")
+(add-hook 'write-file-hooks 'auto-update-file-header)
+
+(add-hook 'c-mode-common-hook   'auto-make-header)
+(add-hook 'c++-mode-hook   'auto-make-header)
+
+
+
+(defun win-resize-top-or-bot ()
+  "Figure out if the current window is on top, bottom or in the
+middle"
+  (let* ((win-edges (window-edges))
+	 (this-window-y-min (nth 1 win-edges))
+	 (this-window-y-max (nth 3 win-edges))
+	 (fr-height (frame-height)))
+    (cond
+     ((eq 0 this-window-y-min) "top")
+     ((eq (- fr-height 1) this-window-y-max) "bot")
+     (t "mid"))))
+
+(defun win-resize-left-or-right ()
+  "Figure out if the current window is to the left, right or in the
+middle"
+  (let* ((win-edges (window-edges))
+	 (this-window-x-min (nth 0 win-edges))
+	 (this-window-x-max (nth 2 win-edges))
+	 (fr-width (frame-width)))
+    (cond
+     ((eq 0 this-window-x-min) "left")
+     ((eq (+ fr-width 4) this-window-x-max) "right")
+     (t "mid"))))
+
+(defun win-resize-enlarge-horiz ()
+  (interactive)
+  (cond
+   ((equal "top" (win-resize-top-or-bot)) (enlarge-window -1))
+   ((equal "bot" (win-resize-top-or-bot)) (enlarge-window 1))
+   ((equal "mid" (win-resize-top-or-bot)) (enlarge-window -1))
+   (t (message "nil"))))
+
+(defun win-resize-minimize-horiz ()
+  (interactive)
+  (cond
+   ((equal "top" (win-resize-top-or-bot)) (enlarge-window 1))
+   ((equal "bot" (win-resize-top-or-bot)) (enlarge-window -1))
+   ((equal "mid" (win-resize-top-or-bot)) (enlarge-window 1))
+   (t (message "nil"))))
+
+(defun win-resize-enlarge-vert ()
+  (interactive)
+  (cond
+   ((equal "left" (win-resize-left-or-right)) (enlarge-window-horizontally -1))
+   ((equal "right" (win-resize-left-or-right)) (enlarge-window-horizontally 1))
+   ((equal "mid" (win-resize-left-or-right)) (enlarge-window-horizontally -1))))
+
+(defun win-resize-minimize-vert ()
+  (interactive)
+  (cond
+   ((equal "left" (win-resize-left-or-right)) (enlarge-window-horizontally 1))
+   ((equal "right" (win-resize-left-or-right)) (enlarge-window-horizontally -1))
+   ((equal "mid" (win-resize-left-or-right)) (enlarge-window-horizontally 1))))
+
+(global-set-key [C-M-down] 'win-resize-minimize-vert)
+(global-set-key [C-M-up] 'win-resize-enlarge-vert)
+(global-set-key [C-M-left] 'win-resize-minimize-horiz)
+(global-set-key [C-M-right] 'win-resize-enlarge-horiz)
+(global-set-key [C-M-up] 'win-resize-enlarge-horiz)
+(global-set-key [C-M-down] 'win-resize-minimize-horiz)
+(global-set-key [C-M-left] 'win-resize-enlarge-vert)
+(global-set-key [C-M-right] 'win-resize-minimize-vert)
+
+(add-to-list 'load-path "~/.emacs.d/plugins/evil-org-mode")
+(require 'evil-org)
+
+(global-set-key (kbd "C-c f") 'fiplr-find-file)

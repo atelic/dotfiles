@@ -1,0 +1,4 @@
+#! /usr/bin/env bash
+
+phpstorm.sh &
+luakit "https://localhost/beerlamp/test.php"

@@ -1,0 +1,5 @@
+#!/usr/bin/python2
+import os, urllib
+google = os.popen('zenity --entry --text="Enter your search: " --title="goog.py"').read()
+google = urllib.quote(google)
+os.system('google-chrome-stable http://google.com/search?q=%s' % (google) )

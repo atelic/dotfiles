@@ -33,7 +33,8 @@ export HISTIGNORE="&:[ ]*:e"
 ############
 #Aliases
 ###########
-alias emacs='emacsclient'
+alias emacs='emacsclient -t'
+alias ecc='emacsclient -c &'
 alias skype='skype --disable-cleanlooks'
 alias php='/opt/lampp/bin/php'
 alias open='rifle'
@@ -53,9 +54,6 @@ alias df='df -h'
 alias apache='sudo /opt/lampp/lampp start'
 alias en='geeknote'
 alias ox='chmod o+x'
-### Debian / Ubuntu
-#alias install='sudo apt-get install'
-#alias update='sudo apt-get update && sudo apt-get upgrade'
 alias xclip='xclip -selection clipboard'
 alias pacman='sudo pacman'
 alias hdd="df -h | grep /dev/sda2"

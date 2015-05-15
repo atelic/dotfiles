@@ -8,7 +8,7 @@ battery="$(cat /sys/class/power_supply/$device/capacity)%"
 volume="$(amixer get Master | tail -1 | sed 's/.*\[\([0-9]*%\)\].*/\1/')"
 
 # Define your preferred terminal
-terminal='terminator -e'
+terminal='urxvt -e'
 
 # How many spaces do you want before the battery status ?
 spaces=15
@@ -22,10 +22,10 @@ done
 }
 
 # Menu Order.
-menu_list="Vim\nWeb\nTerm\nEmacs\nMusic\nHtop\nRanger\nScreenshot\n$(eval auto_space)Batt: $battery\n Vol: $volume"
+menu_list="Emacs\nWeb\nTerm\nMusic\nVim\nHtop\nRanger\nScreenshot\n$(eval auto_space)Batt: $battery\n Vol: $volume"
 
 # Dmenu Preferences
-Dmenu="/usr/bin/dmenu -p '$(whoami)@$(hostname)' -fn 'Terminess Powerline' -i -y 350 -x 70 -w 1141 -nb '#2d2d2d' -sb '#515151' -nf '#cccccc' -sf '#f99157'"
+Dmenu="/usr/bin/dmenu -p 'Run:' -fn 'Terminess Powerline' -i -y 350 -x 70 -w 1141 -nb '#2d2d2d' -sb '#515151' -nf '#cccccc' -sf '#f99157'"
 
 cmd=$(echo -e "$menu_list" | eval $Dmenu)
 
@@ -41,7 +41,7 @@ case $cmd in
   Term)
     $terminal zsh ;;
   Emacs)
-    emacs ;;
+    $terminal emacs -nw ;;
   Music)
     $terminal ncmpcpp ;;
   Screenshot)

@@ -78,6 +78,15 @@
 		 nil "Automatic regexp-delimited overlays" tar
 		 ((:keywords "extensions")
 		  (:url . "http://www.dr-qubit.org/emacs.php"))])
+ (avy .
+      [(0 2 0)
+       ((emacs
+	 (24 1))
+	(cl-lib
+	 (0 5)))
+       "set-based completion" tar
+       ((:keywords "point" "location")
+	(:url . "https://github.com/abo-abo/avy"))])
  (bug-hunter .
 	     [(0 2)
 	      ((seq

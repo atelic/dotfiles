@@ -1,0 +1,5 @@
+#!/bin/bash
+#
+# A script to set up monitors correctly
+#
+xrandr --output DVI-I-1 --auto --left-of VGA-1 --output VGA-1 --auto --primary

@@ -1,0 +1,11 @@
+#! /bin/ruby
+
+print "Continue? [y/n]: "
+response = gets.chomp
+case response.downcase
+when 'y'
+  puts "Awesome"
+when /\A[nN]o?\Z/ #n or no
+  puts "lolbye"
+  exit
+end
