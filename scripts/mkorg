@@ -1,0 +1,15 @@
+#! /usr/bin/env ruby
+if ARGV.empty?
+  puts "Please enter a file"
+end
+
+new_file = ARGV[0]
+org_file = File.new(new_file, "w+")
+
+org_file.puts("#+HTML_HEAD: <link rel=\"stylesheet\" type=\"text/css\" href=\"http://thomasf.github.io/solarized-css/solarized-light.min.css\" />" + "\n")
+org_file.puts("#+TITLE: " + "\n")
+org_file.puts("#+AUTHOR: Eric Barbour" + "\n")
+org_file.puts("#+OPTIONS: toc:nil" + "\n")
+
+
+org_file.close

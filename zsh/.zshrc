@@ -113,5 +113,16 @@ function mkcd {
   fi
 }
 
+# upload to ptpb.pw
+pb () { curl -F "c=@${1:--}" https://ptpb.pw/ }
+
+# add url of newly uploaded past to clipboard
+pbx () { curl -sF "c=@${1:--}" -w "%{redirect_url}" 'https://ptpb.pw/?r=1' -o /dev/stderr | xsel -l /dev/null -b }
+
+# uploads a screenshot and puts the url in the clipboard
+pbs () {
+  scrot /tmp/$$.png
+  pbx /tmp/$$.png
+}
+
 PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
-#if [ -f /usr/bin/screenfetch ]; then screenfetch -A "Arch Linux" -t; fi
