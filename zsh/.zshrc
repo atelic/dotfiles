@@ -34,6 +34,7 @@ export HISTIGNORE="&:[ ]*:e"
 #Aliases
 ###########
 alias emacs='emacsclient -t'
+alias gh="curl -u 'barbour-em' https://api.github.com/user/repos -d '{name:$1}'"
 alias ecc='emacsclient -c &'
 alias skype='skype --disable-cleanlooks'
 alias php='/opt/lampp/bin/php'
