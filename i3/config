@@ -1,13 +1,13 @@
+##############################
+# Set variables
+##############################
 # Windows = Mod4
 # Alt     = Mod1
-# Use Windows key as Mod
+
 set $mod Mod4
 set $browser google-chrome-stable
-# Set font
-font -*-tamsyn-medium-*-*-*-8-*-*-*-*-*-*-*
-#pango: DejaVu Sans Mono Book 8
-# Using i3-gaps-git from AUR.
-# Number in pixels
+font pango: DejaVu Sans Mono Book 8
+# Gaps patch from https://github.com/Airblader/i3
 gaps inner 12
 gaps outer 2
 set $mode_gaps Gaps: (o) outer, (i) inner
@@ -52,7 +52,7 @@ bindsym Control+Shift+1 [class="^.*"] border toggle
 
 # start dmenu (a program launcher)
 # bindsym $mod+d exec dmenu_run -b -f  -i -l 3 -p "$(whoami)@$(hostname)" -nb "#2d2d2d" -nf "#cccccc" -sb "#515151" -sf "#f99157"
-bindsym $mod+d execdmenu_run -b -f  -i -l 3 -p "$(whoami)@$(hostname)" -nb "#2d2d2d" -nf "#cccccc" -sb "#515151" -sf "#f99157"
+bindsym $mod+d exec dmenu_run -b -f  -i -l 1 -p "Run:" -nb "#2d2d2d" -nf "#cccccc" -sb "#515151" -sf "#f99157"
 
 # change focus
 # default keys altered to match those of vim
@@ -226,23 +226,32 @@ exec --no-startup-id xinput set-prop "SynPS/2 Synaptics TouchPad" "Synaptics Scr
 exec --no-startup-id nm-applet
 exec --no-startup-id sudo tlp start
 exec --no-startup-id xset -b
-exec --no-startuo-id xflux -z 22904
-
+exec --no-startup-id xflux -z 22904
+exec --no-startup-id emacs --daemon --with-x-toolkit=lucid
 
 #######################
 # Custom exec commands
 #######################
 
+# Two button
 bindsym $mod+Return exec urxvt
 bindsym $mod+c exec $browser
 bindsym $mod+Shift+Q kill
-bindsym $mod+q subl3
+bindsym $mod+q exec subl3
+bindsym $mod+t exec /usr/bin/hamster
 bindsym Print exec scrot -q 100 '%Y-%m-%d-%T_$wx$h_scrot.png' -e 'mv $f ~/dotfiles/screenshots'
-bindsym $mod+Shift+B exec /usr/bin/beerlamp.sh
+
+# Three button
+bindsym $mod+Shift+B exec /usr/bin/beerlamp
 bindsym $mod+Shift+D exec /bin/sh /home/eric/dotfiles/scripts/dmenu2.sh
 
 ###############
 # Lock screen
 ###############
-# bindsym $mod+Shift+P exec --no-startup-id dm-tool lock
 bindsym $mod+Shift+P exec /bin/sh /home/eric/bin/blurlock
+
+##############################
+# Kills and restarts lemonbar
+##############################
+exec_always pkill lemonbar
+exec_always ~/.config/lemonbar/output.sh | ~/.config/lemonbar/bar.sh
