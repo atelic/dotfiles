@@ -7,29 +7,9 @@ This repo serves as a backup for a number of my dotfiles as well as a compilatio
 
 ![Info and colors](/../master/screenshots/info.png?raw=true "Info and colors")
 
-### Arch Linux post install
+### Arch Linux post install details can be found in setup.sh
 
-#### Installing needed packages
-sudo pacman -Syu && \
-sudo pacman -S unrar unzip ranger vim emacs geary corebird filezilla gimp inkscape scribus vlc eclipse terminator gnome-tweak-tool ncmpcpp irssi git i3 i3-status dmenu
-yaourt spotify google-chrome i3-gap-git phpstorm android-studio dropbox
-
-#### Dotfiles and configs
-```bash
-cd && git clone https://github.com/barbour-em/dotfiles.git
-sh ~/dotfiles/makesymlinks.sh
-```
-OR
-```bash
-ln -s ~/dotfiles/vim/.vimrc . && \
-ln -s ~/dotfiles/vim/.zshrc . && \
-ln -s ~/dotfiles/i3/.i3status.conf . && \
-cp .config/terminator/config .config/terminator/config.bak && ln -s ~/dotfiles/terminator/config .config/terminator/config
-```
-```bash
-vim .vimrc and run :PluginInstall
-```
-### Web server fun
+### Reminder about XAMPP if you have to deal with it again
 ```
 git config core.fileMode false
 sudo -i
@@ -52,11 +32,4 @@ vim /etc/fstab
 ```
 ```
 mount -a OR mount /dev/sdb1
-```
-
-#### Oh-my-zsh
-```bash
-pacman -S zsh && \
-wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O - | sh
-chsh -s /bin/zsh
 ```
