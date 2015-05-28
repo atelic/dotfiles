@@ -1,0 +1,17 @@
+archey3-git
+auto-xflux
+bar-aint-recursive
+blueman
+byzanz-git
+dmenu2
+google-chrome
+luakit-git
+mopidy-spotify
+mpvhq-git
+mu-git
+siji-git
+spotify
+sublime-text-dev
+tty-clock
+urxvt-font-size-git
+xflux
