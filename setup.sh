@@ -26,6 +26,6 @@ wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O - 
 ###########################################
 # Install homebrew if on a Mac
 ###########################################
-if [ $(uname -s) == "Darwin"]; then
+if [ $(uname -s) -eq "Darwin"]; then
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
