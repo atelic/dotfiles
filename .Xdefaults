@@ -91,6 +91,6 @@ urxvt.keysym.Home: \033[1~
 urxvt.keysym.End: \033[4~
 urxvt.keysym.Control-l: clear\n
 
-URxvt*.transparent: true
-URxvt*.shading: 0 to 99 darkens, 101 to 200 lightens
-URxvt*.shading: 35
+! URxvt*.transparent: true
+! URxvt*.shading: 0 to 99 darkens, 101 to 200 lightens
+! URxvt*.shading: 35

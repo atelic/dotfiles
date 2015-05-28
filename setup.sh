@@ -1,6 +1,7 @@
 #! /bin/bash
 
-sudo pacman -Syu zsh emacs vim unrar unzip ranger filezilla gimp tmux urxvt gnome-tweak-tool ncmpcpp i3 dmenu
+sudo pacman -Syyu zsh emacs vim unrar unzip ranger filezilla gimp tmux urxvt gnome-tweak-tool ncmpcpp i3 dmenu nodejs npm
+sudo pacman -S $(< $HOME/dotfiles/pacman/repos.txt)
 yaourt -S $(< $HOME/dotfiles/pacman/aur.txt)
 ln -s $HOME/dotfiles/vim/.vimrc $HOME/.vimrc
 ln -s $HOME/dotfiles/zsh/.zshrc $HOME/.zshrc
