@@ -7,7 +7,9 @@ This repo serves as a backup for a number of my dotfiles as well as a compilatio
 
 ![Info and colors](/../master/screenshots/info.png?raw=true "Info and colors")
 
-### Arch Linux post install details can be found in setup.sh
+### Arch Linux x86_64 4.0.4-2-ARCH
+
+##### Post install details can be found in setup.sh
 
 ### Reminder about XAMPP if you have to deal with it again
 ```
