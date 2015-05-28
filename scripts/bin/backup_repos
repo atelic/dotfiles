@@ -1,0 +1,7 @@
+#! /bin/bash
+mkdir ~/dotfiles/pacman/$(date '+%F')
+# yaourt -Qqem > ~/dotfiles/pacman/$(date '+%F)/aur.txt
+yaourt -Qqem > ~/dotfiles/pacman/aur.txt
+# pacman -Qqen > ~/dotfiles/pacman/$(date '+%F)/repos.txt
+pacman -Qqen > ~/dotfiles/pacman/repos.txt
+cp /etc/pacman.conf ~/dotfiles/pacman/pacman.conf

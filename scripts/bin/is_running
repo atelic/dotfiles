@@ -1,0 +1,10 @@
+#! /bin/bash
+
+process=$1
+
+ps cax | grep $process > /dev/null
+if [ $? -eq 0 ]; then
+	echo "process is running"
+else
+	echo "process is not running"
+fi

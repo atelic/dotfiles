@@ -1,3 +1,4 @@
 #! /bin/bash
+
 cd /home/eric/doc/org
 git commit -am "Commit from cron $(date)"
