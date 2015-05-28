@@ -3,15 +3,15 @@ Dotfiles
 
 This repo serves as a backup for a number of my dotfiles as well as a compilation of commands and programs that I find myself running/needing when installing a new linux system
 
+### Arch Linux x86_64 4.0.4-2-ARCH
 ![Screenshot](/../master/screenshots/term_desktop.png?raw=true "Current system")
 
 ![Info and colors](/../master/screenshots/info.png?raw=true "Info and colors")
 
-### Arch Linux x86_64 4.0.4-2-ARCH
 
 ##### Post install details can be found in setup.sh
 
-### Reminder about XAMPP if you have to deal with it again
+##### Reminder about XAMPP if you have to deal with it again
 ```
 git config core.fileMode false
 sudo -i
