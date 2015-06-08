@@ -34,6 +34,8 @@ export HISTIGNORE="&:[ ]*:e"
 #Aliases
 ###########
 alias emacs='emacsclient -t'
+alias busy='hexdump -C /dev/urandom|grep "ca fe"'
+alias tmux="tmux attach"
 alias gh="curl -u 'barbour-em' https://api.github.com/user/repos -d '{name:$1}'"
 alias ecc='emacsclient -c &'
 alias skype='skype --disable-cleanlooks'
