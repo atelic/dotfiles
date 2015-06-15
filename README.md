@@ -13,7 +13,6 @@ This repo serves as a backup for a number of my dotfiles as well as a compilatio
 
 ##### Reminder about XAMPP if you have to deal with it again
 ```
-git config core.fileMode false
 sudo -i
 cd /opt && wget http://jaist.dl.sourceforge.net/project/xampp/XAMPP%20Linux/1.8.3/xampp-linux-1.8.3-4 installer.run
 chmod +x xampp-linux-1.8.3-4-installer.run && ./xampp-linux-1.8.3-4-installer.run
