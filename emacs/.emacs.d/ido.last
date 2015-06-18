@@ -2,72 +2,75 @@
 
 ;; ----- ido-last-directory-list -----
 (
- ("/home/eric/src/" . "haskell/")
- ("/home/eric/doc/" . "org/")
- ("/home/eric/dotfiles/" . "zsh/")
- ("/home/eric/" . "dotfiles/")
- ("/home/" . "eric/")
- ("/" . "home/")
+ ("/Users/ericbarbour/tmp/" . "json-editor-custom-types/")
+ ("/Users/ericbarbour/dev/osf.io/tests/api_tests/" . "collections/")
+ ("/Users/ericbarbour/dev/osf.io/tests/" . "api_tests/")
+ ("/Users/" . "ericbarbour/")
+ ("/Users/ericbarbour/dev/osf.io/api/" . "base/")
+ ("/Users/ericbarbour/dev/osf.io/" . "tests/")
+ ("/Users/ericbarbour/dev/" . "osf.io/")
+ ("/Users/ericbarbour/" . "tmp/")
+ ("/Users/ericbarbour/.emacs.d/" . "elpa/")
 )
 
 ;; ----- ido-work-directory-list -----
 (
- "/home/eric/dotfiles/"
- "/home/eric/"
- "/home/eric/src/pdr/labs/lab02/"
- "/home/eric/src/pdr/labs/lab01/"
- "/home/eric/src/haskell/"
- "/home/eric/doc/org/"
- "/home/eric/dotfiles/zsh/"
+ "/Users/ericbarbour/"
+ "/Users/ericbarbour/tmp/json-editor-custom-types/"
+ "/Users/ericbarbour/dev/osf.io/tests/api_tests/collections/"
+ "/Users/ericbarbour/dev/osf.io/api/base/"
+ "/Users/ericbarbour/dev/osf.io/"
+ "/Users/ericbarbour/dev/osf.io/api/collections/"
+ "/Users/ericbarbour/dev/osf.io/api/nodes/"
 )
 
 ;; ----- ido-work-file-list -----
 (
- "setup.sh"
  ".emacs"
- "List.cpp"
- "ListTest.cpp"
- "TestListNode.cpp"
- "LifeCycle.cpp"
- "lifecycle.cpp"
- "LifeCycle.h"
- "update_repos.sh"
- "baby.hs"
+ "todo.org"
+ ".authinfo"
+ ".gnus.el"
+ "test.c"
+ "run.js"
+ "test_views.py"
+ "todo.html"
+ "utils.py"
+ "README.md"
 )
 
 ;; ----- ido-dir-file-cache -----
 (
- ("/home/eric/dotfiles/zsh/" (21858 44079 381919 505000) ".zshrc" "../" "./")
+ ("/Users/ericbarbour/" (21891 10807 0 0) "todo.org" "todo.html" "tmp/" "src/" "Pictures/" "News/" "Music/" "Movies/" "Mail/" "Library/" "letter.txt" "Dropbox/" "Downloads/" "dotfiles/" "Documents/" "dev/" "Desktop/" "bin/" "Applications/" ".zshrc.bak" ".zshrc-e" ".zshrc" ".zshenv" ".zsh_history" ".zprofile" ".zpreztorc" ".zprezto/" ".zlogout" ".zlogin" ".zhistory" ".zcompdump.zwc" ".zcompdump-admin’s MacBook Air-5.0.5" ".zcompdump-admin’s MacBook Air (2)-5.0.7" ".zcompdump-admin’s MacBook Air (2)-5.0.5" ".zcompdump" ".zcompcache/" ".Xauthority" ".weechat/" ".virtualenvs/" ".vimrc" ".vimperator/" ".viminfo" ".vim/" ".Trash/" ".tmuxinator/" ".tmux.conf" ".subversion/" ".rnd" ".PyCharm40/" ".oh-my-zsh/" ".npm/" ".node-gyp/" ".newsrc-dribble" ".ncmpcpp/" ".lyrics/" ".local/" ".lesshst" ".ideavimrc" ".idea/" ".hushlogin" ".htoprc" ".hgignore_global" ".gstreamer-0.10/" ".gnus.el" ".gnus" ".gnupg/" ".gitignore_global" ".gitconfig" ".gem/" ".erlang.cookie" ".erc/" ".emacs.d/" ".emacs" ".DS_Store" ".dropbox/" ".config/" ".CFUserTextEncoding" ".cache/" ".bin/" ".bashrc" ".bash_history" ".authinfo" "../" "./")
 
- ("/home/eric/doc/org/" (21862 31772 683638 554000) "../" ".git/" "moving-to-osx.org" "./" "list.org" "archive/" "job-search/" ".gitignore" "pdr/" "README.md" "apartment.org" "moving-to-osx.html" "rails.org")
+ ("/Users/ericbarbour/dev/osf.io/api/nodes/" (21889 53586 0 0) "views.pyc" "views.py" "urls.pyc" "urls.py" "serializers.pyc" "serializers.py" "permissions.pyc" "permissions.py" "__init__.pyc" "__init__.py" "../" "./")
 
- ("/home/eric/src/pdr/labs/lab01/" (21845 2393 48180 517000) "lifecycle.cpp" "../" "index.md" "svtest.cpp" "svutil.h.html" "./" "TestLifeCycle.cpp" "svutil.cpp" "list.cpp.html" "svutil.h" "a.out" "index.html" "LifeCycle.h" "xToN.cpp" "list.h" "lifecycle.cpp.html" "svtest.cpp.html" "list.h.html" "svutil.cpp.html" "list.cpp" "LifeCycle.cpp")
+ ("/Users/ericbarbour/dev/osf.io/api/collections/" (21890 1077 0 0) "views.pyc" "views.py" "urls.pyc" "urls.py" "serializers.pyc" "serializers.py" "permissions.pyc" "permissions.py" "__init__.pyc" "__init__.py" "../" "./")
 
- ("/home/eric/src/pdr/labs/lab02/" (21859 57912 730098 171000) "../" "List.h" "list-diagram.png" "index.md" "Makefile" "ListNode.h" "./" "TestListNode.cpp" "ListItr.cpp" "index.html" "list-diagram.dia" "List.h.html" "List.cpp" "ListNode.cpp" "ListNode.h.html" "list-diagram.svg" "ListTest.cpp.html" "ListTest.cpp" "ListItr.h" "ListItr.h.html")
+ ("/Users/ericbarbour/dev/osf.io/api/base/" (21890 893 0 0) "wsgi.pyc" "wsgi.py" "views.pyc" "views.py" "utils.pyc" "utils.py" "urls.pyc" "urls.py" "settings/" "serializers.pyc" "serializers.py" "renderers.pyc" "renderers.py" "pagination.pyc" "pagination.py" "middleware.pyc" "middleware.py" "filters.pyc" "filters.py" "authentication/" "__init__.pyc" "__init__.py" "../" "./")
 
- ("/home/eric/dotfiles/" (21862 31885 698198 856000) "sublime/" "screenshots/" "scripts/" ".subl-license.txt" "../" "pacman/" ".git/" "lemonbar/" "./" "i3/" "firefox/" "walls/" "vim/" ".gitignore" "README.md" "bash/" "emacs/" "npm_packages.txt" ".Xdefaults" "zsh/" "terminator/" ".tmux.conf" "new-tab/")
+ ("/Users/ericbarbour/dev/osf.io/tests/api_tests/collections/" (21890 64783 0 0) "test_views.pyc" "test_views.py" "__init__.pyc" "__init__.py" "../" "./")
 
- ("/home/eric/" (21862 32735 419010 37000) ".newsrc-dribble" ".zshrc" ".gnome2_private/" ".lesshst" ".bashrc" ".config/" ".m2/" ".v8flags.3.28.71.19.eric.json" "../" ".newsrc" ".archey3.cfg" ".dmrc" ".ghc/" ".meteor/" ".xscreensaver" "src/" ".ICEauthority" ".PyCharm40/" ".profile" ".offlineimap/" ".emacs" ".vim/" ".gtkrc-2.0" ".meteorsession" "tmp/" ".git-credential-cache/" ".mutt/" ".authinfo" ".gstreamer-0.10/" ".w3m/" ".node-gyp/" ".python_history" ".muttrc" ".java/" ".zhistory" ".zcompdump.zwc" ".zprezto/" "./" ".esd_auth" ".oh-my-zsh/" ".emacs.d/" ".i3/" ".gnome/" ".mysql/" ".gitconfig" ".inputrc" ".dbus/" ".weechat/" ".xprofile" ".pulse-cookie" ".zshenv" ".mozilla/" ".zcompdump-hera-5.0.7" ".i3status.conf" ".lyrics/" "dotfiles/" ".lastpass/" ".bash_logout" ".WebIde80/" ".ncmpcpp/" ".npm/" ".Xauthority" ".icons/" ".ssh/" ".vimperatorrc" ".zpreztorc" ".zlogout" ".gnus" ".cache/" ".hplip/" ".gem/" "doc/" ".guard_history" ".ideavimrc" ".offlineimaprc" ".steampid" "bin/" ".vimrc" ".nanorc" ".zsh_history" ".zlogin" ".pki/" ".Xdefaults" ".emacs.d.pre-prelude.tar" ".thumbnails/" "incoming/" ".urxvt/" ".zprofile" ".gnupg/" ".bash_profile" ".zcompdump" ".steampath" ".newsrc.eld" ".Skype/" ".local/" ".tmux.conf" ".gnome2/")
+ ("/Users/ericbarbour/tmp/json-editor-custom-types/" (21887 7525 0 0) "run.js" "README.md" "package.json" "node_modules/" "index.html" ".gitignore" ".git/" "../" "./")
 
- ("/home/eric/src/" (21845 2448 339015 128000) "../" "cs2150/" "./" "pdr/" "gaps/" "gtg/" "haskell/")
+ ("/Users/ericbarbour/dev/osf.io/tests/api_tests/" (21890 50582 0 0) "users/" "nodes/" "collections/" "base/" "__init__.pyc" "__init__.py" "../" "./")
 
- ("/home/eric/src/pdr/" (21838 57738 48793 949000) "../" "tutorials/" ".git/" "cs2150/" "LICENSE.md" "Makefile" "markdown.css" "./" "slides/" "book/" ".gitignore" "index.html" "README.md" "ibcm/" "utils/" "LICENSE.html" "docs/" "labs/" "exams/" "README.html")
+ ("/Users/ericbarbour/dev/osf.io/tests/" (21890 1455 0 0) "webtest_tests.py" "utils.py" "test_watch.py" "test_views.py" "test_utils.py" "test_transactions.py" "test_share.py" "test_serializers.py" "test_security.py" "test_sanitize.py" "test_rubeus.py" "test_piwik.py" "test_permissions.py" "test_oauth.py" "test_notifications.py" "test_models.py" "test_metadata.py" "test_mails.py" "test_mailchimp.py" "test_identifiers.py" "test_guids.py" "test_files/" "test_features.py" "test_elastic.py" "test_contributors_views.py" "test_conferences.py" "test_citations.py" "test_cas_authentication.py" "test_auth_forms.py" "test_auth.py" "test_app.py" "test_addons_oauth.py" "test_addons.py" "modular_templates/" "models/" "framework_tests/" "factories.pyc" "factories.py" "exceptions.py" "base.pyc" "base.py" "api_tests/" "__init__.pyc" "__init__.py" "../" "./")
 
- ("/home/eric/src/pdr/labs/" (21838 57737 968792 691000) "lab08/" "lab04/" "../" "index.md" "lab03/" "./" "index.html" "lab10/" "lab09/" "lab11/" "lab01/" "lab06/" "lab07/" "lab02/" "lab05/" "lab12/")
+ ("/Users/ericbarbour/dev/osf.io/" (21889 53361 0 0) "website/" "webpack.prod.config.js" "webpack.dev.config.js" "webpack.common.config.js" "tests/" "tasks.pyc" "tasks.py" "src/" "setup.cfg" "scripts/" "sauce-sample.json" "requirements.txt" "requirements/" "README.md" "package.json" "NOTICE" "node_modules/" "manage.py" "main.py" "logs/" "LICENSE" "karma.saucelabs.conf.js" "karma.conf.js" "karma.common.conf.js" "framework/" "env/" "CONTRIBUTING.md" "CHANGELOG" "bower.json" "api/" "addons.json" ".travis.yml" ".jshintrc" ".idea/" ".gitignore" ".git/" ".coveragerc" ".bowerrc" "../" "./")
 
- ("/home/eric/src/haskell/" (21844 56036 449791 851000) "baby.hs" "../" "euler1.hi" ".#baby.hs" "./" "unixtools.hs" "problem2.hs" "euler1.hs" "problem1.hs" "haskell1to10.hs" "euler2.hs" ".#euler2.hs")
+ ("/Users/" (21868 27235 0 0) "Shared/" "ericbarbour/" "admin/" ".localized" "../" "./")
 
- ("/home/eric/doc/" (21840 49530 244007 927000) "../" "org/" "./")
+ ("/Users/ericbarbour/dev/osf.io/api/" (21889 52504 0 0) "users/" "templates/" "static/" "README.md" "nodes/" "collections/" "base/" "__init__.pyc" "__init__.py" "../" "./")
 
- ("/home/eric/.zprezto/" (21841 32622 237744 271000) "../" ".git/" "CONTRIBUTING.md" ".gitmodules" "./" ".gitignore" "init.zsh" "README.md" "modules/" "runcoms/")
+ ("/Users/ericbarbour/dev/" (21889 49697 0 0) "personal-site/" "osf.io/" "jsonmetadata/" "cs2150/" ".DS_Store" "../" "./")
 
- ("/home/eric/.zprezto/runcoms/" (21841 32622 241077 634000) "../" "zpreztorc" "zlogout" "./" "README.md" "zshenv" "zprofile" "zlogin" "zshrc")
+ ("/Users/ericbarbour/tmp/" (21889 48737 0 0) "waterbutler/" "traverse.py" "json-editor-custom-types/" "idle.html" ".DS_Store" "../" "./")
 
- ("/home/" (21837 30368 29186 13000) "../" "eric/" "./")
+ ("/Users/ericbarbour/.emacs.d/elpa/" (21889 44407 0 0) "yasnippet-20150415.244/" "undo-tree-20140509.522/" "solarized-theme-20150424.53/" "pyvenv-20150503.941/" "powerline-20150602.1413/" "popup-20150609.2145/" "neotree-20150427.259/" "material-theme-20150614.130/" "magit-20150608.1139/" "key-chord-20140929.2246/" "highlight-indentation-20150307.208/" "goto-chg-20131228.1459/" "gnupg/" "git-rebase-mode-20150122.1114/" "git-commit-mode-20150330.1048/" "find-file-in-project-20150528.633/" "evil-nerd-commenter-20150615.2102/" "evil-20150511.146/" "elpy-20150502.740/" "dash-20150611.922/" "company-20150616.439/" "avy-20150615.1048/" "auto-complete-20150615.34/" "archives/" "ace-window-20150520.1014/" "../" "./")
 
- ("/home/eric/Documents/" (21840 49530 244007 927000) "../" "org/" "./")
+ ("/Users/ericbarbour/.emacs.d/" (21889 47180 0 0) "themes/" "ido.last" "elpa/" "el-get/" "auto-save-list/" "ac-comphist.dat" "../" "./")
 
- ("/home/eric/Documents/org/" (21841 306 402052 119000) "../" ".git/" "./" ".#beerlamp.org" ".gitignore" "README.md" "#beerlamp.org#" "beerlamp.org")
+ ("/Users/ericbarbour/dev/osf.io/api/base/settings/" (21889 44069 0 0) "local.pyc" "local.py" "local-dist.py" "defaults.pyc" "defaults.py" "__init__.pyc" "__init__.py" "../" "./")
 )
 
 ;; ----- ido-unc-hosts-cache -----

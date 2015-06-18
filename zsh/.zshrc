@@ -1,11 +1,5 @@
-export ZSH=/home/eric/.oh-my-zsh
-
-ZSH_THEME="norm"
-
-# Base16 Shell
-BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"
-[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
-
+export ZSH=/Users/ericbarbour/.oh-my-zsh
+ZSH_THEME="pure"
 DISABLE_AUTO_UPDATE="true"
 ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
@@ -22,7 +16,7 @@ source $ZSH/oh-my-zsh.sh
 
 export LANG=en_US.UTF-8
 export ALTERNATE_EDITOR=""
-export EDITOR=emacsclient
+export EDITOR=vim
 export TERM=xterm-256color
 export ARCHFLAGS="-arch x86_64"
 export HISTCONTROL="erasedups:ignoreboth"
@@ -33,21 +27,21 @@ export HISTIGNORE="&:[ ]*:e"
 ############
 #Aliases
 ###########
-alias emacs='emacsclient -t'
 alias busy='hexdump -C /dev/urandom|grep "ca fe"'
-alias tmux="tmux attach"
+# alias emacs='emacsclient -t'
 alias gh="curl -u 'barbour-em' https://api.github.com/user/repos -d '{name:$1}'"
 alias ecc='emacsclient -c &'
 alias skype='skype --disable-cleanlooks'
 alias php='/opt/lampp/bin/php'
-alias open='rifle'
+# alias open='rifle'
 alias skype-'skype --disable-cleanlooks'
 alias update_repos='cd /home/eric/src/  && for i in ./*/; do (cd $i && git pull); done'
 alias c="clear"
 alias e="exit"
 alias ..="cd .."
 alias cd..='cd ..'
-alias ls='ls --color --group-directories-first'
+alias sl='ls'
+# alias ls='ls --color --group-directories-first'
 alias composer="sudo php composer.phar"
 alias bc='bc -l'
 alias vi='vim'
@@ -129,3 +123,6 @@ pbs () {
 }
 
 PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
+ulimit -n 2048
+PATH=$PATH:/usr/local/bin
+PATH=$PATH:/Users/ericbarbour/bin

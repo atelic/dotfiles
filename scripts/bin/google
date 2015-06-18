@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+#!/usr/bin/python
 import os, urllib
 google = os.popen('zenity --entry --text="Enter your search: " --title="goog.py"').read()
 google = urllib.quote(google)
