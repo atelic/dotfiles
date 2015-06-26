@@ -6,9 +6,11 @@
 
 set $mod Mod4
 set $browser google-chrome-stable
+set $term terminator
+
 font pango: DejaVu Sans Mono Book 8
 # Gaps patch from https://github.com/Airblader/i3
-gaps inner 12
+gaps inner 6
 gaps outer 2
 set $mode_gaps Gaps: (o) outer, (i) inner
 set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
@@ -52,7 +54,7 @@ bindsym Control+Shift+1 [class="^.*"] border toggle
 
 # start dmenu (a program launcher)
 # bindsym $mod+d exec dmenu_run -b -f  -i -l 3 -p "$(whoami)@$(hostname)" -nb "#2d2d2d" -nf "#cccccc" -sb "#515151" -sf "#f99157"
-bindsym $mod+d exec dmenu_run -b -f  -i -l 1 -p "Run:" -nb "#2d2d2d" -nf "#cccccc" -sb "#515151" -sf "#f99157"
+bindsym $mod+d exec dmenu_run -b -f  -i -l 3 -p "Run:" -nb "#2d2d2d" -nf "#cccccc" -sb "#515151" -sf "#f99157"
 
 # change focus
 # default keys altered to match those of vim
@@ -218,32 +220,74 @@ client.urgent               #dca3a3 #dca3a3 #DCDCCC #3f3f3f
 # Start up commands
 #####################
 
+# Starting brightness
 exec xbacklight -set 40
+# background
 exec --no-startup-id nitrogen --restore
+# hide mouse when don't need
 exec --no-startup-id unclutter
+# CAPS LOCK to ctrl (aka life saver)
 exec --no-startup-id setxkbmap -option ctrl:nocaps
+# two finger scrolling
 exec --no-startup-id xinput set-prop "SynPS/2 Synaptics TouchPad" "Synaptics Scrolling Distance" -107, -107
+# wifi applet
 exec --no-startup-id nm-applet
+# power management
 exec --no-startup-id sudo tlp start
+# stop that damn beeping
 exec --no-startup-id xset -b
+# flu.x for the eyes
 exec --no-startup-id xflux -z 22904
+# bc emacs
 exec --no-startup-id emacs --daemon --with-x-toolkit=lucid
+# disable screen dimming idk y i did this
+exec --no-startup-id xset s off
+exec --no-startup-id xset s noblank
+exec --no-startup-id xset -dpms
+# key repeat to faster bc emacs w/ evil
+exec --no-startup-id xset r rate 250 50
 
 #######################
 # Custom exec commands
 #######################
 
-# Two button
-bindsym $mod+Return exec urxvt
-bindsym $mod+c exec $browser
-bindsym $mod+Shift+Q kill
-bindsym $mod+q exec subl3
-bindsym $mod+t exec /usr/bin/hamster
-bindsym Print exec scrot -q 100 '%Y-%m-%d-%T_$wx$h_scrot.png' -e 'mv $f ~/dotfiles/screenshots'
+####################################################################################
+# KEYBOARD GUIDE
+# THESE ARE ALL THE MAPPING OF $mod+
+####################################################################################
+# TOP ROW
+####################################################################################
+# q    w   e    r      t y u i o p [ ] \
+# quit tab norm resize ? ? ? ? ? ? ? ? ?
+####################################################################################
+# MIDDLE ROW
+####################################################################################
+# a          s	   d     f    g h    j    k  l     ; '
+# sel-parent stack dmenu full ? left down up right ? ?
+####################################################################################
+# BOTTOM ROW
+####################################################################################
+# z       x           c         v       b        n          m    ,      .        / 
+# split-h bright-down bright-up split-v $browser play/pause mute vol-up vol-down ?
+####################################################################################
 
-# Three button
-bindsym $mod+Shift+B exec /usr/bin/beerlamp
-bindsym $mod+Shift+D exec /bin/sh /home/eric/dotfiles/scripts/dmenu2.sh
+# open term
+bindsym $mod+Return exec $term
+# x = volume down c = volume up
+bindsym $mod+x exec amixer -q set Master 5%- unmute
+bindsym $mod+c exec amixer -q set Master 5%+ unmute
+# m for mute
+bindsym $mod+m exec amixer -q set Master toggle
+# n is next to m and toggles play or pause
+bindsym $mod+n exec mpc toggle
+
+bindsym $mod+b exec $browser
+# comma = brightness down period = brightness up
+bindsym $mod+comma exec xbacklight -10 -time 0
+bindsym $mod+period exec xbacklight +10 -time 0
+# kill window
+bindsym $mod+q kill
+bindsym Print exec scrot -q 100 '%Y-%m-%d-%T_$wx$h_scrot.png' -e 'mv $f ~/dotfiles/screenshots'
 
 ###############
 # Lock screen

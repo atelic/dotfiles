@@ -33,6 +33,7 @@ export HISTIGNORE="&:[ ]*:e"
 ############
 #Aliases
 ###########
+alias ncmpcpp='sh ~/bin/music.sh'
 alias emacs='emacsclient -t'
 alias busy='hexdump -C /dev/urandom|grep "ca fe"'
 alias tmux="tmux attach"
