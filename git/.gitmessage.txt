@@ -1,0 +1,21 @@
+# Capitalized, short (50 chars or less) summary
+# ----------------------------------------------|
+#WIP:
+#Add:
+#Mod:
+#Ref:
+#Fix:
+#Rem:
+
+# More detailed description. Wrap at 70 characters
+# Use the imperative: "Fix bug" and not "Fixed bug" 
+# ------------------------------------------------------------------|
+
+# Is this a minor change that doesn't need building?
+# [ci skip]
+
+# Reminder to rebase git rebase -i <commitsha>
+# Pointless commits include but are not limited to
+# Fix flake errors
+# Fix typo
+# Fix test

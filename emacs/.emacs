@@ -27,8 +27,10 @@ Return a list of installed packages or nil for every skipped package."
 						  'flymake
 						  'solarized-theme
 						  'ace-window
+						  'theme-changer
 						  'evil-nerd-commenter
 						  'web-mode
+						  'js2-mode
 						  )
 (require 'package)
 
@@ -38,24 +40,6 @@ Return a list of installed packages or nil for every skipped package."
 (add-to-list 'package-archives
 			 '("elpy" . "http://jorgenschaefer.github.io/packages/"))
 (elpy-enable)
-
-;; ==============
-;; El-get
-;; ==============
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-
-(unless (require 'el-get nil 'noerror)
-  (with-current-buffer
-	  (url-retrieve-synchronously
-	   "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
-	(goto-char (point-max))
-	(eval-print-last-sexp)))
-
-(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
-(el-get 'sync)
-
-(setq package-enable-at-startup nil)
-
 ;; ==============
 ;; Pymacs
 ;; ==============
@@ -113,7 +97,13 @@ Return a list of installed packages or nil for every skipped package."
 ;; ==============
 
 (add-to-list 'load-path "~/.emacs.d/themes/material")
-(load-theme 'material-light t)
+
+(require 'theme-changer)
+(setq calendar-location-name "Charlottesville, VA")
+(setq calendar-latitude 38.04)
+(setq calendar-longitude -78.5)
+(change-theme 'material-light 'base16-eighties-dark)
+
 
 ;;===========================
 ;; Vim emulation and settings
@@ -186,9 +176,13 @@ Return a list of installed packages or nil for every skipped package."
 (global-set-key (kbd "M-p") 'ace-window)
 (global-set-key (kbd "<mouse-4>") 'scroll-down)
 (global-set-key (kbd "<mouse-5>") 'scroll-up)
+(global-set-key (kbd "C-a") 'beginning-of-line)
+(global-set-key (kbd "C-l") 'end-of-line)
+(global-set-key (kbd "C-c r") 'revert-buffer-no-confirm)
 ;; magit config
 (setq magit-last-seen-setup-instructions "1.4.0")
-(global-set-key (kbd "<f1> SPC") 'magit-status)
+(global-set-key (kbd "C-c i") 'magit-status)
+;; (magit-set-key (kdb "s") 'magit-stage-item)
 
 ;; custom mode for inserting closing brace and indenting in C and PHP
 (define-minor-mode c-helpers-minor-mode
@@ -202,15 +196,29 @@ Return a list of installed packages or nil for every skipped package."
   (insert "{")
   (newline)
   (newline)
- (insert "}")
+  (insert "}")
   (indent-for-tab-command)
   (previous-line)
   (indent-for-tab-command))
 
 (add-hook 'c++-mode-hook 'c-helpers-minor-mode)
 (add-hook 'php-mode-hook 'c-helpers-minor-mode)
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+(projectile-global-mode)
 
+;; Source: http://www.emacswiki.org/emacs-en/download/misc-cmds.el
+(defun revert-buffer-no-confirm ()
+  "Revert buffer without confirmation."
+  (interactive)
+  (revert-buffer t t))
 
+;; magit diff colors
+(eval-after-load 'magit
+  '(progn
+     (set-face-foreground 'magit-diff-add "green3")
+     (set-face-foreground 'magit-diff-del "red3")
+     (when (not window-system)
+       (set-face-background 'magit-item-highlight "black"))))
 
 ;; ==================
 ;; Custom-set-variables
@@ -224,11 +232,14 @@ Return a list of installed packages or nil for every skipped package."
    [default bold shadow italic underline bold bold-italic bold])
  '(ansi-color-names-vector
    (vector "#ffffff" "#f36c60" "#8bc34a" "#fff59d" "#4dd0e1" "#b39ddb" "#81d4fa" "#262626"))
+ '(ansi-term-color-vector
+   [unspecified "#2d2d2d" "#f2777a" "#99cc99" "#ffcc66" "#6699cc" "#cc99cc" "#6699cc" "#d3d0c8"])
  '(custom-safe-themes
    (quote
-	("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "f11b028f78c8934c4dea255d94c491f7ced8720db594f9454dbec55938af3934" "1c57936ffb459ad3de4f2abbc39ef29bfb109eade28405fa72734df1bc252c13" default)))
+	("13f85dabe9c9abd73426f190aeedb7d0ad32d29e1fef3138ec8a2435a8fb0910" "3539b3cc5cbba41609117830a79f71309a89782f23c740d4a5b569935f9b7726" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "f11b028f78c8934c4dea255d94c491f7ced8720db594f9454dbec55938af3934" "1c57936ffb459ad3de4f2abbc39ef29bfb109eade28405fa72734df1bc252c13" default)))
  '(fci-rule-color "#3a3a3a")
  '(inhibit-startup-screen t)
+ '(python-check-command "/usr/local/bin/pyflakes")
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
    (quote

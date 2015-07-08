@@ -1,0 +1,41 @@
+[core]
+	excludesfile = /Users/ericbarbour/.gitignore
+	editor = emacsclient -t
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[user]
+	name = Eric Barbour
+	email = emb4gu@virginia.edu
+[push]
+	default = matching
+[alias]
+	up = !git pull --rebase --prune $@ && git submodule update --init --recursive
+	cob = checkout -b
+	unstage = reset HEAD --
+	last = log -1 HEAD
+	gui = !open /Applications/SourceTree.app
+	co = checkout
+	ec = config --global -e
+	undo = reset HEAD~1 --mixed
+	amend = commit -a --amend
+	wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
+	save = !git add -A && git commit -m 'SAVEPOINT'
+	wip = commit -am "WIP"
+	ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+	dlc = diff --cached HEAD^
+	find = "!git ls-files | grep -i"
+	done = "!f() { git branch | grep "$1" | cut -c 3- | grep -v done | xargs -I{} git branch -m {} done-{}; }; f""}"
+	la = "!git config -l | grep alias | cut -c 7-"
+[commit]
+	template = /Users/ericbarbour/.gitmessage.txt
+[credential]
+	helper = osxkeychain
+[merge]
+	tool = opendiff
+[mergetool]
+	keepBackup = false

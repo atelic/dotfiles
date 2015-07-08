@@ -122,6 +122,11 @@ pbs () {
   pbx /tmp/$$.png
 }
 
+pyclean() {
+	find . -type f -name "*.py[co]" -delete
+	find . -type d -name "__pycache__" -delete
+}
+
 PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 ulimit -n 2048
 PATH=$PATH:/usr/local/bin

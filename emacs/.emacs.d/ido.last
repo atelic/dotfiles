@@ -2,21 +2,55 @@
 
 ;; ----- ido-last-directory-list -----
 (
+ ("/Users/ericbarbour/dev/osf.io/framework/" . "auth/")
+ ("/Users/ericbarbour/dev/osf.io/website/templates/" . "emails/")
+ ("/Users/ericbarbour/dotfiles/" . "zsh/")
+ ("/Users/ericbarbour/dev/osf.io/scripts/" . "migration/")
+ ("/Users/ericbarbour/dev/instaslam/app/" . "models/")
+ ("/Users/ericbarbour/dev/instaslam/" . "app/")
+ ("/Users/ericbarbour/.config/" . "mopidy/")
  ("/Users/ericbarbour/tmp/" . "json-editor-custom-types/")
+ ("/Users/ericbarbour/dev/osf.io/website/static/js/" . "pages/")
+ ("/Users/ericbarbour/dev/osf.io/website/static/" . "js/")
+ ("/Users/ericbarbour/dev/osf.io/website/project/" . "views/")
+ ("/Users/ericbarbour/dev/osf.io/website/" . "templates/")
+ ("/Users/ericbarbour/dev/shareCuration/crowd/" . "templates/")
  ("/Users/ericbarbour/dev/osf.io/tests/api_tests/" . "collections/")
  ("/Users/ericbarbour/dev/osf.io/tests/" . "api_tests/")
  ("/Users/" . "ericbarbour/")
- ("/Users/ericbarbour/dev/osf.io/api/" . "base/")
- ("/Users/ericbarbour/dev/osf.io/" . "tests/")
+ ("/Users/ericbarbour/dev/osf.io/api/" . "collections/")
+ ("/Users/ericbarbour/dev/osf.io/" . "website/")
  ("/Users/ericbarbour/dev/" . "osf.io/")
- ("/Users/ericbarbour/" . "tmp/")
- ("/Users/ericbarbour/.emacs.d/" . "elpa/")
+ ("/Users/ericbarbour/" . ".emacs.d/")
+ ("/Users/ericbarbour/.emacs.d/" . "themes/")
 )
 
 ;; ----- ido-work-directory-list -----
 (
+ "/Users/ericbarbour/dev/osf.io/website/project/views/"
  "/Users/ericbarbour/"
+ "/Users/ericbarbour/dev/osf.io/website/templates/emails/"
+ "/Users/ericbarbour/dev/osf.io/website/static/js/"
+ "/Users/ericbarbour/dev/osf.io/website/static/js/pages/"
+ "/Users/ericbarbour/dev/osf.io/website/"
+ "/Users/ericbarbour/dev/osf.io/website/templates/"
+ "/Users/ericbarbour/dev/osf.io/website/project/"
+ "/Users/ericbarbour/dev/osf.io/website/project/metadata/"
+ "/Users/ericbarbour/dev/osf.io/scripts/migration/"
+ "/Users/ericbarbour/dev/osf.io/scripts/"
+ "/Users/ericbarbour/dev/osf.io/framework/auth/"
+ "/Users/ericbarbour/dev/osf.io/website/templates/project/"
+ "/Users/ericbarbour/dev/osf.io/website/notifications/"
+ "/Users/ericbarbour/bin/"
+ "/Users/ericbarbour/dev/osf.io/scripts/tests/"
+ "/Users/ericbarbour/dotfiles/zsh/"
+ "/Users/ericbarbour/dev/instaslam/app/models/"
+ "/Users/ericbarbour/.tmuxinator/"
+ "/Users/ericbarbour/.config/mopidy/"
  "/Users/ericbarbour/tmp/json-editor-custom-types/"
+ "/Users/ericbarbour/tmp/barbour-em.github.io/folio/"
+ "/Users/ericbarbour/dev/shareCuration/crowd/templates/"
+ "/Users/ericbarbour/dev/shareCuration/crowd/"
  "/Users/ericbarbour/dev/osf.io/tests/api_tests/collections/"
  "/Users/ericbarbour/dev/osf.io/api/base/"
  "/Users/ericbarbour/dev/osf.io/"
@@ -26,49 +60,109 @@
 
 ;; ----- ido-work-file-list -----
 (
+ "drafts.py"
  ".emacs"
- "todo.org"
- ".authinfo"
- ".gnus.el"
- "test.c"
- "run.js"
- "test_views.py"
- "todo.html"
- "utils.py"
- "README.md"
+ "#prereg_review.txt.mako#"
+ "registrationEditorExtensions.js"
+ "notes.org"
+ "register_1-page.js"
+ "project-registrations-page.js"
+ "registrationUtils.js"
+ "routes.py"
+ "prereg-admin-page.js"
 )
 
 ;; ----- ido-dir-file-cache -----
 (
- ("/Users/ericbarbour/" (21891 10807 0 0) "todo.org" "todo.html" "tmp/" "src/" "Pictures/" "News/" "Music/" "Movies/" "Mail/" "Library/" "letter.txt" "Dropbox/" "Downloads/" "dotfiles/" "Documents/" "dev/" "Desktop/" "bin/" "Applications/" ".zshrc.bak" ".zshrc-e" ".zshrc" ".zshenv" ".zsh_history" ".zprofile" ".zpreztorc" ".zprezto/" ".zlogout" ".zlogin" ".zhistory" ".zcompdump.zwc" ".zcompdump-admin’s MacBook Air-5.0.5" ".zcompdump-admin’s MacBook Air (2)-5.0.7" ".zcompdump-admin’s MacBook Air (2)-5.0.5" ".zcompdump" ".zcompcache/" ".Xauthority" ".weechat/" ".virtualenvs/" ".vimrc" ".vimperator/" ".viminfo" ".vim/" ".Trash/" ".tmuxinator/" ".tmux.conf" ".subversion/" ".rnd" ".PyCharm40/" ".oh-my-zsh/" ".npm/" ".node-gyp/" ".newsrc-dribble" ".ncmpcpp/" ".lyrics/" ".local/" ".lesshst" ".ideavimrc" ".idea/" ".hushlogin" ".htoprc" ".hgignore_global" ".gstreamer-0.10/" ".gnus.el" ".gnus" ".gnupg/" ".gitignore_global" ".gitconfig" ".gem/" ".erlang.cookie" ".erc/" ".emacs.d/" ".emacs" ".DS_Store" ".dropbox/" ".config/" ".CFUserTextEncoding" ".cache/" ".bin/" ".bashrc" ".bash_history" ".authinfo" "../" "./")
+ ("/Users/ericbarbour/dev/osf.io/website/project/views/" (21916 13335 0 0) "wiki.py" "tag.pyc" "tag.py" "register.pyc" "register.py" "node.pyc" "node.py" "log.pyc" "log.py" "key.pyc" "key.py" "file.pyc" "file.py" "drafts.pyc" "drafts.py" "contributor.pyc" "contributor.py" "comment.pyc" "comment.py" "__init__.pyc" "__init__.py" "#register.py#" "../" "./")
 
- ("/Users/ericbarbour/dev/osf.io/api/nodes/" (21889 53586 0 0) "views.pyc" "views.py" "urls.pyc" "urls.py" "serializers.pyc" "serializers.py" "permissions.pyc" "permissions.py" "__init__.pyc" "__init__.py" "../" "./")
+ ("/Users/ericbarbour/.emacs.d/" (21915 53715 0 0) "themes/" "projectile-bookmarks.eld" "ido.last" "games/" "elpa/" "el-get/" "auto-save-list/" "ac-comphist.dat" "../" "./")
 
- ("/Users/ericbarbour/dev/osf.io/api/collections/" (21890 1077 0 0) "views.pyc" "views.py" "urls.pyc" "urls.py" "serializers.pyc" "serializers.py" "permissions.pyc" "permissions.py" "__init__.pyc" "__init__.py" "../" "./")
+ ("/Users/ericbarbour/" (21916 14245 0 0) "weed-master/" "tmp/" "src/" "Pictures/" "notes.org" "Music/" "Movies/" "Library/" "Dropbox/" "Downloads/" "dotfiles/" "Documents/" "dev/" "Desktop/" "bin/" "base16-eighties.dark.256.itermcolors" "Applications/" ".zshrc.bak" ".zshrc-e" ".zshrc" ".zshenv" ".zsh_history" ".zprofile" ".zpreztorc" ".zprezto/" ".zlogout" ".zlogin" ".zhistory" ".zcompdump.zwc" ".zcompdump-admin’s MacBook Air-5.0.5" ".zcompdump-admin’s MacBook Air (2)-5.0.7" ".zcompdump-admin’s MacBook Air (2)-5.0.5" ".zcompdump" ".zcompcache/" ".Xauthority" ".weechat/" ".w3m/" ".virtualenvs/" ".vimrc" ".vimperator/" ".viminfo" ".vim/" ".Trash/" ".tmuxinator/" ".tmux.conf" ".subversion/" ".ssh/" ".sqlite_history" ".rnd" ".PyCharm40/" ".psql_history" ".oh-my-zsh/" ".npm/" ".node-gyp/" ".newsrc-dribble" ".ncmpcpp/" ".mongorc.js" ".lyrics/" ".local/" ".lesshst" ".irssi/" ".ipython/" ".ideavimrc" ".idea/" ".hushlogin" ".htoprc" ".hgignore_global" ".gstreamer-0.10/" ".gnus.el" ".gnus" ".gnupg/" ".gitmessage.txt" ".gitignore_global" ".gitignore" ".gitconfig" ".gem/" ".gcalcli_oauth" ".gcalcli_cache" ".erlang.cookie" ".erc/" ".emacs.d/" ".emacs" ".DS_Store" ".dropbox/" ".dbshell" ".config/" ".CFUserTextEncoding" ".cache/" ".bin/" ".bashrc" ".bash_history" ".autoenv_authorized.tmp" ".autoenv_authorized" ".authinfo" "../" "./")
 
- ("/Users/ericbarbour/dev/osf.io/api/base/" (21890 893 0 0) "wsgi.pyc" "wsgi.py" "views.pyc" "views.py" "utils.pyc" "utils.py" "urls.pyc" "urls.py" "settings/" "serializers.pyc" "serializers.py" "renderers.pyc" "renderers.py" "pagination.pyc" "pagination.py" "middleware.pyc" "middleware.py" "filters.pyc" "filters.py" "authentication/" "__init__.pyc" "__init__.py" "../" "./")
+ ("/Users/ericbarbour/dev/osf.io/" (21916 13282 0 0) "website/" "webpack.prod.config.js" "webpack.dev.config.js" "webpack.common.config.js" "user_flow.md" "tests/" "tasks.pyc" "tasks.py" "src/" "setup.cfg" "scripts/" "sauce-sample.json" "requirements.txt" "requirements/" "README.md" "package.json" "NOTICE" "node_modules/" "manage.py" "main.py" "logs/" "LICENSE" "karma.saucelabs.conf.js" "karma.conf.js" "karma.common.conf.js" "framework/" "env/" "CONTRIBUTING.md" "CHANGELOG" "bower.json" "api/" "addons.json" ".travis.yml" ".jshintrc" ".idea/" ".gitignore" ".git/" ".coveragerc" ".bowerrc" "../" "./")
 
- ("/Users/ericbarbour/dev/osf.io/tests/api_tests/collections/" (21890 64783 0 0) "test_views.pyc" "test_views.py" "__init__.pyc" "__init__.py" "../" "./")
+ ("/Users/ericbarbour/dev/osf.io/website/" (21916 13335 0 0) "views.pyc" "views.py" "util/" "templates/" "static/" "signals.pyc" "signals.py" "settings/" "security.pyc" "security.py" "search_migration/" "search/" "routes.pyc" "routes.py" "project/" "profile/" "oauth/" "notifications/" "models.pyc" "models.py" "mails.pyc" "mails.py" "mailchimp_utils.pyc" "mailchimp_utils.py" "language.pyc" "language.py" "landing_pages.pyc" "landing_pages.py" "identifiers/" "filters/" "exceptions.pyc" "exceptions.py" "discovery/" "conferences/" "citations/" "archiver/" "app.pyc" "app.py" "addons/" "__init__.pyc" "__init__.py" "../" "./")
 
- ("/Users/ericbarbour/tmp/json-editor-custom-types/" (21887 7525 0 0) "run.js" "README.md" "package.json" "node_modules/" "index.html" ".gitignore" ".git/" "../" "./")
+ ("/Users/ericbarbour/dev/osf.io/website/static/js/" (21916 14121 0 0) "waterbutler.js" "tests/" "signUp.js" "signIn.js" "share/" "search.js" "resources/" "registrationUtils.js" "registrationRetraction.js" "registrationEmbargo.js" "registrationEditorExtensions.js" "registerNode.js" "projectSettings.js" "projectorganizer.js" "projectCreator.js" "project.js" "profile.js" "privateLinkTable.js" "privateLinkManager.js" "pointers.js" "paginator.js" "pages/" "osfLanguage.js" "osfHelpers.js" "oop.js" "onboarder.js" "objectCreateShim.js" "notificationsTreebeard.js" "notificationsConfig.js" "nodeControl.js" "navbarControl.js" "mime.js" "metadata_1.js" "mathrender.js" "markdown.js" "logFeed.js" "koHelpers.js" "json-editor-extensions.js" "iconmap.js" "growlBox.js" "formViewModel.js" "forgotPassword.js" "folderPickerNodeConfig.js" "folderpicker.js" "fileViewTreebeard.js" "filesWidget.js" "filepage/" "fangorn.js" "diffTool.js" "crossOrigin.js" "contribManager.js" "contribAdder.js" "conference.js" "components/" "commentpane.js" "comment.js" "clipboard.js" "citationWidget.js" "citationsNodeConfig.js" "citations.js" "citationList.js" "citationGrid.js" "changeMessage.js" "addonSettings.js" "addonPermissions.js" "addonNodeConfig.js" "addonHelper.js" "accountSettings.js" "accountClaimer.js" "../" "./")
 
- ("/Users/ericbarbour/dev/osf.io/tests/api_tests/" (21890 50582 0 0) "users/" "nodes/" "collections/" "base/" "__init__.pyc" "__init__.py" "../" "./")
+ ("/Users/ericbarbour/dev/osf.io/website/templates/project/" (21915 62805 0 0) "view_file.mako" "statistics.mako" "settings.mako" "retracted_registration.mako" "retract_registration.mako" "registrations.mako" "registration_editor_templates.mako" "registration_editor_extensions.mako" "registration_editor.mako" "register.mako" "project_header.mako" "project_base.mako" "project.mako" "modal_show_links.mako" "modal_generate_private_link.mako" "modal_duplicate.mako" "modal_add_pointer.mako" "modal_add_contributor.mako" "modal_add_component.mako" "key_history.mako" "forks.mako" "files.mako" "contributors.mako" "addon/" "../" "./")
+
+ ("/Users/ericbarbour/dev/osf.io/website/project/metadata/" (21915 55437 0 0) "utils.pyc" "utils.py" "simple.json" "schemas.pyc" "schemas.py" "prereg-prize-test.json" "osf-standard-test.json" "osf-standard-1.json" "osf-open-ended-1.json" "brandt-prereg-test.json" "brandt-prereg-1.json" "brandt-postcomp-1.json" "aea-prereg-1.json" "__init__.pyc" "__init__.py" "../" "./")
+
+ ("/Users/ericbarbour/dev/osf.io/website/static/js/pages/" (21915 62801 0 0) "wiki-edit-page.js" "view-file-tree-page.js" "twofactor-page.js" "sharing-page.js" "ShareJSDocFile.js" "share-search-page.js" "share-embed-page.js" "search-page.js" "render-nodes.js" "registration-retraction-page.js" "register_1-page.js" "register-page.js" "project-settings-page.js" "project-registrations-page.js" "project-dashboard-page.js" "project-base-page.js" "profile-settings-page.js" "profile-settings-addons-page.js" "profile-page.js" "profile-account-settings-page.js" "notifications-config-page.js" "login-page.js" "home-page.js" "forgotpassword-page.js" "files-page.js" "file-page.js" "dashboard-page.js" "conference-page.js" "base-page.js" "#ShareJSDocFile.js#" "../" "./")
+
+ ("/Users/ericbarbour/.emacs.d/themes/" (21889 30581 0 0) "material-theme.elc" "material-theme.el" "material-theme-pkg.el" "material-theme-autoloads.el~" "material-theme-autoloads.el" "material-light-theme.elc" "material-light-theme.el" "../" "./")
+
+ ("/Users/ericbarbour/.tmuxinator/" (21915 17128 0 0) "work.yml" "share.yml" "osf.yml" "chill.yml" "../" "./")
+
+ ("/Users/ericbarbour/dev/osf.io/website/templates/emails/" (21914 59114 0 0) "transactional.txt.mako" "transactional.html.mako" "test.txt.mako" "test.html.mako" "support_request.txt.mako" "security_permissions_change.txt.mako" "primary_email_changed.txt.mako" "pending_retraction_non_admin.txt.mako" "pending_retraction_admin.txt.mako" "pending_registered.txt.mako" "pending_invite.txt.mako" "pending_embargo_non_admin.txt.mako" "pending_embargo_admin.txt.mako" "notify_base.mako" "invite.txt.mako" "forward_invite_registered.txt.mako" "forward_invite.txt.mako" "forgot_password.txt.mako" "file_operation_success.txt.mako" "file_operation_success.html.mako" "file_operation_failed.txt.mako" "file_operation_failed.html.mako" "email_removed.txt.mako" "email_contributors_of_registrations.txt.mako" "digest.txt.mako" "digest.html.mako" "confirm_merge.txt.mako" "confirm.txt.mako" "conference_submitted.txt.mako" "conference_inactive.txt.mako" "conference_failed.txt.mako" "comments.txt.mako" "comments.html.mako" "comment_replies.txt.mako" "comment_replies.html.mako" "archive_uncaught_error_user.html.mako" "archive_uncaught_error_desk.txt.mako" "archive_success.html.mako" "archive_size_exceeded_user.html.mako" "archive_size_exceeded_desk.txt.mako" "archive_copy_error_user.html.mako" "archive_copy_error_desk.txt.mako" "#prereg_review.txt.mako#" "../" "./")
+
+ ("/Users/ericbarbour/dev/osf.io/website/templates/" (21914 59114 0 0) "util/" "tags.mako" "share_search.mako" "share_registration.mako" "share_api_docs.mako" "search_bar.mako" "search.mako" "resend.mako" "public/" "projectGridTemplates.html" "project/" "profile.mako" "profile/" "nav.mako" "metadata/" "merge_accounts.mako" "log_templates.mako" "log_list.mako" "index.mako" "include/" "footer.mako" "error.mako" "emails/" "dashboard.mako" "copyright.mako" "components/" "claim_account_registered_login.mako" "claim_account_registered.mako" "claim_account.mako" "base.mako" "alert.mako" "_log_templates.mako" "__init__.py" "../" "./")
+
+ ("/Users/ericbarbour/dev/osf.io/website/project/" (21914 59115 0 0) "views/" "utils.pyc" "utils.py" "signals.pyc" "signals.py" "model.pyc" "model.py" "metadata/" "forms.pyc" "forms.py" "decorators.pyc" "decorators.py" "__init__.pyc" "__init__.py" "../" "./")
+
+ ("/Users/ericbarbour/dev/osf.io/framework/auth/" (21914 54044 0 0) "views.pyc" "views.py" "utils.pyc" "utils.py" "signing.pyc" "signing.py" "signals.pyc" "signals.py" "forms.pyc" "forms.py" "exceptions.pyc" "exceptions.py" "decorators.pyc" "decorators.py" "core.pyc" "core.py" "cas.pyc" "cas.py" "__init__.pyc" "__init__.py" "../" "./")
+
+ ("/Users/ericbarbour/dev/osf.io/scripts/" (21914 51100 0 0) "utils.pyc" "utils.py" "tests/" "sync_email.py" "staff_public_regs.py" "send_digest.sh" "send_digest.pyc" "send_digest.py" "retract_registrations.sh" "retract_registrations.py" "refresh_box_tokens.sh" "refresh_box_tokens.py" "populate_conferences.py" "parse_citation_styles.pyc" "parse_citation_styles.py" "osfstorage/" "nodes_to_abstract.py" "migration/" "migrate_zendeley_provider_names.py" "migrate_was_invited.py" "migrate_unregistered.py" "migrate_unconfirmed_valid_users.py" "migrate_registration_and_fork_log.py" "migrate_presentation_service.py" "migrate_piwik_derived_nodes.py" "migrate_piwik_base_nodes.py" "migrate_permissions.py" "migrate_none_logs.py" "migrate_names_cleanup.py" "migrate_manual_merged_user.py" "migrate_logs_fix.py" "migrate_inconsistent_file_keys.py" "migrate_guid.py" "migrate_github_oauth_settings.py" "migrate_counters.py" "migrate_conference_admins.py" "migrate_comment_level.py" "migrate_cloudfiles_container.py" "migrate_categories.py" "migrate_boxfiles.py" "metrics.py" "log_analytics.py" "loadtest/" "impute_visibility.py" "impute_names_model.py" "impute_names.py" "impute_addons.py" "github/" "fix_templated_orphans.py" "find_nested_projects.py" "find_guids_without_referents.py" "ensure_log_dates.py" "embargo_registrations.sh" "embargo_registrations.py" "email_registration_contributors.py" "dev_populate_conferences.py" "dataverse/" "cron.py" "create_fakes.py" "consistency/" "clear_sessions.py" "clear_invalid_unclaimed_records.py" "cleanup_failed_registrations.pyc" "cleanup_failed_registrations.py" "annotate_rsvps.py" "analytics.sh" "analytics/" "admin_permission_email.py" "add_date_confirmed.py" "add_conference.py" "add_blacklist_guids.py" "__init__.pyc" "__init__.py" "../" "./")
+
+ ("/Users/ericbarbour/dev/osf.io/website/static/" (21908 21177 0 0) "vendor/" "tmp/" "robots.txt" "registration_templates/" "public/" "pages/" "nodes_20140131.json" "nodes.json" "maintenance/" "js/" "img/" "fonts/" "feed-icon-14x14.png" "favicon.ico" "css/" "citations_load_error.html" "built/" "../" "./")
+
+ ("/Users/ericbarbour/dev/osf.io/scripts/migration/" (21914 44727 0 0) "projectorganizer/" "migration_registered_meta.pyc" "migrate_unconfirmed_user_emails.py" "migrate_profile_dates.py" "migrate_none_as_email_verification.py" "migrate_confirmed_user_emails.py" "__init__.pyc" "__init__.py" "../" "./")
+
+ ("/Users/ericbarbour/dev/osf.io/framework/" (21908 15349 0 0) "utils.pyc" "utils.py" "transactions/" "tasks/" "status/" "sessions/" "sentry/" "routing/" "render/" "mongo/" "logging/" "guid/" "forms/" "flask/" "exceptions/" "email/" "bcrypt/" "auth/" "analytics/" "addons/" "__init__.pyc" "__init__.py" "../" "./")
+
+ ("/Users/ericbarbour/dev/osf.io/website/notifications/" (21914 40377 0 0) "views.pyc" "views.py" "utils.pyc" "utils.py" "model.pyc" "model.py" "emails.pyc" "emails.py" "constants.pyc" "constants.py" "__init__.pyc" "__init__.py" "../" "./")
+
+ ("/Users/ericbarbour/dev/osf.io/website/templates/profile/" (21889 50522 0 0) "settings.mako" "notifications.mako" "modal_change_avatar.mako" "key_history.mako" "addons.mako" "addon_permissions.mako" "account.mako" "../" "./")
+
+ ("/Users/ericbarbour/dev/" (21913 65492 0 0) "personal-site/" "osf.io/" "instaslam/" "cs2150/" ".DS_Store" "../" "./")
+
+ ("/Users/ericbarbour/bin/" (21912 579 0 0) "yesno" "todo_gen" "subl" "pacmann.sh" "music.sh" "monitor" "mkxresources" "mkorg" "is_running" "httpserve" "google-chrome" "fakecas" "commit_org" "backup_repos" "asciinema" ".DS_Store" "../" "./")
+
+ ("/Users/ericbarbour/dev/osf.io/api/nodes/" (21908 32960 0 0) "views.pyc" "views.py" "urls.pyc" "urls.py" "serializers.pyc" "serializers.py" "permissions.pyc" "permissions.py" "__init__.pyc" "__init__.py" "../" "./")
+
+ ("/Users/ericbarbour/dev/osf.io/api/base/" (21909 30793 0 0) "wsgi.pyc" "wsgi.py" "views.pyc" "views.py" "utils.pyc" "utils.py" "urls.pyc" "urls.py" "settings/" "serializers.pyc" "serializers.py" "renderers.pyc" "renderers.py" "pagination.pyc" "pagination.py" "middleware.pyc" "middleware.py" "filters.pyc" "filters.py" "authentication/" "__init__.pyc" "__init__.py" "../" "./")
+
+ ("/Users/ericbarbour/dev/osf.io/scripts/tests/" (21909 33981 0 0) "test_retract_registrations.py" "test_refresh_box_tokens.py" "test_osfstorage_oldels.py" "test_migrate_was_invited.py" "test_migrate_unconfirmed_user_emails.py" "test_migrate_registration_and_fork_log.py" "test_migrate_registered_meta.pyc" "test_migrate_presentation_service.py" "test_migrate_none_as_email_verification.py" "test_migrate_manual_merged_user.py" "test_migrate_logs_fix.py" "test_migrate_from_oldels.py" "test_migrate_dates.py" "test_migrate_confirmed_user_emails.py" "test_migrate_conference_admins.py" "test_glacier_audit.py" "test_find_guids_without_referents.py" "test_files_audit.py" "test_embargo_registrations.py" "test_email_registration_contributors.py" "test_dataverse_migrate_study.py" "test_clear_sessions.py" "test_add_blacklist_guids.py" "__init__.py" "../" "./")
+
+ ("/Users/ericbarbour/dev/osf.io/api/collections/" (21907 62447 0 0) "../" "./")
+
+ ("/Users/ericbarbour/dev/osf.io/tests/api_tests/collections/" (21907 62448 0 0) "../" "./")
+
+ ("/Users/ericbarbour/dev/instaslam/app/models/" (21907 11347 0 0) "post.rb" "concerns/" ".keep" "../" "./")
+
+ ("/Users/ericbarbour/dotfiles/zsh/" (21907 62722 0 0) ".zshrc" "../" "./")
+
+ ("/Users/ericbarbour/dotfiles/" (21905 57780 0 0) "zsh/" "walls/" "vim/" "terminator/" "sublime/" "setup.sh" "scripts/" "screenshots/" "README.md" "pacman/" "npm_packages.txt" "new-tab/" "ncmpcpp/" "lemonbar/" "i3/" "firefox/" "emacs/" "bash/" ".Xdefaults" ".tmux.conf" ".gitignore" ".git/" ".emacs.for.osx" ".DS_Store" "../" "./")
+
+ ("/Users/ericbarbour/dev/instaslam/app/" (21907 9004 0 0) "views/" "models/" "mailers/" "helpers/" "controllers/" "assets/" "../" "./")
+
+ ("/Users/ericbarbour/dev/instaslam/" (21907 11080 0 0) "vendor/" "tmp/" "test/" "README.rdoc" "Rakefile" "public/" "log/" "lib/" "Gemfile.lock" "Gemfile" "db/" "config.ru" "config/" "bin/" "app/" ".gitignore" ".git/" "../" "./")
+
+ ("/Users/ericbarbour/tmp/barbour-em.github.io/folio/" (21906 332 0 0) "todo.js" "todo.html" "todo.css" "style.css" "schedule.js" "schedule.html" "schedule.css" "index.html" "headshot.jpg" "../" "./")
+
+ ("/Users/ericbarbour/.config/mopidy/" (21900 8523 0 0) "spotify/" "mopidy.conf" "#mopidy.conf#" "../" "./")
+
+ ("/Users/ericbarbour/.config/" (21878 5261 0 0) "profanity/" "mopidy/" "configstore/" "../" "./")
+
+ ("/Users/ericbarbour/tmp/json-editor-custom-types/" (21898 48966 0 0) "run.js" "README.md" "package.json" "node_modules/" "index.html" ".gitignore" ".git/" "../" "./")
+
+ ("/Users/ericbarbour/tmp/" (21896 42125 0 0) "json-editor-custom-types/" "idle.html" "barbour-em.github.io/" "../" "./")
+
+ ("/Users/ericbarbour/dev/shareCuration/crowd/templates/" (21893 48158 0 0) "index.html" "homepage.html" "__init__.pyc" "__init__.py" "../" "./")
+
+ ("/Users/ericbarbour/dev/shareCuration/crowd/" (21893 48122 0 0) "views.pyc" "views.py" "urls.pyc" "urls.py" "tests.py" "templates/" "models.pyc" "models.py" "migrations/" "admin.pyc" "admin.py" "__init__.pyc" "__init__.py" "../" "./")
+
+ ("/Users/ericbarbour/dev/osf.io/tests/api_tests/" (21889 50731 0 0) "users/" "nodes/" "collections/" "base/" "__init__.py" "../" "./")
 
  ("/Users/ericbarbour/dev/osf.io/tests/" (21890 1455 0 0) "webtest_tests.py" "utils.py" "test_watch.py" "test_views.py" "test_utils.py" "test_transactions.py" "test_share.py" "test_serializers.py" "test_security.py" "test_sanitize.py" "test_rubeus.py" "test_piwik.py" "test_permissions.py" "test_oauth.py" "test_notifications.py" "test_models.py" "test_metadata.py" "test_mails.py" "test_mailchimp.py" "test_identifiers.py" "test_guids.py" "test_files/" "test_features.py" "test_elastic.py" "test_contributors_views.py" "test_conferences.py" "test_citations.py" "test_cas_authentication.py" "test_auth_forms.py" "test_auth.py" "test_app.py" "test_addons_oauth.py" "test_addons.py" "modular_templates/" "models/" "framework_tests/" "factories.pyc" "factories.py" "exceptions.py" "base.pyc" "base.py" "api_tests/" "__init__.pyc" "__init__.py" "../" "./")
-
- ("/Users/ericbarbour/dev/osf.io/" (21889 53361 0 0) "website/" "webpack.prod.config.js" "webpack.dev.config.js" "webpack.common.config.js" "tests/" "tasks.pyc" "tasks.py" "src/" "setup.cfg" "scripts/" "sauce-sample.json" "requirements.txt" "requirements/" "README.md" "package.json" "NOTICE" "node_modules/" "manage.py" "main.py" "logs/" "LICENSE" "karma.saucelabs.conf.js" "karma.conf.js" "karma.common.conf.js" "framework/" "env/" "CONTRIBUTING.md" "CHANGELOG" "bower.json" "api/" "addons.json" ".travis.yml" ".jshintrc" ".idea/" ".gitignore" ".git/" ".coveragerc" ".bowerrc" "../" "./")
 
  ("/Users/" (21868 27235 0 0) "Shared/" "ericbarbour/" "admin/" ".localized" "../" "./")
 
  ("/Users/ericbarbour/dev/osf.io/api/" (21889 52504 0 0) "users/" "templates/" "static/" "README.md" "nodes/" "collections/" "base/" "__init__.pyc" "__init__.py" "../" "./")
 
- ("/Users/ericbarbour/dev/" (21889 49697 0 0) "personal-site/" "osf.io/" "jsonmetadata/" "cs2150/" ".DS_Store" "../" "./")
-
- ("/Users/ericbarbour/tmp/" (21889 48737 0 0) "waterbutler/" "traverse.py" "json-editor-custom-types/" "idle.html" ".DS_Store" "../" "./")
-
  ("/Users/ericbarbour/.emacs.d/elpa/" (21889 44407 0 0) "yasnippet-20150415.244/" "undo-tree-20140509.522/" "solarized-theme-20150424.53/" "pyvenv-20150503.941/" "powerline-20150602.1413/" "popup-20150609.2145/" "neotree-20150427.259/" "material-theme-20150614.130/" "magit-20150608.1139/" "key-chord-20140929.2246/" "highlight-indentation-20150307.208/" "goto-chg-20131228.1459/" "gnupg/" "git-rebase-mode-20150122.1114/" "git-commit-mode-20150330.1048/" "find-file-in-project-20150528.633/" "evil-nerd-commenter-20150615.2102/" "evil-20150511.146/" "elpy-20150502.740/" "dash-20150611.922/" "company-20150616.439/" "avy-20150615.1048/" "auto-complete-20150615.34/" "archives/" "ace-window-20150520.1014/" "../" "./")
-
- ("/Users/ericbarbour/.emacs.d/" (21889 47180 0 0) "themes/" "ido.last" "elpa/" "el-get/" "auto-save-list/" "ac-comphist.dat" "../" "./")
 
  ("/Users/ericbarbour/dev/osf.io/api/base/settings/" (21889 44069 0 0) "local.pyc" "local.py" "local-dist.py" "defaults.pyc" "defaults.py" "__init__.pyc" "__init__.py" "../" "./")
 )
