@@ -33,6 +33,7 @@ export HISTIGNORE="&:[ ]*:e"
 ############
 #Aliases
 ###########
+alias google-chrome-stable='google-chrome-stable --force-device-scale-factor'
 alias ncmpcpp='sh ~/bin/music.sh'
 alias emacs='emacsclient -t'
 alias busy='hexdump -C /dev/urandom|grep "ca fe"'
