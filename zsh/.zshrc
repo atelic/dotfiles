@@ -37,7 +37,6 @@ alias google-chrome-stable='google-chrome-stable --force-device-scale-factor'
 alias ncmpcpp='sh ~/bin/music.sh'
 alias emacs='emacsclient -t'
 alias busy='hexdump -C /dev/urandom|grep "ca fe"'
-alias tmux="tmux attach"
 alias gh="curl -u 'barbour-em' https://api.github.com/user/repos -d '{name:$1}'"
 alias ecc='emacsclient -c &'
 alias skype='skype --disable-cleanlooks'
@@ -128,6 +127,11 @@ pbx () { curl -sF "c=@${1:--}" -w "%{redirect_url}" 'https://ptpb.pw/?r=1' -o /d
 pbs () {
   scrot /tmp/$$.png
   pbx /tmp/$$.png
+}
+
+pyclean() {
+  find . -name "*.py[co]" -delete
+  find . -name "__pycache__" -delete
 }
 
 PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
