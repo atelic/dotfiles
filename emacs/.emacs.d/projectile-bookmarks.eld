@@ -1,1 +1,1 @@
-("~/dotfiles/" "~/dev/osf.io/")
+("~/dev/osf.io/" "~/Dropbox/org/" "~/tmp/barbour-em.github.io/" "~/dotfiles/")

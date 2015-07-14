@@ -26,6 +26,7 @@ Return a list of installed packages or nil for every skipped package."
 						  'elpy
 						  'flymake
 						  'solarized-theme
+						  'zenburn-theme
 						  'ace-window
 						  'theme-changer
 						  'evil-nerd-commenter
@@ -40,15 +41,6 @@ Return a list of installed packages or nil for every skipped package."
 (add-to-list 'package-archives
 			 '("elpy" . "http://jorgenschaefer.github.io/packages/"))
 (elpy-enable)
-;; ==============
-;; Pymacs
-;; ==============
-
-;; Run M-x el-get pymacs first
-(require 'pymacs)
-(pymacs-load "ropemacs" "rope-")
-(setq ropemacs-enable-autoimport 't)
-(global-set-key (kbd "M-+") 'rope-auto-import)
 
 ;; ==============
 ;; Flymake
@@ -102,7 +94,7 @@ Return a list of installed packages or nil for every skipped package."
 (setq calendar-location-name "Charlottesville, VA")
 (setq calendar-latitude 38.04)
 (setq calendar-longitude -78.5)
-(change-theme 'material-light 'base16-eighties-dark)
+(change-theme 'solarized-light 'zenburn)
 
 
 ;;===========================
@@ -120,9 +112,9 @@ Return a list of installed packages or nil for every skipped package."
 (key-chord-define-global "jk" 'evil-normal-state)
 
 ;; vim-like indenting
-(setq-default tab-width 4 indent-tabs-mode t)
-(setq-default c-basic-offset 4 c-default-style "linux")
-(define-key global-map (kbd "RET") 'newline-and-indent)
+;; (setq-default tab-width 4 indent-tabs-mode t)
+;; (setq-default c-basic-offset 4 c-default-style "linux")
+;; (define-key global-map (kbd "RET") 'newline-and-indent)
 
 ;; same as map ; :
 (define-key evil-normal-state-map (kbd ";") 'evil-ex)
@@ -154,7 +146,7 @@ Return a list of installed packages or nil for every skipped package."
 (defun track-mouse (e))
 (setq mouse-sel-mode t)
 
-										;Like NerdTree
+;; Like NerdTree
 (require 'neotree)
 (global-set-key [f8] 'neotree-toggle)
 
@@ -166,6 +158,7 @@ Return a list of installed packages or nil for every skipped package."
 (add-hook 'python-mode-hook
 		  (lambda ()
 			(add-to-list 'ac-sources 'ac-source-ropemacs)))
+(add-hook 'prog-mode-hook 'flyspell-prog-mode)
 
 ;; ==================
 ;; Personal shortcuts
@@ -179,11 +172,18 @@ Return a list of installed packages or nil for every skipped package."
 (global-set-key (kbd "C-a") 'beginning-of-line)
 (global-set-key (kbd "C-l") 'end-of-line)
 (global-set-key (kbd "C-c r") 'revert-buffer-no-confirm)
+(global-set-key (kbd "C-c t") 'multi-term)
+(setq multi-term-program "/bin/bash")
 ;; magit config
 (setq magit-last-seen-setup-instructions "1.4.0")
-(global-set-key (kbd "C-c i") 'magit-status)
-;; (magit-set-key (kdb "s") 'magit-stage-item)
+(global-set-key (kbd "C-x g") 'magit-status)
 
+(eval-after-load 'magit
+  '(progn
+	 (set-face-foreground 'magit-diff-add "green3")
+	 (set-face-foreground 'magit-diff-del "red3")
+	 (unless window-system
+	          (set-face-background 'magit-item-highlight "black"))))
 ;; custom mode for inserting closing brace and indenting in C and PHP
 (define-minor-mode c-helpers-minor-mode
   "This mode contains little helpers for C developement"
@@ -203,7 +203,11 @@ Return a list of installed packages or nil for every skipped package."
 
 (add-hook 'c++-mode-hook 'c-helpers-minor-mode)
 (add-hook 'php-mode-hook 'c-helpers-minor-mode)
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+(setq c-basic-indent 2)
+(setq tab-width 2)
+(setq indent-tabs-mode nil)
+
 (projectile-global-mode)
 
 ;; Source: http://www.emacswiki.org/emacs-en/download/misc-cmds.el
@@ -236,9 +240,10 @@ Return a list of installed packages or nil for every skipped package."
    [unspecified "#2d2d2d" "#f2777a" "#99cc99" "#ffcc66" "#6699cc" "#cc99cc" "#6699cc" "#d3d0c8"])
  '(custom-safe-themes
    (quote
-	("13f85dabe9c9abd73426f190aeedb7d0ad32d29e1fef3138ec8a2435a8fb0910" "3539b3cc5cbba41609117830a79f71309a89782f23c740d4a5b569935f9b7726" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "f11b028f78c8934c4dea255d94c491f7ced8720db594f9454dbec55938af3934" "1c57936ffb459ad3de4f2abbc39ef29bfb109eade28405fa72734df1bc252c13" default)))
+	("b06aaf5cefc4043ba018ca497a9414141341cb5a2152db84a9a80020d35644d1" "6ebb2401451dc6d01cd761eef8fe24812a57793c5ccc427b600893fa1d767b1d" "83279c1d867646c5eea8a804a67a23e581b9b3b67f007e7831279ed3a4de9466" "13f85dabe9c9abd73426f190aeedb7d0ad32d29e1fef3138ec8a2435a8fb0910" "3539b3cc5cbba41609117830a79f71309a89782f23c740d4a5b569935f9b7726" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "f11b028f78c8934c4dea255d94c491f7ced8720db594f9454dbec55938af3934" "1c57936ffb459ad3de4f2abbc39ef29bfb109eade28405fa72734df1bc252c13" default)))
  '(fci-rule-color "#3a3a3a")
  '(inhibit-startup-screen t)
+ '(magit-use-overlays nil)
  '(python-check-command "/usr/local/bin/pyflakes")
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
