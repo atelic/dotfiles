@@ -1,0 +1,51 @@
+ls
+l
+boot2docker 
+boot2docker up
+exit
+cd ~/dev/
+ls
+git clone https://github.com/andrecp/django-tutorial-docker-nginx-postgres.git
+cd django-tutorial-docker-nginx-postgres/
+boot2docker up
+boot2docker init
+boot2docker up
+c
+clear
+ack
+ack --bar
+c
+clear
+sh rebuild_docker.sh
+docker 
+brew install docker-compose
+sh rebuild_docker.sh
+exit
+ls
+mv Todo.org todo.org
+ls -al
+exit
+ls
+ls
+exit
+ls
+ls
+la
+alias ff 'find-file $1'
+alias e 'exit'
+e
+cd ~/dev/osf.io/
+source env/bin/activate
+ls
+source
+source env/bin/activate
+ls
+ls
+python --version
+inv server
+cd ../../
+inv shell
+e
+cd ..
+cd ..
+inv elasticsearch

@@ -1,0 +1,2 @@
+alias e exit
+alias ff find-file $1
