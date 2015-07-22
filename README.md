@@ -8,17 +8,21 @@ This repo serves as a backup for a number of my dotfiles as well as a compilatio
 curl https://raw.githubusercontent.com/barbour-em/dotfiles/mac-setup/install.sh | bash
 ```
 
+If you don't like the idea of curling into your shell ...
+
+### Manual Install
+
+- `git clone https://github.com/barbour-em/dotfiles`
+- Checkout to the `mac-setup` branch if you'd like
+- Run `./bootstrap.sh` from the top level directory
+
 ### OSX Yosemite 10.10.3
 ![Screenshot](https://i.imgur.com/ETo4c0M.png "Tmux running")
 ![Screenshot](https://i.imgur.com/v7d6dGU.png "More tmux")
 ![Screenshot](https://i.imgur.com/xdQdmI8.png "Floating")
 
 
-##### Post install details can be found in bootstrap.sh
-
-You can run `./bootstrap.sh` from the cloned directory
-
-##### Reminder about mounting USB:
+###### Reminder to self about mounting USB:
 ```
 sudo -i
 fdisk -l
