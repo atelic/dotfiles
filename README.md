@@ -1,26 +1,22 @@
 Dotfiles
 =======
 
-This repo serves as a backup for a number of my dotfiles as well as a compilation of commands and programs that I find myself running/needing when installing a new linux system
+This repo serves as a backup for a number of my dotfiles as well as a compilation of commands and programs that I find myself running/needing when installing a new nix system
 
-### Arch Linux x86_64 4.0.4-2-ARCH
-![Screenshot](/../master/screenshots/term_desktop.png?raw=true "Current system")
-
-![Info and colors](/../master/screenshots/info.png?raw=true "Info and colors")
-
-
-##### Post install details can be found in setup.sh
-
-##### Reminder about XAMPP if you have to deal with it again
+### Quick install
 ```
-git config core.fileMode false
-sudo -i
-cd /opt && wget http://jaist.dl.sourceforge.net/project/xampp/XAMPP%20Linux/1.8.3/xampp-linux-1.8.3-4 installer.run
-chmod +x xampp-linux-1.8.3-4-installer.run && ./xampp-linux-1.8.3-4-installer.run
-ln -s ~/BeerLamp /opt/lampp/htdocs
-chmod 775 -R /opt/lampp/htdocs
-/opt/lampp/lampp restart
+curl https://raw.githubusercontent.com/barbour-em/dotfiles/mac-setup/install.sh | bash
 ```
+
+### OSX Yosemite 10.10.3
+![Screenshot](https://i.imgur.com/ETo4c0M.png "Tmux running")
+![Screenshot](https://i.imgur.com/v7d6dGU.png "More tmux")
+![Screenshot](https://i.imgur.com/xdQdmI8.png "Floating")
+
+
+##### Post install details can be found in bootstrap.sh
+
+You can run `./bootstrap.sh` from the cloned directory
 
 ##### Reminder about mounting USB:
 ```
