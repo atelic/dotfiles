@@ -1,6 +1,6 @@
 export ZSH=/home/eric/.oh-my-zsh
 
-ZSH_THEME="norm"
+ZSH_THEME="nanotech"
 
 # Base16 Shell
 BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"
