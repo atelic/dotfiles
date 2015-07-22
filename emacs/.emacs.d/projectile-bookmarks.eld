@@ -1,1 +1,0 @@
-("~/dev/osf.io/" "~/Dropbox/org/" "/usr/local/" "~/tmp/barbour-em.github.io/" "~/dotfiles/")
