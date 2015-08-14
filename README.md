@@ -34,8 +34,7 @@ Features:
 ## Setup for new Arch machine
 
 ```bash
-sudo pacman -Syu
-sudo pacman -S ansible
+sudo pacman -Syu ansible
 git clone https://github.com/palcu/dotfiles.git ~/dotfiles
 cd ~/dotfiles/playbooks && ./launch
 ```

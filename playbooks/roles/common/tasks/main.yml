@@ -20,10 +20,11 @@
     - .tmuxinator
     - .ncmpcpp
     - .Xdefaults
+    - .irssi
 
 - name: Create ~/bin
   file: src=~/dotfiles/scripts/bin/{{ item }}
-        dest=~/bin/{{ item }}
+dest=~/bin/{{ item }}
         state=link
         force=yes
   with_items:
@@ -59,3 +60,17 @@
 - name: Install .emacs.d/
   git: repo=https://github.com/barbour-em/my-emacs.git dest=~/.emacs.d
   when: check_emacs.stat.exists == false
+
+- name: Download org files
+  git: repo=https://bitbucket.org/barbour-em/org.git dest=~/org
+
+- name: Check if Dropbox is installed
+  stat: path=~/Dropbox
+  register: check_dropbox
+
+- name: Symlink org files to Dropbox
+  file: src=~/org/{{ item }}
+        dest=~/Dropbox/org/{{ item }}
+        state=link
+        force=yes
+  when: check_dropbox.stat.exists
