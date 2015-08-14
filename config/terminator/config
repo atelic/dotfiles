@@ -4,6 +4,11 @@
   focus = system
   title_inactive_bg_color = "#65737e"
 [keybindings]
+  go_left = None
+  go_down = None
+  cycle_next = None
+  go_right = None
+  go_up = None
 [profiles]
   [[default]]
     scrollbar_position = hidden
@@ -11,7 +16,6 @@
     copy_on_selection = True
     background_image = None
     background_darkness = 0.86
-    background_type = transparent
     use_system_font = False
     cursor_color = "#dcdcdc"
     foreground_color = "#dcdcdc"
@@ -19,7 +23,7 @@
     icon_bell = False
     show_titlebar = False
     scroll_on_keystroke = False
-    font = Source Code Pro for Powerline 11
+    font = Terminus 15
     background_color = "#3f3f3f"
     allow_bold = False
   [[Base16 Ocean Dark]]
@@ -28,15 +32,14 @@
     copy_on_selection = True
     alternate_screen_scroll = False
     background_image = None
-    background_darkness = 0.88
-    background_type = transparent
+    background_darkness = 1.05
     use_system_font = False
     cursor_color = "#dcdcdc"
     foreground_color = "#dcdcdc"
     icon_bell = False
     show_titlebar = False
     scroll_on_keystroke = False
-    font = Terminess Powerline 10
+    font = Terminus 14
     background_color = "#3f3f3f"
     allow_bold = False
 [layouts]

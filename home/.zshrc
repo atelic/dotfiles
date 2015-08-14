@@ -1,5 +1,5 @@
-export ZSH=/Users/ericbarbour/.oh-my-zsh
-ZSH_THEME="pure"
+export ZSH=~/.oh-my-zsh
+ZSH_THEME="nanotech"
 DISABLE_AUTO_UPDATE="true"
 ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
