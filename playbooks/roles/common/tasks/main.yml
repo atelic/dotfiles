@@ -17,12 +17,13 @@
     - .vimrc
     - .zshrc
     - .i3status.conf
-    # - .i3
-    # - .tmuxinator
+    - .tmuxinator
+    - .ncmpcpp
+    - .Xdefaults
 
 - name: Create ~/bin
   file: src=~/dotfiles/scripts/bin/{{ item }}
-        dest=~/bin{{ item }}
+        dest=~/bin/{{ item }}
         state=link
         force=yes
   with_items:
@@ -45,8 +46,6 @@
     - todo_gen
     - yesno
 
-
-
 - name: Clone Vundle
   git: repo=https://github.com/gmarik/Vundle.vim.git dest=~/.vim/bundle/Vundle.vim
 
@@ -60,7 +59,3 @@
 - name: Install .emacs.d/
   git: repo=https://github.com/barbour-em/my-emacs.git dest=~/.emacs.d
   when: check_emacs.stat.exists == false
-
-- name: Update .emacs.d/
-  command: cd ~/.emacs.d && git stash && git pull && git stash apply
-  when: check_emacs.stat.exists

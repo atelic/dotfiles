@@ -7,7 +7,7 @@ Features:
 * Zsh shell with oh_my_zsh and my .zshrc
 * Vim provisioned with Vundle
 * Emacs with my [repo](https://github.com/barbour-em/my-emacs)
-* My scripts are synced in ~/bin/ 
+* My scripts are synced in ~/bin/
 
 ## Setup for new Mac machine
 
@@ -42,8 +42,6 @@ cd ~/dotfiles/playbooks && ./launch
 
 ### TODOS
 
-- [ ] Files for the `.config` directory on my Arch machine has not been automated. Find a way to use the `copy` module for this
 - [ ] Sublime support is bad
-- [ ] Arch package list needs updating
 - [ ] Needs support for `yaourt`
 - [ ] Still missing some files like `~/.gkt-2.0`

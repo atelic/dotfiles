@@ -1,0 +1,14 @@
+---
+# TLP is a power manager with specific features for thinkpads
+# https://wiki.archlinux.org/index.php/TLP
+# start and stop thresold are used to save battery life by
+# no charging it too often
+# http://linrunner.de/en/tlp/docs/tlp-configuration.html#chargethresholds
+- name: "Configure tlp"
+  replace:
+    dest: "/etc/default/tlp"
+    regexp: '^#{{item}}'
+    replace: '{{item}}'
+  with_items:
+    - "START_CHARGE_THRESH"
+    - "STOP_CHARGE_THRESH"
