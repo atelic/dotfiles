@@ -1,37 +1,49 @@
-Dotfiles
-=======
+# Dotfiles by Eric Barbour
 
-This repo serves as a backup for a number of my dotfiles as well as a compilation of commands and programs that I find myself running/needing when installing a new nix system
+Features:
 
-### Quick install
-```
-curl https://raw.githubusercontent.com/barbour-em/dotfiles/mac-setup/install.sh | bash
+* the `playbooks` folder contains Ansible that provisions a machine with apps and configs
+* This keeps my Mac and Arch machine in sync with a playbook for each
+* Zsh shell with oh_my_zsh and my .zshrc
+* Vim provisioned with Vundle
+* Emacs with
+* AppleScripts that automate [mundane tasks](http://palcu.blogspot.com/2014/02/automate-everything-even-opening-your.html)
+* the `configs` folder is for other apps like Sublime Text or iTerm2
+
+## Setup for new Mac machine
+
+1. Install XCode tools using `xcode-select --install`
+2. Install [Brew](http://brew.sh/)
+
+  ```bash
+  ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+  ```
+
+3. Install Ansible using Brew `brew install ansible`
+4. `~/dotfiles` must be this repo
+
+  ```bash
+  git clone https://github.com/palcu/dotfiles.git ~/dotfiles
+  ```
+5. Install [XQuartz](https://xquartz.macosforge.org/landing/)
+6. Run the Ansible playbook for Mac
+
+  ```bash
+  cd ~/dotfiles/playbooks && ./launch
+  ```
+
+## Setup for new Arch machine
+
+```bash
+sudo pacman -Syu
+sudo pacman -S ansible
+git clone https://github.com/palcu/dotfiles.git ~/dotfiles
+cd ~/dotfiles/playbooks && ./launch
 ```
 
-If you don't like the idea of curling into your shell ...
+### TODOS
 
-### Manual Install
-
-- `git clone https://github.com/barbour-em/dotfiles`
-- Checkout to the `mac-setup` branch if you'd like
-- Run `./bootstrap.sh` from the top level directory
-
-### OSX Yosemite 10.10.3
-![Screenshot](https://i.imgur.com/ETo4c0M.png "Tmux running")
-![Screenshot](https://i.imgur.com/v7d6dGU.png "More tmux")
-![Screenshot](https://i.imgur.com/xdQdmI8.png "Floating")
-
-
-###### Reminder to self about mounting USB:
-```
-sudo -i
-fdisk -l
-mkdir /mnt/sdb1
-vim /etc/fstab
-```
-```
-/dev/sdb1       /mnt/sdb1           vfat    defaults        0       0
-```
-```
-mount -a OR mount /dev/sdb1
-```
+- [ ] Files for the `.config` directory on my Arch machine has not been automated. Find a way to use the `copy` module for this
+- [ ] Sublime support for this is bad
+- [ ] Arch package list needs updating
+- [ ] Needs support for `yaourt`

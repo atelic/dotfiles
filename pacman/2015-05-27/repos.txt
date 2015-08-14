@@ -1,8 +1,0 @@
-evince
-git
-lib32-curl
-lib32-util-linux
-libsystemd
-numix-icon-theme
-systemd
-systemd-sysvcompat
