@@ -1,0 +1,76 @@
+---
+- name: Install Oh-my-zsh
+  git: repo=https://github.com/robbyrussell/oh-my-zsh.git dest=~/.oh-my-zsh
+
+- name: Symlink my dotfiles
+  file: src=~/dotfiles/home/{{ item }}
+        dest=~/{{ item }}
+        state=link
+        force=yes
+  with_items:
+    - .bashrc
+    - .gitconfig
+    - .gitignore
+    - .gitignore_global
+    - .gitmessage.txt
+    - .tmux.conf
+    - .vimrc
+    - .zshrc
+    - .i3status.conf
+    - .tmuxinator
+    - .ncmpcpp
+    - .Xdefaults
+    - .irssi
+
+- name: Create ~/bin
+  file: src=~/dotfiles/scripts/bin/{{ item }}
+        dest=~/bin/{{ item }}
+        state=link
+        force=yes
+  with_items:
+    - asciinema
+    - backup_repos
+    - commit_org
+    - exercism
+    - fakecas
+    - google-chrome
+    - httpserve
+    - is_running
+    - killall-tmux.sh
+    - mkorg
+    - mkxresources
+    - monitor
+    - music.sh
+    - pacmann.sh
+    - subl
+    - todo.rb
+    - todo_gen
+    - yesno
+
+- name: Clone Vundle
+  git: repo=https://github.com/gmarik/Vundle.vim.git dest=~/.vim/bundle/Vundle.vim
+
+- name: Install VIM plugins
+  command: vim +PluginInstall! +qall
+
+- name: Check if emacs exists
+  stat: path=~/.emacs.d/
+  register: check_emacs
+
+- name: Install .emacs.d/
+  git: repo=https://github.com/barbour-em/my-emacs.git dest=~/.emacs.d
+  when: check_emacs.stat.exists == false
+
+# - name: Download org files
+#   git: repo=https://bitbucket.org/barbour-em/org.git dest=~/org
+#
+# - name: Check if Dropbox is installed
+#   stat: path=~/Dropbox
+#   register: check_dropbox
+#
+# - name: Symlink org files to Dropbox
+#   file: src=~/org/{{ item }}
+#         dest=~/Dropbox/org/{{ item }}
+#         state=link
+#         force=yes
+#   when: check_dropbox.stat.exists
