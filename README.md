@@ -2,11 +2,12 @@
 
 Features:
 
-* the `playbooks` folder contains Ansible that provisions a machine with apps and configs
+* the `playbooks` folder contains Ansible that provisions a machine with programs and configs
 * This keeps my Mac and Arch machine in sync with a playbook for each
 * Zsh shell with oh_my_zsh and my .zshrc
 * Vim provisioned with Vundle
 * Emacs with my [repo](https://github.com/barbour-em/my-emacs)
+* My scripts are synced in ~/bin/ 
 
 ## Setup for new Mac machine
 
