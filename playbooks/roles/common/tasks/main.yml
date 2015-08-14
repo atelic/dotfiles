@@ -1,0 +1,68 @@
+---
+- name: Install Oh-my-zsh
+  git: repo=https://github.com/robbyrussell/oh-my-zsh.git dest=~/.oh-my-zsh
+
+- name: Symlink my dotfiles
+  file: src=~/dotfiles/home/{{ item }}
+        dest=~/{{ item }}
+        state=link
+        force=yes
+  with_items:
+    - .vimrc
+    - .zshrc
+    - .tmux.conf
+    - .i3status.conf
+    - .zpreztorc
+    - .zlogin
+    - .zlogout
+    - .zshenv
+    - .gitignore
+    - .gitconfig
+    # - .i3
+    # - .tmuxinator
+
+- name: Create ~/bin
+    file: src=~/dotfiles/scripts/bin/{{ item }}
+        dest=~/bin{{ item }}
+        state=link
+        force=yes
+  with_items:
+    - 1259080
+    - asciinema
+    - backup_repos
+    - commit_org
+    - exercism
+    - fakecas
+    - google-chrome
+    - httpserve
+    - is_running
+    - killall-tmux.sh
+    - mkorg
+    - mkxresources
+    - monitor
+    - music.sh
+    - pacmann.sh
+    - subl
+    - todo.rb
+    - todo_gen
+    - yesno
+
+
+
+- name: Clone Vundle
+  git: repo=https://github.com/gmarik/Vundle.vim.git dest=~/.vim/bundle/Vundle.vim
+
+- name: Install VIM plugins
+  command: vim +PluginInstall! +qall
+
+- name: Check if emacs exists
+  stat: path=~/.emacs.d/
+  register: check_emacs
+
+- name: Install .emacs.d/
+  git: repo=https://github.com/barbour-em/my-emacs.git dest=~/.emacs.d
+  when: check_emacs.stat.exists == false
+
+- name: Update .emacs.d/
+  command: cd ~/.emacs.d && git stash && git pull && git stash apply
+  when: check_emacs.stat.exists

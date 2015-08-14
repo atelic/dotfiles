@@ -1,0 +1,51 @@
+[global_config]
+  title_transmit_bg_color = "#bf616a"
+  suppress_multiple_term_dialog = True
+  focus = system
+  title_inactive_bg_color = "#65737e"
+[keybindings]
+[profiles]
+  [[default]]
+    scrollbar_position = hidden
+    palette = "#3f3f3f:#cc9393:#7f9f7f:#e3ceab:#dfaf8f:#cc9393:#8cd0d3:#dcdccc:#3f3f3f:#cc9393:#7f9f7f:#e3ceab:#dfaf8f:#cc9393:#8cd0d3:#dcdccc"
+    copy_on_selection = True
+    background_image = None
+    background_darkness = 0.86
+    background_type = transparent
+    use_system_font = False
+    cursor_color = "#dcdcdc"
+    foreground_color = "#dcdcdc"
+    use_custom_command = True
+    icon_bell = False
+    show_titlebar = False
+    scroll_on_keystroke = False
+    font = Source Code Pro for Powerline 11
+    background_color = "#3f3f3f"
+    allow_bold = False
+  [[Base16 Ocean Dark]]
+    scrollbar_position = hidden
+    palette = "#3f3f3f:#cc9393:#7f9f7f:#e3ceab:#dfaf8f:#cc9393:#8cd0d3:#dcdccc:#3f3f3f:#cc9393:#7f9f7f:#e3ceab:#dfaf8f:#cc9393:#8cd0d3:#dcdccc"
+    copy_on_selection = True
+    alternate_screen_scroll = False
+    background_image = None
+    background_darkness = 0.88
+    background_type = transparent
+    use_system_font = False
+    cursor_color = "#dcdcdc"
+    foreground_color = "#dcdcdc"
+    icon_bell = False
+    show_titlebar = False
+    scroll_on_keystroke = False
+    font = Terminess Powerline 10
+    background_color = "#3f3f3f"
+    allow_bold = False
+[layouts]
+  [[default]]
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+      profile = Base16 Ocean Dark
+    [[[window0]]]
+      type = Window
+      parent = ""
+[plugins]

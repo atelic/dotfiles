@@ -1,0 +1,43 @@
+---
+- name: Update packages
+  pacman: upgrade=yes update_cache=yes
+
+# as a reminder pacman -Qqe > package_list.txt
+- name: Install libraries using pacman
+  pacman: name={{ item }} state=latest
+  sudo: true
+  with_items:
+    - ack
+    - bash
+    - curl
+    - git
+    - htop
+    - nmap
+    - node
+    - most
+    - python
+    - python-pip
+    - python-pycurl
+    - python3
+    - vim
+    - wget
+    - zsh
+
+- name: Change shell to ZSH
+  sudo: true
+  user: shell=/bin/zsh name={{ ansible_ssh_user }}
+
+- name: Set up i3 config
+  file: src=~/dotfiles/i3/config
+        dest=~/.i3/config
+        state=link
+        force=yes
+
+- name: Set up .config directory
+  file: src=~/dotfiles/config/{{ item }}
+        dest=~/.config/{{ item }}
+        state=link
+        force=yes
+  with_items:
+    - lemonbar
+    - terminator

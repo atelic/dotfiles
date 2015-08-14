@@ -1,37 +1,49 @@
-Dotfiles
-=======
+# Dotfiles by Eric Barbour
 
-This repo serves as a backup for a number of my dotfiles as well as a compilation of commands and programs that I find myself running/needing when installing a new linux system
+Features:
 
-### Arch Linux x86_64 4.0.4-2-ARCH
-![Screenshot](/../master/screenshots/term_desktop.png?raw=true "Current system")
+* the `playbooks` folder contains Ansible that provisions a machine with programs and configs
+* This keeps my Mac and Arch machine in sync with a playbook for each
+* Zsh shell with oh_my_zsh and my .zshrc
+* Vim provisioned with Vundle
+* Emacs with my [repo](https://github.com/barbour-em/my-emacs)
+* My scripts are synced in ~/bin/ 
 
-![Info and colors](/../master/screenshots/info.png?raw=true "Info and colors")
+## Setup for new Mac machine
 
+1. Install XCode tools using `xcode-select --install`
+2. Install [Brew](http://brew.sh/)
 
-##### Post install details can be found in setup.sh
+  ```bash
+  ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+  ```
 
-##### Reminder about XAMPP if you have to deal with it again
-```
-git config core.fileMode false
-sudo -i
-cd /opt && wget http://jaist.dl.sourceforge.net/project/xampp/XAMPP%20Linux/1.8.3/xampp-linux-1.8.3-4 installer.run
-chmod +x xampp-linux-1.8.3-4-installer.run && ./xampp-linux-1.8.3-4-installer.run
-ln -s ~/BeerLamp /opt/lampp/htdocs
-chmod 775 -R /opt/lampp/htdocs
-/opt/lampp/lampp restart
+3. Install Ansible using Brew `brew install ansible`
+4. `~/dotfiles` must be this repo
+
+  ```bash
+  git clone https://github.com/barbour-em/dotfiles.git ~/dotfiles
+  ```
+5. Install [XQuartz](https://xquartz.macosforge.org/landing/)
+6. Run the Ansible playbook for Mac
+
+  ```bash
+  cd ~/dotfiles/playbooks && ./launch
+  ```
+
+## Setup for new Arch machine
+
+```bash
+sudo pacman -Syu
+sudo pacman -S ansible
+git clone https://github.com/palcu/dotfiles.git ~/dotfiles
+cd ~/dotfiles/playbooks && ./launch
 ```
 
-##### Reminder about mounting USB:
-```
-sudo -i
-fdisk -l
-mkdir /mnt/sdb1
-vim /etc/fstab
-```
-```
-/dev/sdb1       /mnt/sdb1           vfat    defaults        0       0
-```
-```
-mount -a OR mount /dev/sdb1
-```
+### TODOS
+
+- [ ] Files for the `.config` directory on my Arch machine has not been automated. Find a way to use the `copy` module for this
+- [ ] Sublime support is bad
+- [ ] Arch package list needs updating
+- [ ] Needs support for `yaourt`
+- [ ] Still missing some files like `~/.gkt-2.0`
