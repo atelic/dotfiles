@@ -21,7 +21,7 @@ Features:
 4. `~/dotfiles` must be this repo
 
   ```bash
-  git clone https://github.com/palcu/dotfiles.git ~/dotfiles
+  git clone https://github.com/barbour-em/dotfiles.git ~/dotfiles
   ```
 5. Install [XQuartz](https://xquartz.macosforge.org/landing/)
 6. Run the Ansible playbook for Mac
