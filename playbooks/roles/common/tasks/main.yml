@@ -21,6 +21,34 @@
     # - .i3
     # - .tmuxinator
 
+- name: Create ~/bin
+    file: src=~/dotfiles/scripts/bin/{{ item }}
+        dest=~/bin{{ item }}
+        state=link
+        force=yes
+  with_items:
+    - 1259080
+    - asciinema
+    - backup_repos
+    - commit_org
+    - exercism
+    - fakecas
+    - google-chrome
+    - httpserve
+    - is_running
+    - killall-tmux.sh
+    - mkorg
+    - mkxresources
+    - monitor
+    - music.sh
+    - pacmann.sh
+    - subl
+    - todo.rb
+    - todo_gen
+    - yesno
+
+
+
 - name: Clone Vundle
   git: repo=https://github.com/gmarik/Vundle.vim.git dest=~/.vim/bundle/Vundle.vim
 
