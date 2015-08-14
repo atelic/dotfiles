@@ -40,14 +40,4 @@ windows:
       layout: fcd0,179x39,0,0{109x39,0,0,23,69x39,110,0,28}
       panes:
         - tig
-        - git add -A && git status
-  - emacs:
-      panes:
-        - emacs
-  - irc: irssi
-  - stats:
-      layout: 21c6,178x50,0,0{89x50,0,0,4,88x50,90,0[88x25,90,0,5,88x24,90,26,6]}
-      panes:
-        - ranger
-        - sudo htop
-        - sh $HOME/bin/music.sh
+        - git status

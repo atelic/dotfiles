@@ -6,4 +6,5 @@
 - name: Symlink Sublime Text to subl in terminal
   file: src=~/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl
         dest=/usr/local/bin/subl
+        force=yes
         state=link

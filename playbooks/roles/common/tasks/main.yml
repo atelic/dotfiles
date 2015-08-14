@@ -8,26 +8,26 @@
         state=link
         force=yes
   with_items:
+    - .bashrc
+    - .gitconfig
+    - .gitignore
+    - .gitignore_global
+    - .gitmessage.txt
+    - .tmux.conf
     - .vimrc
     - .zshrc
-    - .tmux.conf
     - .i3status.conf
-    - .zpreztorc
-    - .zlogin
-    - .zlogout
-    - .zshenv
-    - .gitignore
-    - .gitconfig
-    # - .i3
-    # - .tmuxinator
+    - .tmuxinator
+    - .ncmpcpp
+    - .Xdefaults
+    - .irssi
 
 - name: Create ~/bin
-    file: src=~/dotfiles/scripts/bin/{{ item }}
-        dest=~/bin{{ item }}
+  file: src=~/dotfiles/scripts/bin/{{ item }}
+dest=~/bin/{{ item }}
         state=link
         force=yes
   with_items:
-    - 1259080
     - asciinema
     - backup_repos
     - commit_org
@@ -47,8 +47,6 @@
     - todo_gen
     - yesno
 
-
-
 - name: Clone Vundle
   git: repo=https://github.com/gmarik/Vundle.vim.git dest=~/.vim/bundle/Vundle.vim
 
@@ -63,6 +61,16 @@
   git: repo=https://github.com/barbour-em/my-emacs.git dest=~/.emacs.d
   when: check_emacs.stat.exists == false
 
-- name: Update .emacs.d/
-  command: cd ~/.emacs.d && git stash && git pull && git stash apply
-  when: check_emacs.stat.exists
+- name: Download org files
+  git: repo=https://bitbucket.org/barbour-em/org.git dest=~/org
+
+- name: Check if Dropbox is installed
+  stat: path=~/Dropbox
+  register: check_dropbox
+
+- name: Symlink org files to Dropbox
+  file: src=~/org/{{ item }}
+        dest=~/Dropbox/org/{{ item }}
+        state=link
+        force=yes
+  when: check_dropbox.stat.exists
