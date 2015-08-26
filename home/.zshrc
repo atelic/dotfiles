@@ -35,7 +35,6 @@ alias busy='hexdump -C /dev/urandom|grep "ca fe"'
 alias gh="curl -u 'barbour-em' https://api.github.com/user/repos -d '{name:$1}'"
 alias ecc='emacsclient -c &'
 alias skype='skype --disable-cleanlooks'
-alias php='/opt/lampp/bin/php'
 # alias open='rifle'
 alias skype-'skype --disable-cleanlooks'
 alias update_repos='cd /home/eric/src/  && for i in ./*/; do (cd $i && git pull); done'
@@ -44,15 +43,17 @@ alias e="exit"
 alias ..="cd .."
 alias cd..='cd ..'
 alias sl='ls'
-# alias ls='ls --color --group-directories-first'
-alias composer="sudo php composer.phar"
+
+if [[ `uname` == 'Linux' ]]; then
+    alias ls='ls --color --group-directories-first'
+    alias open='xdg-open'
+fi
 alias bc='bc -l'
 alias vi='vim'
 alias svi='sudo vim'
 alias edit='emacsclient'
 alias df='df -h'
 alias apache='sudo /opt/lampp/lampp start'
-alias en='geeknote'
 alias ox='chmod o+x'
 alias xclip='xclip -selection clipboard'
 alias pacman='sudo pacman'
@@ -67,12 +68,6 @@ alias speed-test=' wget -O /dev/null http://speedtest.wdc01.softlayer.com/downlo
 #Scripts
 ##############
 [ -z "$PS1" ] && return
-alias dna='cd /home/eric/.script/fun && ./dna && cd'
-alias pacscr='cd /home/eric/.script/fun && ./pacman && cd'
-alias stats='cd /home/eric/.script/fun && ./fetch && cd'
-alias pipes='cd /home/eric/.script/fun && ./pipes && cd'
-alias bars='cd /home/eric/.script/fun && ./colorbars && cd'
-alias scheme='cd /home/eric/.script/fun && ./colorscheme && cd'
 
 up (){
  for i in $(seq ${1: -1});do
@@ -134,3 +129,7 @@ PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 ulimit -n 2048
 PATH=$PATH:/usr/local/bin
 PATH=$PATH:/Users/ericbarbour/bin
+PATH=$PATH:~/.composer/vendor/bin
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/dev
+source /usr/bin/virtualenvwrapper.sh

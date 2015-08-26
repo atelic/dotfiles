@@ -41,6 +41,6 @@ cd ~/dotfiles/playbooks && ./launch
 
 ### TODOS
 
-- [ ] Sublime support is bad
+- [ ] Sublime support is bad but I don't really use it anymore. May remove
 - [ ] Needs support for `yaourt`
-- [ ] Still missing some files like `~/.gkt-2.0`
+  - For now, save `pacman -Qmq` in this dir and yaourt -S $(< ~/dotfiles/pkglist.txt) later

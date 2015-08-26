@@ -1,9 +1,9 @@
 [core]
-	excludesfile = /Users/ericbarbour/.gitignore
+	excludesfile = ~/.gitignore
 	editor = emacsclient -t
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+	path =
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
@@ -32,10 +32,10 @@
 	done = "!f() { git branch | grep "$1" | cut -c 3- | grep -v done | xargs -I{} git branch -m {} done-{}; }; f""}"
 	la = "!git config -l | grep alias | cut -c 7-"
 [commit]
-	template = /Users/ericbarbour/.gitmessage.txt
+	template = ~/.gitmessage.txt
 [credential]
 	helper = osxkeychain
 [merge]
-	tool = opendiff
+	tool = meld
 [mergetool]
 	keepBackup = false
