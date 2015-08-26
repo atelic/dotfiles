@@ -23,7 +23,7 @@
     icon_bell = False
     show_titlebar = False
     scroll_on_keystroke = False
-    font = Terminus 15
+    font = Terminus 12
     background_color = "#3f3f3f"
     allow_bold = False
   [[Base16 Ocean Dark]]
@@ -39,7 +39,7 @@
     icon_bell = False
     show_titlebar = False
     scroll_on_keystroke = False
-    font = Terminus 14
+    font = Terminus 12
     background_color = "#3f3f3f"
     allow_bold = False
 [layouts]

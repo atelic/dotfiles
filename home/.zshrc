@@ -60,6 +60,7 @@ alias pacman='sudo pacman'
 alias hdd="df -h | grep /dev/sda2"
 alias lock='cd ~ && ./flock'
 alias brightness='xbacklight -set'
+alias gcb='google-chrome-beta'
 ## Status and complex scripts ##
 alias batt='upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep -E "state|to\ full|percentage"'
 alias clock='while true; do tput clear; date +"%H : %M" | figlet ; sleep 1; done'
@@ -133,3 +134,4 @@ PATH=$PATH:~/.composer/vendor/bin
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/dev
 source /usr/bin/virtualenvwrapper.sh
+source /etc/profile.d/autojump.sh

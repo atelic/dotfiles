@@ -1,0 +1,11 @@
+alsi
+google-chrome-beta
+lemonbar
+libgcrypt15
+libspotify
+mopidy-spotify
+mopidy-spotify-tunigo
+python2-pyspotify
+python2-tunigo
+spotify
+unclutter-xfixes-git

@@ -50,9 +50,6 @@
 - name: Clone Vundle
   git: repo=https://github.com/gmarik/Vundle.vim.git dest=~/.vim/bundle/Vundle.vim
 
-- name: Install VIM plugins
-  command: vim +PluginInstall! +qall
-
 - name: Check if emacs exists
   stat: path=~/.emacs.d/
   register: check_emacs

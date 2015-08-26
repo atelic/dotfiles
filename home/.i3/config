@@ -1,47 +1,47 @@
-##############################
-# Set variables
-##############################
+#################
+# Set variables #
+#################
 # Windows = Mod4
 # Alt     = Mod1
 
 set $mod Mod4
-set $browser google-chrome-stable
+set $browser google-chrome-beta
 set $term terminator
 
 # Gaps patch from https://github.com/Airblader/i3
-# set $mode_gaps Gaps: (o) outer, (i) inner
-# set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
-# set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
-# bindsym $mod+Shift+g mode "$mode_gaps"
+set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+bindsym $mod+Shift+g mode "$mode_gaps"
 
-# mode "$mode_gaps" {
-#   bindsym o      mode "$mode_gaps_outer"
-#   bindsym i      mode "$mode_gaps_inner"
-#   bindsym Return mode "default"
-#   bindsym Escape mode "default"
-# }
+mode "$mode_gaps" {
+  bindsym o      mode "$mode_gaps_outer"
+  bindsym i      mode "$mode_gaps_inner"
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
 
-# mode "$mode_gaps_inner" {
-#   bindsym plus  gaps inner current plus 5
-#   bindsym minus gaps inner current minus 5
-#   bindsym 0     gaps inner current set 0
-#   bindsym Shift+plus  gaps inner all plus 5
-#   bindsym Shift+minus gaps inner all minus 5
-#   bindsym Shift+0     gaps inner all set 0
-#   bindsym Return mode "default"
-#   bindsym Escape mode "default"
-# }
+mode "$mode_gaps_inner" {
+  bindsym plus  gaps inner current plus 5
+  bindsym minus gaps inner current minus 5
+  bindsym 0     gaps inner current set 0
+  bindsym Shift+plus  gaps inner all plus 5
+  bindsym Shift+minus gaps inner all minus 5
+  bindsym Shift+0     gaps inner all set 0
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
 
-# mode "$mode_gaps_outer" {
-#   bindsym plus  gaps outer current plus 5
-#   bindsym minus gaps outer current minus 5
-#   bindsym 0     gaps outer current set 0
-#   bindsym Shift+plus  gaps outer all plus 5
-#   bindsym Shift+minus gaps outer all minus 5
-#   bindsym Shift+0     gaps outer all set 0
-#   bindsym Return mode "default"
-#   bindsym Escape mode "default"
-# }
+mode "$mode_gaps_outer" {
+  bindsym plus  gaps outer current plus 5
+  bindsym minus gaps outer current minus 5
+  bindsym 0     gaps outer current set 0
+  bindsym Shift+plus  gaps outer all plus 5
+  bindsym Shift+minus gaps outer all minus 5
+  bindsym Shift+0     gaps outer all set 0
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 #Make windows play nice with gaps and don't give them a title in tiling mode
@@ -120,19 +120,18 @@ set $WS7 7
 set $WS8 8
 set $WS9 9
 set $WS0 10
-set $feh exec --no-startup-id feh --bg-scale
 
 # switch to workspace
-bindsym $mod+1 workspace $WS1; $feh ~/dotfiles/walls/Solarized-Mountains.png
-bindsym $mod+2 workspace $WS2; $feh ~/dotfiles/walls/geosolar.jpg
-bindsym $mod+3 workspace $WS3; $feh ~/dotfiles/walls/Solarized-Mountains.png
-bindsym $mod+4 workspace $WS4; $feh ~/dotfiles/walls/geosolar.jpg
-bindsym $mod+5 workspace $WS5; $feh ~/dotfiles/walls/Solarized-Mountains.png
-bindsym $mod+6 workspace $WS6; $feh ~/dotfiles/walls/geosolar.jpg
-bindsym $mod+7 workspace $WS7; $feh ~/dotfiles/walls/Solarized-Mountains.png
-bindsym $mod+8 workspace $WS8; $feh ~/dotfiles/walls/geosolar.jpg
-bindsym $mod+9 workspace $WS9; $feh ~/dotfiles/walls/Solarized-Mountains.png
-bindsym $mod+0 workspace $WS0; $feh ~/dotfiles/walls/geosolar.jpg
+bindsym $mod+1 workspace $WS1
+bindsym $mod+2 workspace $WS2
+bindsym $mod+3 workspace $WS3
+bindsym $mod+4 workspace $WS4
+bindsym $mod+5 workspace $WS5
+bindsym $mod+6 workspace $WS6
+bindsym $mod+7 workspace $WS7
+bindsym $mod+8 workspace $WS8
+bindsym $mod+9 workspace $WS9
+bindsym $mod+0 workspace $WS0
 
 # move focused container to workspace
 bindsym $mod+Shift+exclam           move workspace $WS1
@@ -187,10 +186,9 @@ bindsym Escape mode "default"
 #####################
 
 bar {
-
-  mode hide
   position top
-  status_command i3status
+  # status_command i3status
+  status_command i3blocks
   colors {
     #Between text
     separator #93b3a3 #3f3f3f #93b3a3
@@ -202,8 +200,9 @@ bar {
     active_workspace   #ffcfaf #3f3f3f #ffcfaf
     inactive_workspace #636363 #3f3f3f #dcdccc
     urgent_workspace   #dca3a3 #3f3f3f #dca3a3
-
   }
+  workspace_buttons yes
+  strip_workspace_numbers no
 }
 
 #####################
@@ -220,8 +219,6 @@ client.urgent               #dca3a3 #dca3a3 #DCDCCC #3f3f3f
 # Start up commands
 #####################
 
-# Starting brightness
-exec xbacklight -set 40
 # hide mouse when don't need
 exec --no-startup-id unclutter
 # CAPS LOCK to ctrl (aka life saver)
@@ -234,13 +231,11 @@ exec --no-startup-id nm-applet
 exec --no-startup-id xset -b
 # flu.x for the eyes
 exec --no-startup-id xflux -z 22904
-# bc emacs
-exec --no-startup-id /bin/emacs --daemon --with-x-toolkit=lucid
 # key repeat to faster
 exec --no-startup-id xset r rate 250 50
 # gotta sync those files
 exec --no-startup-id dropbox
-exec --no-startup-id $HOME/tlp
+exec --no-startup-id nitrogen --restore
 #######################
 # Custom exec commands
 #######################
@@ -281,14 +276,3 @@ bindsym $mod+period exec xbacklight +10 -time 0
 # kill window
 bindsym $mod+q kill
 bindsym Print exec scrot -q 100 '%Y-%m-%d-%T_$wx$h_scrot.png' -e 'mv $f ~/dotfiles/screenshots'
-
-###############
-# Lock screen
-###############
-bindsym $mod+Shift+P exec /bin/sh /home/eric/bin/blurlock
-
-##############################
-# Kills and restarts lemonbar
-##############################
-exec_always pkill lemonbar
-exec_always ~/.config/lemonbar/output.sh | ~/.config/lemonbar/bar.sh
