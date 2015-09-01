@@ -35,7 +35,7 @@ Features:
 
 ```bash
 sudo pacman -Syu ansible
-git clone https://github.com/palcu/dotfiles.git ~/dotfiles
+git clone https://github.com/barbour-em/dotfiles.git ~/dotfiles
 cd ~/dotfiles/playbooks && ./launch
 ```
 
