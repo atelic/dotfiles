@@ -129,8 +129,9 @@ pyclean() {
 PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 ulimit -n 2048
 PATH=$PATH:/usr/local/bin
-PATH=$PATH:/Users/ericbarbour/bin
+PATH=$PATH:~/bin
 PATH=$PATH:~/.composer/vendor/bin
+
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/dev
 source /usr/bin/virtualenvwrapper.sh

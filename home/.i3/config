@@ -5,8 +5,8 @@
 # Alt     = Mod1
 
 set $mod Mod4
-set $browser google-chrome-beta
-set $term terminator
+set $browser google-chrome-stable
+set $term urxvt
 
 # Gaps patch from https://github.com/Airblader/i3
 set $mode_gaps Gaps: (o) outer, (i) inner
@@ -187,8 +187,8 @@ bindsym Escape mode "default"
 
 bar {
   position top
-  # status_command i3status
-  status_command i3blocks
+  status_command i3status
+  # status_command i3blocks
   colors {
     #Between text
     separator #93b3a3 #3f3f3f #93b3a3
@@ -276,3 +276,5 @@ bindsym $mod+period exec xbacklight +10 -time 0
 # kill window
 bindsym $mod+q kill
 bindsym Print exec scrot -q 100 '%Y-%m-%d-%T_$wx$h_scrot.png' -e 'mv $f ~/dotfiles/screenshots'
+# Youtube hack
+bindsym $mod+y fullscreen disable; floating enable; resize set 400 300; sticky enable; move window to position 1515 20
