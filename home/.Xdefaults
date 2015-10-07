@@ -26,6 +26,7 @@ URxvt*underlineColor: #c5f779
 ! URxvt*color15:          #ffffff
 urxvt*internalBorder: 4
 URxvt.perl-ext-common: default, tabbed
+URxvt*loginShell: false
 
 
 *.foreground: #ccb18b

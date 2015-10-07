@@ -2,10 +2,10 @@ export ZSH=~/.oh-my-zsh
 ZSH_THEME="nanotech"
 DISABLE_AUTO_UPDATE="true"
 ENABLE_CORRECTION="true"
-COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="false"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 HIST_STAMPS="mm/dd/yyyy"
-plugins=( git colored-man colorize )
+
 
 export TERM="xterm-256color"
 
@@ -35,14 +35,13 @@ alias busy='hexdump -C /dev/urandom|grep "ca fe"'
 alias gh="curl -u 'barbour-em' https://api.github.com/user/repos -d '{name:$1}'"
 alias ecc='emacsclient -c &'
 alias skype='skype --disable-cleanlooks'
-# alias open='rifle'
-alias skype-'skype --disable-cleanlooks'
 alias update_repos='cd /home/eric/src/  && for i in ./*/; do (cd $i && git pull); done'
 alias c="clear"
 alias e="exit"
 alias ..="cd .."
 alias cd..='cd ..'
 alias sl='ls'
+alias gl='git pull'
 
 if [[ `uname` == 'Linux' ]]; then
     alias ls='ls --color --group-directories-first'
@@ -136,3 +135,6 @@ export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/dev
 source /usr/bin/virtualenvwrapper.sh
 source /etc/profile.d/autojump.sh
+plugins=( git colored-man colorize zsh-syntax-highlighting )
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

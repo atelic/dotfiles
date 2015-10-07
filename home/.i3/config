@@ -6,12 +6,14 @@
 
 set $mod Mod4
 set $browser google-chrome-stable
-set $term urxvt
+set $term urxvt -e /bin/zsh
 
 # Gaps patch from https://github.com/Airblader/i3
 set $mode_gaps Gaps: (o) outer, (i) inner
 set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
 set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+# gaps inner 4
+# gaps outer 2
 bindsym $mod+Shift+g mode "$mode_gaps"
 
 mode "$mode_gaps" {
@@ -44,15 +46,17 @@ mode "$mode_gaps_outer" {
 }
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
+
 #Make windows play nice with gaps and don't give them a title in tiling mode
 new_window 1pixel
 for_window [class="^.*"] border pixel 1
 bindsym Control+Shift+1 [class="^.*"] border toggle
 
+set $dmenu_command exec dmenu_run -b -f  -i -l 3 -p "Run:" -nb "#2d2d2d" -nf "#cccccc" -sb "#515151" -sf "#f99157"
 # start dmenu (a program launcher)
 # bindsym $mod+d exec dmenu_run -b -f  -i -l 3 -p "$(whoami)@$(hostname)" -nb "#2d2d2d" -nf "#cccccc" -sb "#515151" -sf "#f99157"
-bindsym $mod+d exec dmenu_run -b -f  -i -l 3 -p "Run:" -nb "#2d2d2d" -nf "#cccccc" -sb "#515151" -sf "#f99157"
-bindsym $mod+space exec dmenu_run -b -f  -i -l 3 -p "Run:" -nb "#2d2d2d" -nf "#cccccc" -sb "#515151" -sf "#f99157"
+bindsym $mod+d $dmenu_command
+bindsym $mod+space $dmenu_command
 
 # change focus
 # default keys altered to match those of emacs
@@ -110,6 +114,7 @@ bindsym $mod+Shift+space floating toggle
 # focus the parent container
 bindsym $mod+a focus parent
 
+# Set up variables so changing their names doesn't suck
 set $WS1 1
 set $WS2 2
 set $WS3 3
@@ -188,18 +193,23 @@ bindsym Escape mode "default"
 bar {
   position top
   status_command i3status
-  # status_command i3blocks
   colors {
+    background #7cafc2
+		statusline #181818
+		separator #181818
+		focused_workspace #7cafc2 #7cafc2 #181818
+		active_workspace #7cafc2 #7cafc2 #181818
+		inactive_workspace #7cafc2 #7cafc2 #585858
     #Between text
-    separator #93b3a3 #3f3f3f #93b3a3
+    # separator #93b3a3 #3f3f3f #93b3a3
     #Light gray background
-    background #3f3f3f
-    statusline #dcdccc
+    # background #3f3f3f
+    # statusline #dcdccc
     #Zenburn colors
-    focused_workspace  #93b3a3 #3f3f3f #93b3a3
-    active_workspace   #ffcfaf #3f3f3f #ffcfaf
-    inactive_workspace #636363 #3f3f3f #dcdccc
-    urgent_workspace   #dca3a3 #3f3f3f #dca3a3
+    # focused_workspace  #93b3a3 #3f3f3f #93b3a3
+    # active_workspace   #ffcfaf #3f3f3f #ffcfaf
+    # inactive_workspace #636363 #3f3f3f #dcdccc
+    # urgent_workspace   #dca3a3 #3f3f3f #dca3a3
   }
   workspace_buttons yes
   strip_workspace_numbers no
@@ -235,6 +245,7 @@ exec --no-startup-id xflux -z 22904
 exec --no-startup-id xset r rate 250 50
 # gotta sync those files
 exec --no-startup-id dropbox
+# background
 exec --no-startup-id nitrogen --restore
 #######################
 # Custom exec commands
@@ -276,5 +287,4 @@ bindsym $mod+period exec xbacklight +10 -time 0
 # kill window
 bindsym $mod+q kill
 bindsym Print exec scrot -q 100 '%Y-%m-%d-%T_$wx$h_scrot.png' -e 'mv $f ~/dotfiles/screenshots'
-# Youtube hack
-bindsym $mod+y fullscreen disable; floating enable; resize set 400 300; sticky enable; move window to position 1515 20
+# screen locking

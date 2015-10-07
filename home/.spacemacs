@@ -51,8 +51,15 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dotspacemacs/config'.
-   dotspacemacs-additional-packages '(zenburn-theme
-                                      swiper)
+   dotspacemacs-additional-packages '(
+                                      ;; Awesome dark theme
+                                      zenburn-theme
+                                      ;; Needed for org to export with highlighting
+                                      htmlize
+                                      ;; I-search on steroids
+                                      swiper
+                                      ;; better term
+                                      multi-term)
    ;; A list of packages and/or extensions tnhat will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -82,7 +89,7 @@ values."
    ;; directory. A string value must be a path to an image format supported
    ;; by your Emacs build.
    ;; If the value is nil then no banner is displayed. (default 'official)
-   dotspacemacs-startup-banner 'official
+   dotspacemacs-startup-banner 'random
    ;; List of items to show in the startup buffer. If nil it is disabled.
    ;; Possible values are: `recents' `bookmarks' `projects'.
    ;; (default '(recents projects))
@@ -198,6 +205,25 @@ values."
   "Initialization function for user code.
 It is called immediately after `dotspacemacs/init'.  You are free to put any
 user code."
+  ;; Convert word in DOuble CApitals to Single Capitals
+  (defun dcaps-to-scaps ()
+    "Convert word in DOuble CApitals to Single Capitals."
+    (interactive)
+    (and (= ?w (char-syntax (char-before)))
+         (save-excursion
+           (and (if (called-interactively-p)
+                    (skip-syntax-backward "w")
+                  (= -3 (skip-syntax-backward "w")))
+                (let (case-fold-search)
+                  (looking-at "\\b[[:upper:]]\\{2\\}[[:lower:]]"))
+                (capitalize-word 1)))))
+  (add-hook 'post-self-insert-hook #'dcaps-to-scaps nil 'local)
+
+  ;; I like C++ mode for header files
+  (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+
+  ;;;; Org mode
+  (setq org-src-fontify-natively t)
   )
 
 (defun dotspacemacs/user-config ()
@@ -231,19 +257,8 @@ user code."
         (comment-or-uncomment-region (line-beginning-position) (line-end-position))
       (comment-dwim arg)))
 
-  ;; Convert word in DOuble CApitals to Single Capitals
-  (defun dcaps-to-scaps ()
-    "Convert word in DOuble CApitals to Single Capitals."
-    (interactive)
-    (and (= ?w (char-syntax (char-before)))
-         (save-excursion
-           (and (if (called-interactively-p)
-                    (skip-syntax-backward "w")
-                  (= -3 (skip-syntax-backward "w")))
-                (let (case-fold-search)
-                  (looking-at "\\b[[:upper:]]\\{2\\}[[:lower:]]"))
-                (capitalize-word 1)))))
-  (add-hook 'post-self-insert-hook #'dcaps-to-scaps nil 'local)
+  ;; I like to see the time when in full screen
+  (display-time-mode 1)
 
   ;;;; Key bindings
   ;; Interactive searching on steroids
@@ -251,10 +266,26 @@ user code."
   (global-set-key (kbd "C-r") 'swiper)
   (global-set-key (kbd "C-;") 'comment-dwim-line)
 
+  ;; M-m o for my own functions and shortcuts
   (evil-leader/set-key "oc" 'insert-c-header)
+  (evil-leader/set-key "ot" 'multi-term)
 
   ;; Navigating code with this is amazing
   (global-set-key (kbd "M-i") 'helm-semantic-or-imenu)
+
+
   )
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(browse-url-browser-function (quote browse-url-default-browser)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
