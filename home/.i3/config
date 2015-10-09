@@ -52,7 +52,7 @@ new_window 1pixel
 for_window [class="^.*"] border pixel 1
 bindsym Control+Shift+1 [class="^.*"] border toggle
 
-set $dmenu_command exec dmenu_run -b -f  -i -l 3 -p "Run:" -nb "#2d2d2d" -nf "#cccccc" -sb "#515151" -sf "#f99157"
+set $dmenu_command exec dmenu_run -h 20 -w 500 -x 420 -y 23 -fn Terminus -nb "#2c2f3d" -nf "#e9ca92" -sb "#2c2f3d" -sf "#c76622"
 # start dmenu (a program launcher)
 # bindsym $mod+d exec dmenu_run -b -f  -i -l 3 -p "$(whoami)@$(hostname)" -nb "#2d2d2d" -nf "#cccccc" -sb "#515151" -sf "#f99157"
 bindsym $mod+d $dmenu_command
@@ -115,16 +115,16 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+a focus parent
 
 # Set up variables so changing their names doesn't suck
-set $WS1 1
-set $WS2 2
-set $WS3 3
-set $WS4 4
-set $WS5 5
-set $WS6 6
-set $WS7 7
-set $WS8 8
-set $WS9 9
-set $WS0 10
+set $WS1 1:WWW
+set $WS2 2:EMACS
+set $WS3 3:TMUX
+set $WS4 4:WORK
+set $WS5 5:EXTRA
+set $WS6 6:MORE
+set $WS7 7:STAPH
+set $WS8 8:PLS
+set $WS9 9:NO
+set $WS0 10:DED
 
 # switch to workspace
 bindsym $mod+1 workspace $WS1
@@ -192,38 +192,39 @@ bindsym Escape mode "default"
 
 bar {
   position top
-  status_command i3status
+  status_command ~/.i3/stat.sh
   colors {
-    background #7cafc2
-		statusline #181818
-		separator #181818
-		focused_workspace #7cafc2 #7cafc2 #181818
-		active_workspace #7cafc2 #7cafc2 #181818
-		inactive_workspace #7cafc2 #7cafc2 #585858
-    #Between text
-    # separator #93b3a3 #3f3f3f #93b3a3
-    #Light gray background
-    # background #3f3f3f
-    # statusline #dcdccc
-    #Zenburn colors
-    # focused_workspace  #93b3a3 #3f3f3f #93b3a3
-    # active_workspace   #ffcfaf #3f3f3f #ffcfaf
-    # inactive_workspace #636363 #3f3f3f #dcdccc
-    # urgent_workspace   #dca3a3 #3f3f3f #dca3a3
+	# Whole color settings
+	background #2c2f3d
+	statusline #e9ca92
+	separator  #c76622
+
+                      #border  #bg      #text
+  focused_workspace 	#2c2f3d	 #2c2f3d  #c76622
+  active_workspace  	#2c2f3d	 #2c2f3d  #e9ca92
+  inactive_workspace	#2c2f3d	 #2c2f3d  #e9ca92
+  urgent_workspace	  #2c2f3d  #2c2f3d  #c93939
   }
   workspace_buttons yes
-  strip_workspace_numbers no
+  strip_workspace_numbers yes
 }
 
-#####################
-# Zenburn Colors
-#####################
+##### Border Style #####
+# Border Size
+new_window pixel 3
+new_float pixel 3
 
-client.background           #342826
-client.focused              #688060 #688060 #303030 #ffcfaf
-client.focused_inactive     #3f3f3f #3F3F3F #7f9f7f #3f3f3f
-client.unfocused            #3f3f3f #3F3F3F #DCDCCC #3f3f3f
-client.urgent               #dca3a3 #dca3a3 #DCDCCC #3f3f3f
+# Border Colors Set
+set $FOCUS	#c76622
+set $UNFOCUS	#e9ca92
+
+
+# Border Colors
+# class			border   backgr.  text	 indicator
+client.focused		$FOCUS   $FOCUS   $FOCUS $FOCUS
+client.focused_inactive $UNFOCUS $UNFOCUS $UNFOCUS $UNFOCUS
+client.unfocused	$UNFOCUS $UNFOCUS $UNFOCUS $UNFOCUS
+client.urgent		$FOCUS	 $FOCUS	  $FOCUS   $FOCUS
 
 #####################
 # Start up commands

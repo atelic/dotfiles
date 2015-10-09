@@ -88,3 +88,5 @@ function mkcd {
 
 # Load Bash It
 source $BASH_IT/bash_it.sh
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

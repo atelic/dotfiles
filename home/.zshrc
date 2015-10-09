@@ -6,7 +6,6 @@ COMPLETION_WAITING_DOTS="false"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 HIST_STAMPS="mm/dd/yyyy"
 
-
 export TERM="xterm-256color"
 
 export PATH="/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/home/eric/.gem/ruby/1.8/bin:/opt/nginx/sbin:/home/eric/.local/bin:/home/eric/bin:/home/eric/.gem/ruby/1.8/bin:/opt/nginx/sbin:/usr/bin/core_perl"
@@ -42,28 +41,30 @@ alias ..="cd .."
 alias cd..='cd ..'
 alias sl='ls'
 alias gl='git pull'
+alias gst='git status'
 
+# Aliases only for Arch machine
 if [[ `uname` == 'Linux' ]]; then
     alias ls='ls --color --group-directories-first'
     alias open='xdg-open'
+    alias xclip='xclip -selection clipboard'
+    alias pacman='sudo pacman'
+    alias hdd="df -h | grep /dev/sda2"
+    alias brightness='xbacklight -set'
+    alias gcs='google-chrome-stable'
 fi
-alias bc='bc -l'
+alias calc='irb'
+alias ipy='ipython'
 alias vi='vim'
 alias svi='sudo vim'
-alias edit='emacsclient'
 alias df='df -h'
-alias apache='sudo /opt/lampp/lampp start'
 alias ox='chmod o+x'
-alias xclip='xclip -selection clipboard'
-alias pacman='sudo pacman'
-alias hdd="df -h | grep /dev/sda2"
-alias lock='cd ~ && ./flock'
-alias brightness='xbacklight -set'
-alias gcb='google-chrome-beta'
+
 ## Status and complex scripts ##
 alias batt='upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep -E "state|to\ full|percentage"'
 alias clock='while true; do tput clear; date +"%H : %M" | figlet ; sleep 1; done'
-alias speed-test=' wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip'
+alias speed-test='wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip'
+
 ##############
 #Scripts
 ##############

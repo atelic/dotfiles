@@ -25,17 +25,18 @@ values."
      ;; ---------------------------------------------------------------
      ;; Necessities
      better-defaults
-     syntax-checking
      semantic
+     syntax-checking
      ;; Languages
      c-c++
-     javascript
-     python
-     markdown
      emacs-lisp
-     ruby
-     php
      html
+     java
+     javascript
+     markdown
+     php
+     python
+     ruby
      yaml
      ;; Buffer and navigation
      perspectives
@@ -97,8 +98,8 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(solarized-light
-                         spacemacs-dark
+   dotspacemacs-themes '(spacemacs-dark
+                         solarized-light
                          zenburn)
    ;; If non nil the cursor color matches the state color.
    dotspacemacs-colorize-cursor-according-to-state t
@@ -205,6 +206,12 @@ values."
   "Initialization function for user code.
 It is called immediately after `dotspacemacs/init'.  You are free to put any
 user code."
+  
+  )
+
+(defun dotspacemacs/user-config ()
+  "Configuration function for user code"
+  (setq vc-follow-symlinks t)
   ;; Convert word in DOuble CApitals to Single Capitals
   (defun dcaps-to-scaps ()
     "Convert word in DOuble CApitals to Single Capitals."
@@ -224,10 +231,7 @@ user code."
 
   ;;;; Org mode
   (setq org-src-fontify-natively t)
-  )
 
-(defun dotspacemacs/user-config ()
-  "Configuration function for user code"
   ;; Just looks cooler
   (setq powerline-default-separator 'slant)
 
@@ -269,6 +273,7 @@ user code."
   ;; M-m o for my own functions and shortcuts
   (evil-leader/set-key "oc" 'insert-c-header)
   (evil-leader/set-key "ot" 'multi-term)
+  (setq multi-term-program "/bin/zsh")
 
   ;; Navigating code with this is amazing
   (global-set-key (kbd "M-i") 'helm-semantic-or-imenu)
