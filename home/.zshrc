@@ -59,6 +59,7 @@ alias vi='vim'
 alias svi='sudo vim'
 alias df='df -h'
 alias ox='chmod o+x'
+alias lab='ssh -l emb4gu labunix01.cs.virginia.edu'
 
 ## Status and complex scripts ##
 alias batt='upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep -E "state|to\ full|percentage"'
@@ -139,3 +140,6 @@ source /etc/profile.d/autojump.sh
 plugins=( git colored-man colorize zsh-syntax-highlighting )
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+eval "$(fasd --init auto)"
+alias v='f -e vim'       # quick opening files with vim
+alias m='f -e mplayer'   # quick opening files with mplayer

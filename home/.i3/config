@@ -59,7 +59,7 @@ bindsym $mod+d $dmenu_command
 bindsym $mod+space $dmenu_command
 
 # change focus
-# default keys altered to match those of emacs
+# default keys altered to match those of vim
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
@@ -118,8 +118,8 @@ bindsym $mod+a focus parent
 set $WS1 1:WWW
 set $WS2 2:EMACS
 set $WS3 3:TMUX
-set $WS4 4:WORK
-set $WS5 5:EXTRA
+set $WS4 4:SPOTIFY
+set $WS5 5:WORK
 set $WS6 6:MORE
 set $WS7 7:STAPH
 set $WS8 8:PLS

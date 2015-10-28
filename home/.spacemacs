@@ -55,12 +55,15 @@ values."
    dotspacemacs-additional-packages '(
                                       ;; Awesome dark theme
                                       zenburn-theme
+                                      solarized-theme
                                       ;; Needed for org to export with highlighting
                                       htmlize
                                       ;; I-search on steroids
                                       swiper
                                       ;; better term
-                                      multi-term)
+                                      multi-term
+                                      ;; search all the things
+                                      ag)
    ;; A list of packages and/or extensions tnhat will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -269,6 +272,7 @@ user code."
   (global-set-key (kbd "C-s") 'swiper)
   (global-set-key (kbd "C-r") 'swiper)
   (global-set-key (kbd "C-;") 'comment-dwim-line)
+  (global-set-key (kbd "<menu>") 'helm-M-x)
 
   ;; M-m o for my own functions and shortcuts
   (evil-leader/set-key "oc" 'insert-c-header)
