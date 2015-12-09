@@ -97,7 +97,7 @@ chatnets = {
   freenode = {
     type = "IRC";
     nick = "urnik";
-    autosendcmd = "/msg nickserv identify dothebarbwa shesalady;wait 2000;/run awl.pl;wait 2000;/window 2;/wc;/run trackbar.pl;";
+    autosendcmd = "/run awl.pl;wait 2000;/window 2;/wc;/run trackbar.pl;";
 
   };
 
