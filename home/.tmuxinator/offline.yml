@@ -1,16 +1,16 @@
-# ~/.tmuxinator/osf.yml
+# ~/.tmuxinator/offline.yml
 
-name: osf
-root: ~/dev/osf.io
+name: offline
+root: ~/dev/OSF-OFFLINE
 
 # Optional tmux socket
 # socket_name: foo
 
 # Runs before everything. Use it to start daemons etc.
-# pre: pkill \emacs; \emacs --daemon
+# pre: 
 
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
-pre_window: source env/bin/activate
+pre_window: workon offline
 
 # Pass command line options to tmux. Useful for specifying a different tmux.conf.
 # tmux_options: -f ~/.tmux.mac.conf
@@ -28,17 +28,8 @@ pre_window: source env/bin/activate
 # post: tmux -CC attach -t osf
 
 windows:
-  - invokes:
-      layout: f4a7,179x39,0,0[179x19,0,0{89x19,0,0,0,89x19,90,0,6},179x19,0,20{89x19,0,20,3,89x19,90,20,4}]
+  - main:
+      layout: main-vertical
       panes:
-        - inv assets -dw
-        - inv apiserver
-        - inv server
-        - inv elasticsearch
-        - deactivate; workon waterbutler; inv server
-        - fakecas
-  - git:
-      layout: fcd0,179x39,0,0{109x39,0,0,23,69x39,110,0,28}
-      panes:
-        - tig
+        - ./start.py
         - git status

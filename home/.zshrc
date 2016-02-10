@@ -5,7 +5,7 @@ ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 HIST_STAMPS="mm/dd/yyyy"
-plugins=( git colored-man colorize )
+plugins=( git nosecomplete zsh-syntax-highlighting)
 
 export TERM="xterm-256color"
 
@@ -24,31 +24,33 @@ export HISTFILESIZE=500000
 export HISTSIZE=100000
 export HISTIGNORE="&:[ ]*:e"
 
+## python virtualenvs
+export WORKON_HOME=~/.envs
+source /usr/local/bin/virtualenvwrapper.sh
+
 ############
 #Aliases
 ###########
 alias busy='hexdump -C /dev/urandom|grep "ca fe"'
+alias lab='ssh -l emb4gu labunix01.cs.virginia.edu'
 # alias emacs='emacsclient -t'
 alias gh="curl -u 'barbour-em' https://api.github.com/user/repos -d '{name:$1}'"
 alias ecc='emacsclient -c &'
 alias skype='skype --disable-cleanlooks'
-alias php='/opt/lampp/bin/php'
 # alias open='rifle'
 alias skype-'skype --disable-cleanlooks'
 alias update_repos='cd /home/eric/src/  && for i in ./*/; do (cd $i && git pull); done'
 alias c="clear"
-alias e="exit"
+alias e="emacsclient -t"
 alias ..="cd .."
 alias cd..='cd ..'
 alias sl='ls'
 # alias ls='ls --color --group-directories-first'
-alias composer="sudo php composer.phar"
 alias bc='bc -l'
 alias vi='vim'
 alias svi='sudo vim'
 alias edit='emacsclient'
 alias df='df -h'
-alias apache='sudo /opt/lampp/lampp start'
 alias en='geeknote'
 alias ox='chmod o+x'
 alias xclip='xclip -selection clipboard'
@@ -56,21 +58,16 @@ alias pacman='sudo pacman'
 alias hdd="df -h | grep /dev/sda2"
 alias lock='cd ~ && ./flock'
 alias brightness='xbacklight -set'
+alias xampp='open /Applications/XAMPP/manager-osx.app'
+alias apachectl='sudo /Applications/XAMPP/bin/apachectl'
+alias kill-apache='sudo pkill -f httpd'
 ## Status and complex scripts ##
 alias batt='upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep -E "state|to\ full|percentage"'
-alias clock='while true; do tput clear; date +"%H : %M" | figlet ; sleep 1; done'
 alias speed-test=' wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip'
+alias clock='tty-clock -B -c -C 2'
 ##############
 #Scripts
 ##############
-[ -z "$PS1" ] && return
-alias dna='cd /home/eric/.script/fun && ./dna && cd'
-alias pacscr='cd /home/eric/.script/fun && ./pacman && cd'
-alias stats='cd /home/eric/.script/fun && ./fetch && cd'
-alias pipes='cd /home/eric/.script/fun && ./pipes && cd'
-alias bars='cd /home/eric/.script/fun && ./colorbars && cd'
-alias scheme='cd /home/eric/.script/fun && ./colorscheme && cd'
-
 up (){
  for i in $(seq ${1: -1});do
    cd ../
@@ -100,7 +97,7 @@ extract () {
 }
 
 #mkdir and follow into it
-function mkcd {
+function mkcd () {
   if [ ! -n "$1" ]; then
       echo "Enter a directory name"
   elif [ -d $1 ]; then
@@ -126,8 +123,19 @@ pyclean() {
 	find . -type f -name "*.py[co]" -delete
 	find . -type d -name "__pycache__" -delete
 }
+ternclean() {
+  find . -type f -name "*.tern-port" -delete
+}
+cleandir(){
+    pyclean
+    ternclean
+}
 
 PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
-ulimit -n 2048
+
 PATH=$PATH:/usr/local/bin
 PATH=$PATH:/Users/ericbarbour/bin
+
+ulimit -n 2048
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
