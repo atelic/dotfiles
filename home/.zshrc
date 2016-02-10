@@ -2,7 +2,7 @@ export ZSH=~/.oh-my-zsh
 ZSH_THEME="nanotech"
 DISABLE_AUTO_UPDATE="true"
 ENABLE_CORRECTION="true"
-COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="false"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 HIST_STAMPS="mm/dd/yyyy"
 plugins=( git nosecomplete zsh-syntax-highlighting)
@@ -31,25 +31,39 @@ source /usr/local/bin/virtualenvwrapper.sh
 ############
 #Aliases
 ###########
+alias google-chrome-stable='google-chrome-stable --force-device-scale-factor'
+alias ncmpcpp='sh ~/bin/music.sh'
+alias emacs='emacsclient -t'
 alias busy='hexdump -C /dev/urandom|grep "ca fe"'
 alias lab='ssh -l emb4gu labunix01.cs.virginia.edu'
 # alias emacs='emacsclient -t'
 alias gh="curl -u 'barbour-em' https://api.github.com/user/repos -d '{name:$1}'"
 alias ecc='emacsclient -c &'
 alias skype='skype --disable-cleanlooks'
-# alias open='rifle'
-alias skype-'skype --disable-cleanlooks'
 alias update_repos='cd /home/eric/src/  && for i in ./*/; do (cd $i && git pull); done'
 alias c="clear"
 alias e="emacsclient -t"
 alias ..="cd .."
 alias cd..='cd ..'
 alias sl='ls'
-# alias ls='ls --color --group-directories-first'
 alias bc='bc -l'
+alias gl='git pull'
+alias gst='git status'
+
+# Aliases only for Arch machine
+if [[ `uname` == 'Linux' ]]; then
+    alias ls='ls --color --group-directories-first'
+    alias open='xdg-open'
+    alias xclip='xclip -selection clipboard'
+    alias pacman='sudo pacman'
+    alias hdd="df -h | grep /dev/sda2"
+    alias brightness='xbacklight -set'
+    alias gcs='google-chrome-stable'
+fi
+alias calc='irb'
+alias ipy='ipython'
 alias vi='vim'
 alias svi='sudo vim'
-alias edit='emacsclient'
 alias df='df -h'
 alias en='geeknote'
 alias ox='chmod o+x'
@@ -68,6 +82,19 @@ alias clock='tty-clock -B -c -C 2'
 ##############
 #Scripts
 ##############
+alias ox='chmod o+x'
+alias lab='ssh -l emb4gu labunix01.cs.virginia.edu'
+
+## Status and complex scripts ##
+alias batt='upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep -E "state|to\ full|percentage"'
+alias clock='while true; do tput clear; date +"%H : %M" | figlet ; sleep 1; done'
+alias speed-test='wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip'
+
+##############
+#Scripts
+##############
+[ -z "$PS1" ] && return
+
 up (){
  for i in $(seq ${1: -1});do
    cd ../
@@ -120,8 +147,8 @@ pbs () {
 }
 
 pyclean() {
-	find . -type f -name "*.py[co]" -delete
-	find . -type d -name "__pycache__" -delete
+  find . -name "*.py[co]" -delete
+  find . -name "__pycache__" -delete
 }
 ternclean() {
   find . -type f -name "*.tern-port" -delete
@@ -134,8 +161,20 @@ cleandir(){
 PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 
 PATH=$PATH:/usr/local/bin
-PATH=$PATH:/Users/ericbarbour/bin
 
 ulimit -n 2048
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+PATH=$PATH:~/bin
+PATH=$PATH:~/.composer/vendor/bin
+
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/dev
+source /usr/bin/virtualenvwrapper.sh
+source /etc/profile.d/autojump.sh
+plugins=( git colored-man colorize zsh-syntax-highlighting )
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+eval "$(fasd --init auto)"
+alias v='f -e vim'       # quick opening files with vim
+alias m='f -e mplayer'   # quick opening files with mplayer

@@ -1,17 +1,19 @@
-##############################
-# Set variables
-##############################
+#################
+# Set variables #
+#################
 # Windows = Mod4
 # Alt     = Mod1
 
 set $mod Mod4
 set $browser google-chrome-stable
-set $term terminator
+set $term urxvt -e /bin/zsh
 
 # Gaps patch from https://github.com/Airblader/i3
 set $mode_gaps Gaps: (o) outer, (i) inner
 set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
 set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+# gaps inner 4
+# gaps outer 2
 bindsym $mod+Shift+g mode "$mode_gaps"
 
 mode "$mode_gaps" {
@@ -44,18 +46,20 @@ mode "$mode_gaps_outer" {
 }
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
+
 #Make windows play nice with gaps and don't give them a title in tiling mode
 new_window 1pixel
 for_window [class="^.*"] border pixel 1
 bindsym Control+Shift+1 [class="^.*"] border toggle
 
+set $dmenu_command exec dmenu_run -h 20 -w 500 -x 420 -y 23 -fn Terminus -nb "#2c2f3d" -nf "#e9ca92" -sb "#2c2f3d" -sf "#c76622"
 # start dmenu (a program launcher)
 # bindsym $mod+d exec dmenu_run -b -f  -i -l 3 -p "$(whoami)@$(hostname)" -nb "#2d2d2d" -nf "#cccccc" -sb "#515151" -sf "#f99157"
-bindsym $mod+d exec dmenu_run -b -f  -i -l 3 -p "Run:" -nb "#2d2d2d" -nf "#cccccc" -sb "#515151" -sf "#f99157"
-bindsym $mod+space exec dmenu_run -b -f  -i -l 3 -p "Run:" -nb "#2d2d2d" -nf "#cccccc" -sb "#515151" -sf "#f99157"
+bindsym $mod+d $dmenu_command
+bindsym $mod+space $dmenu_command
 
 # change focus
-# default keys altered to match those of emacs
+# default keys altered to match those of vim
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
@@ -110,29 +114,29 @@ bindsym $mod+Shift+space floating toggle
 # focus the parent container
 bindsym $mod+a focus parent
 
-set $WS1 1
-set $WS2 2
-set $WS3 3
-set $WS4 4
-set $WS5 5
-set $WS6 6
-set $WS7 7
-set $WS8 8
-set $WS9 9
-set $WS0 10
-set $feh exec --no-startup-id feh --bg-scale
+# Set up variables so changing their names doesn't suck
+set $WS1 1:WWW
+set $WS2 2:EMACS
+set $WS3 3:TMUX
+set $WS4 4:SPOTIFY
+set $WS5 5:WORK
+set $WS6 6:MORE
+set $WS7 7:STAPH
+set $WS8 8:PLS
+set $WS9 9:NO
+set $WS0 10:DED
 
 # switch to workspace
-bindsym $mod+1 workspace $WS1; $feh ~/dotfiles/walls/Solarized-Mountains.png
-bindsym $mod+2 workspace $WS2; $feh ~/dotfiles/walls/geosolar.jpg
-bindsym $mod+3 workspace $WS3; $feh ~/dotfiles/walls/Solarized-Mountains.png
-bindsym $mod+4 workspace $WS4; $feh ~/dotfiles/walls/geosolar.jpg
-bindsym $mod+5 workspace $WS5; $feh ~/dotfiles/walls/Solarized-Mountains.png
-bindsym $mod+6 workspace $WS6; $feh ~/dotfiles/walls/geosolar.jpg
-bindsym $mod+7 workspace $WS7; $feh ~/dotfiles/walls/Solarized-Mountains.png
-bindsym $mod+8 workspace $WS8; $feh ~/dotfiles/walls/geosolar.jpg
-bindsym $mod+9 workspace $WS9; $feh ~/dotfiles/walls/Solarized-Mountains.png
-bindsym $mod+0 workspace $WS0; $feh ~/dotfiles/walls/geosolar.jpg
+bindsym $mod+1 workspace $WS1
+bindsym $mod+2 workspace $WS2
+bindsym $mod+3 workspace $WS3
+bindsym $mod+4 workspace $WS4
+bindsym $mod+5 workspace $WS5
+bindsym $mod+6 workspace $WS6
+bindsym $mod+7 workspace $WS7
+bindsym $mod+8 workspace $WS8
+bindsym $mod+9 workspace $WS9
+bindsym $mod+0 workspace $WS0
 
 # move focused container to workspace
 bindsym $mod+Shift+exclam           move workspace $WS1
@@ -187,40 +191,45 @@ bindsym Escape mode "default"
 #####################
 
 bar {
-  mode hide
   position top
-  status_command i3status
+  status_command ~/.i3/stat.sh
   colors {
-    #Between text
-    separator #93b3a3 #3f3f3f #93b3a3
-    #Light gray background
-    background #3f3f3f
-    statusline #dcdccc
-    #Zenburn colors
-    focused_workspace  #93b3a3 #3f3f3f #93b3a3
-    active_workspace   #ffcfaf #3f3f3f #ffcfaf
-    inactive_workspace #636363 #3f3f3f #dcdccc
-    urgent_workspace   #dca3a3 #3f3f3f #dca3a3
+	# Whole color settings
+	background #2c2f3d
+	statusline #e9ca92
+	separator  #c76622
 
+                      #border  #bg      #text
+  focused_workspace 	#2c2f3d	 #2c2f3d  #c76622
+  active_workspace  	#2c2f3d	 #2c2f3d  #e9ca92
+  inactive_workspace	#2c2f3d	 #2c2f3d  #e9ca92
+  urgent_workspace	  #2c2f3d  #2c2f3d  #c93939
   }
+  workspace_buttons yes
+  strip_workspace_numbers yes
 }
 
-#####################
-# Zenburn Colors
-#####################
+##### Border Style #####
+# Border Size
+new_window pixel 3
+new_float pixel 3
 
-client.background           #342826
-client.focused              #688060 #688060 #303030 #ffcfaf
-client.focused_inactive     #3f3f3f #3F3F3F #7f9f7f #3f3f3f
-client.unfocused            #3f3f3f #3F3F3F #DCDCCC #3f3f3f
-client.urgent               #dca3a3 #dca3a3 #DCDCCC #3f3f3f
+# Border Colors Set
+set $FOCUS	#c76622
+set $UNFOCUS	#e9ca92
+
+
+# Border Colors
+# class			border   backgr.  text	 indicator
+client.focused		$FOCUS   $FOCUS   $FOCUS $FOCUS
+client.focused_inactive $UNFOCUS $UNFOCUS $UNFOCUS $UNFOCUS
+client.unfocused	$UNFOCUS $UNFOCUS $UNFOCUS $UNFOCUS
+client.urgent		$FOCUS	 $FOCUS	  $FOCUS   $FOCUS
 
 #####################
 # Start up commands
 #####################
 
-# Starting brightness
-exec xbacklight -set 40
 # hide mouse when don't need
 exec --no-startup-id unclutter
 # CAPS LOCK to ctrl (aka life saver)
@@ -233,13 +242,12 @@ exec --no-startup-id nm-applet
 exec --no-startup-id xset -b
 # flu.x for the eyes
 exec --no-startup-id xflux -z 22904
-# bc emacs
-exec --no-startup-id /bin/emacs --daemon --with-x-toolkit=lucid
 # key repeat to faster
 exec --no-startup-id xset r rate 250 50
 # gotta sync those files
 exec --no-startup-id dropbox
-exec --no-startup-id $HOME/tlp
+# background
+exec --no-startup-id nitrogen --restore
 #######################
 # Custom exec commands
 #######################
@@ -280,14 +288,4 @@ bindsym $mod+period exec xbacklight +10 -time 0
 # kill window
 bindsym $mod+q kill
 bindsym Print exec scrot -q 100 '%Y-%m-%d-%T_$wx$h_scrot.png' -e 'mv $f ~/dotfiles/screenshots'
-
-###############
-# Lock screen
-###############
-bindsym $mod+Shift+P exec /bin/sh /home/eric/bin/blurlock
-
-##############################
-# Kills and restarts lemonbar
-##############################
-exec_always pkill lemonbar
-exec_always ~/.config/lemonbar/output.sh | ~/.config/lemonbar/bar.sh
+# screen locking

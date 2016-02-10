@@ -1,96 +1,84 @@
-! URxvt.foreground: #dcdccc
-! URxvt*background: #3f3f3f
 URxvt.saveLines:32767
-URxvt.scrollBar: false
 URxvt.perl-ext-common: default,matcher
-URxvt.urlLauncher: google-chrome-stable
 URxvt.matcher.button: 2
 URxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-]*[\\w/-]
 URxvt*colorUL: #c5f779
 URxvt*underlineColor: #c5f779
-! URxvt*color0:         #3f3f3f
-! URxvt*color1:       #705050
-! URxvt*color2:     #60b48a
-! URxvt*color3:    #dfaf8f
-! URxvt*color4:      #506070
-! URxvt*color5:   #dc8cc3
-! URxvt*color6:      #8cd0d3
-! URxvt*color7:     #DCDCCC
-! URxvt*color8:      #709080
-! URxvt*color9:      #cc9393
-! URxvt*color10:    #7f9f7f
-! URxvt*color11:   #f0dfaf
-! URxvt*color12:     #94bff3
-! URxvt*color13:  #ec93d3
-! URxvt*color14:    #93e0e3
-! URxvt*color15:          #ffffff
+
 urxvt*internalBorder: 4
 URxvt.perl-ext-common: default, tabbed
+URxvt*loginShell: false
 
-
-*.foreground: #ccb18b
-*.cursorcolor:#ccb18b
-*.colorbd:    #ccb18b
-*.colorul:    #ccb18b
-*.colorit:    #ccb18b
-*background:  #282828
-*color0:      #1a1a1a
-*color1:      #cc6666
-*color2:      #66aa66
-*color3:      #f0c674
-*color4:      #446688
-*color5:      #a374a8
-*color6:      #339999
-*color7:      #a3a3a3
-*color8:      #1a1a1a
-*color9:      #ff6666
-*color10:     #669a66
-*color11:     #f0b664
-*color12:     #537aa0
-*color13:     #722b7a
-*color14:     #2fa7a7
-*color15:     #a3a3a3
-
-!black
-xterm*color0:         #353535
-xterm*color8:         #666666
-!red
-xterm*color1:         #AE4747
-xterm*color9:         #EE6363
-!green
-xterm*color2:         #556B2F
-xterm*color10:        #9ACD32
-!brown/yellow
-xterm*color3:         #DAA520
-xterm*color11:        #FFC125
-!blue
-xterm*color4:         #6F99B4
-xterm*color12:        #7C96B0
-!magenta
-xterm*color5:         #8B7B8B
-xterm*color13:        #D8BFD8
-!cyan
-xterm*color6:         #A7A15E
-xterm*color14:        #F0E68C
-!white
-xterm*color7:         #DDDDDD
-xterm*color15:        #FFFFFF
-URxvt.letterSpace: -1
 URxvt.matcher.button: 1
-URxvt*termName: rxvt-256color
-URxvt*xftAntialias: true
-Rxvt.font: 9x15
-URxvt*font: 9x15,xft:Inconsolatas:antialias=true
-URxvt.boldFont: 9x15,xft:Inconsolatas:antialias=true
+! URxvt*termName: rxvt-256color
+! Rxvt.font: 9x15
 URxvt.letterSpace: -1
-URxvt.perl-ext-common: default,matcher
-URxvt.url-launcher: /usr/bin/google-chrome-stable
 URxvt.matcher.button: 1
 URxvt.iso14755: false
 urxvt.keysym.Home: \033[1~
 urxvt.keysym.End: \033[4~
 urxvt.keysym.Control-l: clear\n
+URxvt.keysym.M-C-c:	perl:clipboard:copy
+URxvt.keysym.M-C-v:	perl:clipboard:paste
 
-! URxvt*.transparent: true
+! Scrollbar or nobar lol
+URxvt.scrollBar: false
+
+! Adds padding around terminal text
+URxvt.internalBorder: 4
+
+! Font
+URxvt*termName: rxvt-256color
+URxvt*xftAntialias: true
+Rxvt.font: 9x15
+URxvt*font: 9x15,xft:Terminus:antialias=true
+URxvt.boldFont: 9x15,xft:Terminus:antialias=true
+
+! Colors Dark then Light or Left then Right if Termsexy
+URxvt*background:#2c2f3d
+URxvt*foreground:#e9ca92
+
+! Other colors
+! blacks
+URxvt*color0:1a1b1d
+URxvt*color8:1a1b1d
+
+! reds
+URxvt*color1:#c93939
+URxvt*color9:#c93939
+
+! greens
+URxvt*color2:#4da732
+URxvt*color10:#4da732
+
+! yellows
+URxvt*color3:#c76622
+URxvt*color11:#c76622
+
+! blues
+URxvt*color4:#2a63be
+URxvt*color12:#2a63be
+
+! magentas
+URxvt*color5:#7a3890
+URxvt*color13:#7a3890
+
+! cyans
+URxvt*color6:#3a9086
+URxvt*color14:#3a9086
+
+! whites
+URxvt*color7:#e9ca92
+URxvt*color15:#e9ca92
+
+
+! Transparency
+URxvt*.transparent: false
 ! URxvt*.shading: 0 to 99 darkens, 101 to 200 lightens
-! URxvt*.shading: 35
+URxvt*.shading: 25
+
+! Clickable Links
+URxvt.perl-ext-common: default,matcher
+URxvt.url-launcher: /usr/bin/google-chrome-stable
+URxvt.matcher.button: 1
+xft:Terminus:pixelsize=15

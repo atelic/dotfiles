@@ -35,12 +35,11 @@ Features:
 
 ```bash
 sudo pacman -Syu ansible
-git clone https://github.com/palcu/dotfiles.git ~/dotfiles
+git clone https://github.com/barbour-em/dotfiles.git ~/dotfiles
 cd ~/dotfiles/playbooks && ./launch
 ```
 
 ### TODOS
 
-- [ ] Sublime support is bad
 - [ ] Needs support for `yaourt`
-- [ ] Still missing some files like `~/.gkt-2.0`
+  - For now, save `pacman -Qmq` in this dir and yaourt -S $(< ~/dotfiles/pkglist.txt) later

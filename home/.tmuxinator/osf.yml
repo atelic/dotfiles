@@ -10,7 +10,7 @@ root: ~/dev/osf.io
 # pre: pkill \emacs; \emacs --daemon
 
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
-pre_window: source env/bin/activate
+pre_window: workon osf
 
 # Pass command line options to tmux. Useful for specifying a different tmux.conf.
 # tmux_options: -f ~/.tmux.mac.conf

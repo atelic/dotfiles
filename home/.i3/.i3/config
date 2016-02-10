@@ -8,6 +8,7 @@ set $mod Mod4
 set $browser google-chrome-stable
 set $term terminator
 
+font pango: DejaVu Sans Mono Book 8
 # Gaps patch from https://github.com/Airblader/i3
 set $mode_gaps Gaps: (o) outer, (i) inner
 set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
@@ -226,16 +227,22 @@ exec --no-startup-id unclutter
 # CAPS LOCK to ctrl (aka life saver)
 exec --no-startup-id setxkbmap -option ctrl:nocaps
 # two finger scrolling
-exec --no-startup-id xinput set-prop "SynPS/2 Synaptics TouchPad" "Synaptics Scrolling Distance" -107, -107s
+exec --no-startup-id xinput set-prop "SynPS/2 Synaptics TouchPad" "Synaptics Scrolling Distance" -107, -107
 # wifi applet
 exec --no-startup-id nm-applet
+# power management
+exec --no-startup-id sudo tlp start
 # stop that damn beeping
 exec --no-startup-id xset -b
 # flu.x for the eyes
 exec --no-startup-id xflux -z 22904
 # bc emacs
-exec --no-startup-id /bin/emacs --daemon --with-x-toolkit=lucid
-# key repeat to faster
+exec --no-startup-id emacs --daemon --with-x-toolkit=lucid
+# disable screen dimming idk y i did this
+exec --no-startup-id xset s off
+exec --no-startup-id xset s noblank
+exec --no-startup-id xset -dpms
+# key repeat to faster bc emacs w/ evil
 exec --no-startup-id xset r rate 250 50
 # gotta sync those files
 exec --no-startup-id dropbox
