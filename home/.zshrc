@@ -5,6 +5,7 @@ ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="false"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 HIST_STAMPS="mm/dd/yyyy"
+plugins=( git nosecomplete zsh-syntax-highlighting)
 
 export TERM="xterm-256color"
 
@@ -23,6 +24,10 @@ export HISTFILESIZE=500000
 export HISTSIZE=100000
 export HISTIGNORE="&:[ ]*:e"
 
+## python virtualenvs
+export WORKON_HOME=~/.envs
+source /usr/local/bin/virtualenvwrapper.sh
+
 ############
 #Aliases
 ###########
@@ -30,16 +35,18 @@ alias google-chrome-stable='google-chrome-stable --force-device-scale-factor'
 alias ncmpcpp='sh ~/bin/music.sh'
 alias emacs='emacsclient -t'
 alias busy='hexdump -C /dev/urandom|grep "ca fe"'
+alias lab='ssh -l emb4gu labunix01.cs.virginia.edu'
 # alias emacs='emacsclient -t'
 alias gh="curl -u 'barbour-em' https://api.github.com/user/repos -d '{name:$1}'"
 alias ecc='emacsclient -c &'
 alias skype='skype --disable-cleanlooks'
 alias update_repos='cd /home/eric/src/  && for i in ./*/; do (cd $i && git pull); done'
 alias c="clear"
-alias e="exit"
+alias e="emacsclient -t"
 alias ..="cd .."
 alias cd..='cd ..'
 alias sl='ls'
+alias bc='bc -l'
 alias gl='git pull'
 alias gst='git status'
 
@@ -58,6 +65,23 @@ alias ipy='ipython'
 alias vi='vim'
 alias svi='sudo vim'
 alias df='df -h'
+alias en='geeknote'
+alias ox='chmod o+x'
+alias xclip='xclip -selection clipboard'
+alias pacman='sudo pacman'
+alias hdd="df -h | grep /dev/sda2"
+alias lock='cd ~ && ./flock'
+alias brightness='xbacklight -set'
+alias xampp='open /Applications/XAMPP/manager-osx.app'
+alias apachectl='sudo /Applications/XAMPP/bin/apachectl'
+alias kill-apache='sudo pkill -f httpd'
+## Status and complex scripts ##
+alias batt='upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep -E "state|to\ full|percentage"'
+alias speed-test=' wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip'
+alias clock='tty-clock -B -c -C 2'
+##############
+#Scripts
+##############
 alias ox='chmod o+x'
 alias lab='ssh -l emb4gu labunix01.cs.virginia.edu'
 
@@ -100,7 +124,7 @@ extract () {
 }
 
 #mkdir and follow into it
-function mkcd {
+function mkcd () {
   if [ ! -n "$1" ]; then
       echo "Enter a directory name"
   elif [ -d $1 ]; then
@@ -126,10 +150,21 @@ pyclean() {
   find . -name "*.py[co]" -delete
   find . -name "__pycache__" -delete
 }
+ternclean() {
+  find . -type f -name "*.tern-port" -delete
+}
+cleandir(){
+    pyclean
+    ternclean
+}
 
 PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
-ulimit -n 2048
+
 PATH=$PATH:/usr/local/bin
+
+ulimit -n 2048
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 PATH=$PATH:~/bin
 PATH=$PATH:~/.composer/vendor/bin
 

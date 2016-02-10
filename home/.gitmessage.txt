@@ -8,8 +8,9 @@
 #Rem:
 
 # More detailed description. Wrap at 70 characters
-# Use the imperative: "Fix bug" and not "Fixed bug" 
-# ------------------------------------------------------------------|
+# Use the imperative: "Fix bug" and not "Fixed bug"
+# ---------------------------------------------------------------------|
+
 
 # Is this a minor change that doesn't need building?
 # [ci skip]

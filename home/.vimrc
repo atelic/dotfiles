@@ -7,7 +7,6 @@ call vundle#begin()
 Bundle 'gmarik/vundle'
 "Some plugins to make HTML not horrible
 Bundle 'mattn/emmet-vim'
-Bundle 'gcmt/breeze.vim'
 "Put closing " or ) when you write the opening one
 Bundle 'tpope/vim-surround'
 Bundle 'Raimondi/delimitMate'
@@ -57,7 +56,6 @@ set showmode
 set smarttab
 onoremap <silent> j gj
 onoremap <silent> k gk
-set nrformats-=octal
 set shiftround
 set ttimeout
 set ttimeoutlen=50
@@ -77,7 +75,6 @@ set encoding=utf-8
 set tabstop=2 shiftwidth=2 expandtab
 set listchars=trail:▓
 set list
-
 "Because Esc is too far
 inoremap jk <Esc>
 
