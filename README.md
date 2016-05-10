@@ -6,7 +6,7 @@ Features:
 * This keeps my Mac and Arch machine in sync with a playbook for each
 * Zsh shell with oh_my_zsh and my .zshrc
 * Vim provisioned with Vundle
-* Emacs with my [repo](https://github.com/barbour-em/my-emacs)
+* Emacs with [Spacemacs](https://github.com/syl20bnr/spacemacs)
 * My scripts are synced in ~/bin/
 
 ## Setup for new Mac machine
@@ -42,4 +42,4 @@ cd ~/dotfiles/playbooks && ./launch
 ### TODOS
 
 - [ ] Needs support for `yaourt`
-  - For now, save `pacman -Qmq` in this dir and yaourt -S $(< ~/dotfiles/pkglist.txt) later
+  - For now, save `pacman -Qmq`  to pkglist.txt in this dir and yaourt -S $(< ~/dotfiles/pkglist.txt) later

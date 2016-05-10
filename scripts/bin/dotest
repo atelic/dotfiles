@@ -1,0 +1,6 @@
+#!/bin/sh
+
+clear
+echo "find . -name '*.pyc' -delete"
+find . -name '*.pyc' -delete
+nosetests "$1"

@@ -1,0 +1,9 @@
+#! /usr/local/bin/python3
+# requires `pip3 install pyperclip`
+import sys
+import pyperclip
+import webbrowser
+
+address = ' '.join(sys.argv[1:]) if len(sys.argv) > 1 else pyperclip.paste()
+
+webbrowser.open('https://www.google.com/maps/place/{}'.format(address))

@@ -63,3 +63,13 @@ ls
 less lol
 zsh
 clear
+osascript -e 'tell application “System Events" to activate’
+
+ls
+./bomb passphrase 
+./halp
+./halp
+./halp
+vim ~/.bashrc 
+vim ~/.bashrc
+chmod +x .invoke_completion.sh 

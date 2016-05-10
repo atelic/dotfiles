@@ -18,6 +18,7 @@ values."
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
    '(
+     rust
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -39,8 +40,6 @@ values."
      ruby
      yaml
      ;; Buffer and navigation
-     perspectives
-     erc
      ibuffer
      ranger
      ;; Git
@@ -58,8 +57,6 @@ values."
                                       solarized-theme
                                       ;; Needed for org to export with highlighting
                                       htmlize
-                                      ;; I-search on steroids
-                                      swiper
                                       ;; better term
                                       multi-term
                                       ;; search all the things
@@ -157,13 +154,14 @@ values."
    ;; right; if there is insufficient space it displays it at the bottom.
    ;; (default 'bottom)
    dotspacemacs-which-key-position 'bottom
+   dotspacemacs-elpa-https 'nil
    ;; If non nil a progress bar is displayed when spacemacs is loading. This
    ;; may increase the boot time on some systems and emacs builds, set it to
    ;; nil to boost the loading time. (default t)
    dotspacemacs-loading-progress-bar t
    ;; If non nil the frame is fullscreen when Emacs starts up. (default nil)
    ;; (Emacs 24.4+ only)
-   dotspacemacs-fullscreen-at-startup t
+   dotspacemacs-fullscreen-at-startup nil
    ;; If non nil `spacemacs/toggle-fullscreen' will not use native fullscreen.
    ;; Use to disable fullscreen animations in OSX. (default nil)
    dotspacemacs-fullscreen-use-non-native t
@@ -209,7 +207,8 @@ values."
   "Initialization function for user code.
 It is called immediately after `dotspacemacs/init'.  You are free to put any
 user code."
-  
+(setq create-lockfiles nil)
+
   )
 
 (defun dotspacemacs/user-config ()
@@ -232,11 +231,22 @@ user code."
   ;; I like C++ mode for header files
   (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
+  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.mako?\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+
+
   ;;;; Org mode
   (setq org-src-fontify-natively t)
 
   ;; Just looks cooler
   (setq powerline-default-separator 'slant)
+
+  (setq mac-option-key-is-meta nil
+        mac-command-key-is-meta t
+        mac-command-modifier 'meta
+        mac-option-modifier 'none)
 
   ;;;; Defuns
   ;; Creates a header skeleton for c-style languages
@@ -252,6 +262,18 @@ user code."
 */
 "))
 
+  (defun date-at-point ()
+    "Quick org-mode header for the date"
+    (interactive)
+    (insert
+     "* "(format-time-string "%d-%m-%Y")"
+"))
+
+  (defun python-debug ()
+    (interactive)
+    (insert
+     "import ipdb; ipdb.set_trace()"))
+
   ;; Comment whole line or region
   (defun comment-dwim-line (&optional arg)
     "Replacement for the comment-dwim command.
@@ -264,19 +286,34 @@ user code."
         (comment-or-uncomment-region (line-beginning-position) (line-end-position))
       (comment-dwim arg)))
 
+  (defun org-header ()
+    (interactive)
+    (insert "#+HTML_HEAD: <link rel=\"stylesheet\" type=\"text/css\" href=\"http://thomasf.github.io/solarized-css/solarized-light.min.css\" /> \n"
+"#+STARTUP:    align fold nodlcheck hidestars oddeven lognotestate indent\n"
+"#+TITLE: \n"
+"#+AUTHOR: Eric Barbour\n"
+"#+OPTIONS: H:3 num:nil toc:t \\n:nil @:t ::t |:t ^:t -:t f:t *:t TeX:t LaTeX:t skip:nil d:(HIDE)\n"))
+
   ;; I like to see the time when in full screen
   (display-time-mode 1)
 
   ;;;; Key bindings
   ;; Interactive searching on steroids
-  (global-set-key (kbd "C-s") 'swiper)
-  (global-set-key (kbd "C-r") 'swiper)
+  ;; (ivy-mode 1)
+  ;; (setq ivy-use-virtual-buffers t)
+  ;; (global-set-key (kbd "C-s") 'swiper)
+  ;; (global-set-key (kbd "C-r") 'swiper)
+
+  (global-set-key (kbd "C-s") 'helm-swoop)
+  (global-set-key (kbd "C-r") 'helm-swoop)
   (global-set-key (kbd "C-;") 'comment-dwim-line)
   (global-set-key (kbd "<menu>") 'helm-M-x)
 
   ;; M-m o for my own functions and shortcuts
   (evil-leader/set-key "oc" 'insert-c-header)
   (evil-leader/set-key "ot" 'multi-term)
+  (evil-leader/set-key "od" 'date-at-point)
+  (evil-leader/set-key "op" 'python-debug)
   (setq multi-term-program "/bin/zsh")
 
   ;; Navigating code with this is amazing
@@ -291,7 +328,12 @@ user code."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(browse-url-browser-function (quote browse-url-default-browser)))
+ '(browse-url-browser-function (quote browse-url-default-browser))
+ '(evil-want-Y-yank-to-eol nil)
+ '(package-selected-packages
+   (quote
+    (py-yapf evil-visual-mark-mode toml-mode racer rust-mode flycheck-rust powerline spinner markdown-mode skewer-mode simple-httpd json-snatcher json-reformat yasnippet multiple-cursors js2-mode hydra parent-mode projectile request haml-mode gitignore-mode fringe-helper git-gutter+ git-gutter gh logito pcache pos-tip flycheck pkg-info epl flx magit magit-popup git-commit with-editor smartparens iedit anzu evil goto-chg undo-tree highlight php-mode diminish inf-ruby bind-map bind-key packed pythonic f s dash helm avy helm-core popup async package-build toc-org org-plus-contrib org-bullets eyebrowse column-enforce-mode rake uuidgen zenburn-theme yaml-mode ws-butler window-numbering which-key web-mode web-beautify volatile-highlights vi-tilde-fringe use-package tern tagedit stickyfunc-enhance srefactor spacemacs-theme spaceline solarized-theme smooth-scrolling smeargle slim-mode scss-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe restart-emacs rbenv ranger rainbow-delimiters quelpa pyvenv pytest pyenv-mode popwin pip-requirements phpunit phpcbf php-extras php-auto-yasnippets persp-mode pcre2el paradox page-break-lines orgit open-junk-file neotree multi-term move-text mmm-mode markdown-toc magit-gitflow magit-gh-pulls macrostep lorem-ipsum livid-mode live-py-mode linum-relative link-hint leuven-theme less-css-mode json-mode js2-refactor js-doc jade-mode info+ indent-guide ido-vertical-mode ibuffer-projectile hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-ag google-translate golden-ratio github-clone github-browse-file gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gist gh-md flycheck-pos-tip flx-ido fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-visualstar evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-jumper evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu emmet-mode emacs-eclim elisp-slime-nav drupal-mode disaster diff-hl define-word cython-mode coffee-mode cmake-mode clean-aindent-mode clang-format chruby bundler buffer-move bracketed-paste auto-highlight-symbol auto-compile anaconda-mode aggressive-indent ag adaptive-wrap ace-window ace-link ace-jump-helm-line)))
+ '(paradox-github-token t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

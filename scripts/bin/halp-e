@@ -1,0 +1,6 @@
+#! bin/sh
+ps aux | egrep '([r]unserver|[i]nv\ server)'| awk '{print $2}' | xargs kill && \
+    inv clean && inv requirements --quick && \
+    python -m scripts.migration.migrate_dashboard_collection_to_bookmarks && \
+    python -m scripts.populate_new_and_noteworthy_projects && \
+    python -m scripts.migrate_comment_targets

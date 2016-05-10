@@ -1,18 +1,14 @@
-export ZSH=~/.oh-my-zsh
-ZSH_THEME="nanotech"
+# export ZSH=~/.oh-my-zsh
+# ZSH_THEME="nanotech"
 DISABLE_AUTO_UPDATE="true"
 ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="false"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 HIST_STAMPS="mm/dd/yyyy"
-plugins=( git nosecomplete zsh-syntax-highlighting)
+# plugins=( git nosecomplete zsh-syntax-highlighting)
 
-export TERM="xterm-256color"
-
-export PATH="/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/home/eric/.gem/ruby/1.8/bin:/opt/nginx/sbin:/home/eric/.local/bin:/home/eric/bin:/home/eric/.gem/ruby/1.8/bin:/opt/nginx/sbin:/usr/bin/core_perl"
+# export PATH="/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/home/eric/.gem/ruby/1.8/bin:/opt/nginx/sbin:/home/eric/.local/bin:/home/eric/bin:/home/eric/.gem/ruby/1.8/bin:/opt/nginx/sbin:/usr/bin/core_perl"
 export MANPATH="/usr/local/man:$MANPATH"
-
-source $ZSH/oh-my-zsh.sh
 
 export LANG=en_US.UTF-8
 export ALTERNATE_EDITOR=""
@@ -59,6 +55,8 @@ if [[ `uname` == 'Linux' ]]; then
     alias hdd="df -h | grep /dev/sda2"
     alias brightness='xbacklight -set'
     alias gcs='google-chrome-stable'
+    source /usr/bin/virtualenvwrapper.sh
+    source /etc/profile.d/autojump.sh
 fi
 alias calc='irb'
 alias ipy='ipython'
@@ -72,7 +70,6 @@ alias pacman='sudo pacman'
 alias hdd="df -h | grep /dev/sda2"
 alias lock='cd ~ && ./flock'
 alias brightness='xbacklight -set'
-alias xampp='open /Applications/XAMPP/manager-osx.app'
 alias apachectl='sudo /Applications/XAMPP/bin/apachectl'
 alias kill-apache='sudo pkill -f httpd'
 ## Status and complex scripts ##
@@ -82,7 +79,6 @@ alias clock='tty-clock -B -c -C 2'
 ##############
 #Scripts
 ##############
-alias ox='chmod o+x'
 alias lab='ssh -l emb4gu labunix01.cs.virginia.edu'
 
 ## Status and complex scripts ##
@@ -168,13 +164,7 @@ ulimit -n 2048
 PATH=$PATH:~/bin
 PATH=$PATH:~/.composer/vendor/bin
 
-export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/dev
-source /usr/bin/virtualenvwrapper.sh
-source /etc/profile.d/autojump.sh
-plugins=( git colored-man colorize zsh-syntax-highlighting )
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 eval "$(fasd --init auto)"
-alias v='f -e vim'       # quick opening files with vim
-alias m='f -e mplayer'   # quick opening files with mplayer

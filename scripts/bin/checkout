@@ -1,0 +1,21 @@
+#!/bin/bash
+
+if git rev-parse --git-dir > /dev/null 2>&1; then
+    : # This is a valid git repository (but the current working
+    # directory may not be the top level.
+    NUM=$1
+    if [ $# -eq 0 ]
+    then
+        echo "Doing checkout of last item in list..."
+        git status | tail -3 | head -1 |awk '{print $2}' | xargs git checkout --
+    else
+        git status | tail -"$NUM" | head -1 |awk '{print $2}' | xargs git checkout --
+    fi
+else
+    : # this is not a git repository
+    echo "Not in a git directory, exiting..."
+    exit 1
+fi
+
+
+

@@ -1,0 +1,49 @@
+#!/bin/bash
+set -eu
+set -o pipefail
+
+mild() {
+    inv clean
+    inv req
+    inv req -q
+    inv req --dev
+    inv req --addons
+}
+
+kill_servers() {
+    ps aux | egrep '([r]unserver|[i]nv\ server)'| awk '{print $2}' | xargs kill
+}
+
+spicy () {
+    mild
+    kill_servers
+    inv rebuild_search
+    inv migrate_search
+    inv clean_assets
+}
+
+main() {
+    OSF=$HOME/dev/osf.io
+    cd $OSF
+
+    if [ $# -eq 0 ]
+    then
+        echo "Cleaning out .pyc files and invoking requirements"
+        mild
+    fi
+
+    if [ $1 == "kill" ]
+    then
+        read -p "It's that bad? " -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]
+        then
+            # echo "You done did it"
+            spicy
+        fi
+    fi
+
+}
+
+main "$@"
+
