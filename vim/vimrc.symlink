@@ -1,4 +1,289 @@
-syntax on
+" Spacebar is a much better leader than \ or ,
+let mapleader = "\<Space>"
 
-" Wrap gitcommit file types at the appropriate length
-filetype indent plugin on
+""""" PLUGINS """""
+call plug#begin()
+" ESSENTIALS
+Plug 'tpope/vim-sensible' " Sensible defaults
+Plug 'rstacruz/vim-opinion' " More sensible defaults
+Plug 'ervandew/supertab' " Tab complete everything
+Plug 'ctrlpvim/ctrlp.vim' " Fuzzy-matching go-to file
+Plug 'mhinz/vim-startify'
+nnoremap <C-b> :CtrlPBuffer<CR>
+map <C-t> :CtrlPBufTag<CR>
+" Make ctrlp faster
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+if has('python') ||  has('python3')
+  " Faster and more accurate fuzzy-matching
+  Plug 'felikz/ctrlp-py-matcher'
+  let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+endif
+let g:ctrlp_funky_syntax_highlight = 1
+Plug 'dyng/ctrlsf.vim'  " ag-powered search with in-place editing
+let g:ctrlsf_ackprg = 'rg'
+nmap     <C-f>f :CtrlSF ''<Left>
+nmap     <C-f>n <Plug>CtrlSFCwordPath
+nnoremap <C-f>t :CtrlSFToggle<CR>
+Plug 'tpope/vim-rsi'  " unix keybindings in insert mode
+Plug 'tpope/vim-repeat'  " make more actions repeatable with .
+Plug 'tpope/vim-surround'  " motions for handling surrounding characters
+Plug 'tpope/vim-unimpaired'  " useful bracket maps and option toggling
+Plug 'tomtom/tcomment_vim'  " for code comments
+Plug 'micha/vim-colors-solarized' "Color scheme
+" Toggle comment with space-/
+nmap <leader>/ <Plug>TComment_<c-_><c-_>
+vmap <leader>/ <Plug>TComment_<c-_><c-_>
+" Buffers
+Plug 'moll/vim-bbye'  " delete buffer without closing window
+nnoremap X :Bdelete<CR>
+" Plug 'BufOnly.vim'  " delete all but current buffer
+
+Plug 'scrooloose/nerdtree'
+nnoremap <leader>d :NERDTreeToggle<CR>
+nnoremap <leader>D :NERDTreeFind<CR>
+let g:NERDTreeRespectWildIgnore = 1
+
+Plug 'neomake/neomake'  " Async syntax checking
+Plug 'jaawerth/neomake-local-eslint-first'
+if has('nvim') || has('channel') && has('job') && has('patch-8-0-0027')
+    autocmd! BufWritePost * Neomake " Lint on save
+endif
+let g:neomake_open_list = 2  " Show errors in location list, if any
+let g:neomake_python_enabled_makers = ['flake8']  " Only use flake8 for Python
+let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_html_enabled_makers = []
+
+" NICE TO HAVE
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+let g:airline_theme='tomorrow'
+" Explicitly specify which extensions to use
+let g:airline_extensions = ['branch', 'ctrlp', 'tabline', 'neomake', 'whitespace']
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'jszakmeister/vim-togglecursor'  " change cursor shape when entering insert mode
+" Snippets
+if version >= 704 && has('python') || has('python3') | Plug 'SirVer/ultisnips' | endif
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+Plug 'honza/vim-snippets'
+
+Plug 'junegunn/vim-slash' " Better / search
+
+Plug 'majutsushi/tagbar', {'on': 'Tagbar'}
+" Open tagbar
+map <leader>\ :Tagbar<CR>
+let g:tagbar_autofocus = 1
+Plug 'wellle/targets.vim'  " because cin), etc. is awesome
+Plug 'tpope/vim-dispatch' " So we can run tests asynchronously
+Plug 'janko-m/vim-test'  " For running tests
+let test#python#runner = 'pytest'
+nmap <silent> <leader>tt :TestNearest<CR>
+nmap <silent> <leader>tf :TestFile<CR>
+nmap <silent> <leader>tl :TestLast<CR>
+let test#strategy = "dispatch"
+" -s for ipdb support; disable cacheprovider so we don't break 'py.test --lf'
+let test#python#pytest#options = '-s -p no:cacheprovider'
+
+Plug 'mattn/emmet-vim'  " Write HTML fast
+" When in javascript, expand to 'className' (for jsx support)
+let g:user_emmet_settings = {
+  \    'javascript': {'extends': 'html', 'attribute_name': {'class': 'className'}}
+  \ }
+Plug 'jiangmiao/auto-pairs' " autoclose parens, quotes, etc.
+Plug 'Lokaltog/vim-easymotion' " Quickly move around
+nmap s <Plug>(easymotion-s2)
+if has('mac')
+  Plug 'junegunn/vim-xmark', { 'do': 'make' }  " Live markdown preview
+endif
+Plug 'mtth/scratch.vim'
+let g:scratch_height = 20
+let g:scratch_filetype = 'markdown'
+" Open scratch buffer with space-tab (automatically set syntax to python)
+nnoremap <silent> <leader><tab> :Scratch<cr>
+Plug 'tpope/vim-sleuth'  " Detect indent settings
+Plug 'machakann/vim-highlightedyank'  " Highlight yank
+map y <Plug>(highlightedyank)
+
+" GIT
+Plug 'airblade/vim-gitgutter'
+" Set gitgutter's bindings manually to avoid clashes
+let g:gitgutter_map_keys = 0
+nmap <leader>gh <Plug>GitGutterStageHunk
+nmap <leader>gH <Plug>GitGutterUndoHunk
+nmap [h <Plug>GitGutterPrevHunk
+nmap ]h <Plug>GitGutterNextHunk
+Plug 'tpope/vim-fugitive'  " git integration
+Plug 'tpope/vim-rhubarb'  " For :Gbrowse
+map <leader>gs :Gstatus<CR>
+map <leader>gb :Gblame<CR>
+" Open current file on Github
+map <leader>gB :Gbrowse -<CR>
+" Open currently selected lines on Github
+vmap <leader>gB :Gbrowse -<CR>
+map <leader>gr :Gread<CR>
+map <leader>gw :Gwrite<CR>
+noremap <Leader>gp :Gpush<CR>
+Plug 'mattn/webapi-vim' | Plug 'mattn/gist-vim', {'on': 'Gist'}
+" Make gists private by default
+let g:gist_post_private = 1
+" Browse to gist after posting it
+let g:gist_open_browser_after_post = 1
+
+" COLOR
+
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'sloria/vim-hybrid'  " hybrid with easier-to-read line numbers
+" Plug 'chriskempson/base16-vim'
+
+" LANGUAGE-SPECIFIC
+Plug 'sloria/vim-polyglot'  " fork of sheerun/vim-polyglot with better python highlighting
+let g:polyglot_disabled = ['javascript']
+let g:python_highlight_all = 1
+let g:jsx_ext_required = 0
+let g:markdown_fenced_languages = ['javascript', 'python', 'clojure', 'ruby']
+" --- Python ---
+if has('python') ||  has('python3') | Plug 'davidhalter/jedi-vim' | endif
+" Just let me type!
+let g:jedi#popup_select_first = 0
+let g:jedi#popup_on_dot = 0
+let g:jedi#smart_auto_mappings = 0  " don't autoadd 'import'
+let g:jedi#show_call_signatures = 0  " Call sigs slow things down for large projects
+let g:jedi#goto_assignments_command = "gd"
+let g:jedi#goto_command = "gD"  " goto still has problems, so giving it a 2nd-class mapping
+let g:jedi#usages_command = "gu"
+let g:jedi#rename_command = "<C-c>r"
+" --- Javascript ---
+Plug 'pangloss/vim-javascript'
+Plug 'heavenshell/vim-jsdoc'  " For making JS docstrings
+let g:jsdoc_default_mapping = 0
+map <C-c>j :JsDoc<CR>
+" --- Lispy stuff ---
+Plug 'guns/vim-sexp', {'for': 'clojure'}
+Plug 'tpope/vim-sexp-mappings-for-regular-people', {'for': 'clojure'}
+Plug 'tpope/vim-fireplace', {'for': 'clojure'} " clojure repl
+
+call plug#end()
+filetype plugin indent on
+""" end plugins """
+
+""" BASE CUSTOMIZATIONS """
+" NOTE: Many base customizations come from vim-sensible and vim-opinion
+set encoding=utf-8
+set relativenumber
+set autoread " reload files when changed on disk, i.e. via `git checkout`
+set clipboard^=unnamedplus,unnamed " Make "yanks" work with system clipboard
+
+" Indents
+set autoindent
+set expandtab " expand tabs by default (overloadable per file type later)
+set tabstop=4 softtabstop=4 shiftwidth=4
+set shiftround " use multiple of shiftwidth when indenting with '<' and '>'
+
+" No bells
+set noerrorbells visualbell t_vb=
+
+""" VISUAL SETTINGS """
+if &term =~ '256color' | set t_ut= | endif
+set background=dark | silent! colorscheme hybrid-sl
+
+" Show trailing whitespace
+set list listchars=tab:▸\ ,trail:▫
+
+set cursorline  " have a line indicate cursor location
+set previewheight=25  " Larger preview height
+
+" Set minimum window size to 79x5.
+set winwidth=79 winheight=5 winminheight=5
+
+" Patterns to ignore for expand(), ctrlp, etc.
+set wildignore+=*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz,*.swp,*~,._*,*.pyc,*__pycache__*,*.egg-info
+
+" Persistent undo (can use undos after exiting and restarting)
+if exists("+undofile")
+  if isdirectory($HOME . '/.vim/undo') == 0
+    :silent !mkdir -p ~/.vim/undo > /dev/null 2>&1
+  endif
+  set undodir=./.vim-undo// undodir+=~/.vim/undo// undofile
+endif
+
+""" SHORTCUTS """
+" Quickly edit vimrc
+nmap <leader>, :e $MYVIMRC<CR>
+" Reload vimrc
+noremap <silent> <leader>V :source $MYVIMRC<cr>
+" Smash escape
+inoremap jk <Esc>
+" Search and replace, using : as a separator instead of /
+noremap <leader>sr :%s:::cg<Left><Left><Left><Left>
+" Switch between files
+nnoremap <leader>b :e#<CR>
+" Remove trailing whitespace with Backspace
+nnoremap <BS> :%s/\s\+$//<cr>:let @/=''<CR>
+" select last pasted text
+nnoremap gp `[v`]
+" Easy syntax switching
+nnoremap <leader>Tp :set ft=python<CR>
+nnoremap <leader>Tj :set ft=javascript<CR>
+nnoremap <leader>Tm :set ft=markdown<CR>
+" Quickly write/quit
+nnoremap <leader>w :w<CR>
+nnoremap <leader>q :q<CR>
+" Quickly open netrw
+nnoremap <leader>e :e.<CR>
+" Unhighlight search
+nnoremap <leader>n :nohlsearch<CR><C-L>
+" Quick split
+nnoremap <Leader>v <C-w>v<C-w>w
+" Quick select whole file
+map <leader>a ggVG
+" Make D delete to end of line
+nnoremap D d$
+" Make Y yank to end of line
+nnoremap Y y$
+" Go to beginning/end of line
+noremap <leader>h ^
+noremap <leader>l $
+" Execute macro
+nnoremap Q @q
+" Move vertically over wrapped lines
+nmap j gj
+nmap k gk
+" Set cwd to current file
+nnoremap <leader>cd :lcd %:p:h<CR>
+" Split lines (opposite of J)
+nnoremap S i<CR><Esc>
+
+augroup configgroup
+  autocmd!
+  " Make sure Vim returns to the same line when you reopen a file.
+  autocmd BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") | execute 'normal! g`"zvzz' | endif
+
+  " Automatically adjust quickfix window depending on how much text there is
+  autocmd FileType qf call AdjustWindowHeight(3, 20)
+  function! AdjustWindowHeight(minheight, maxheight)
+    exe max([min([line("$"), a:maxheight]), a:minheight]) . "wincmd _"
+  endfunction
+
+  """ Languages
+  " rst
+  autocmd FileType rst setlocal wrap nolist expandtab lbr shiftwidth=4 tabstop=4 softtabstop=4
+    \ formatoptions+=nqtl
+  " markdown
+  autocmd BufRead,BufNewFile *.md set filetype=markdown
+  autocmd BufRead,BufNewFile .eslintrc set filetype=json
+  autocmd FileType markdown setlocal wrap nolist expandtab lbr shiftwidth=4 tabstop=4 softtabstop=4
+    \ formatoptions+=nqtl
+  " vim
+  autocmd FileType vim setlocal shiftwidth=2 tabstop=2 softtabstop=2
+  " commit messages
+  autocmd Filetype gitcommit setlocal nolist textwidth=72
+augroup END
+
+" GUI settings, e.g. MacVim
+set guifont=Ubuntu\ Mono:h14
+" Hide scrollbars and menu
+set guioptions-=T guioptions-=R guioptions-=r guioptions-=m guioptions-=l guioptions-=L
+map ; :

@@ -8,3 +8,12 @@ then
   alias ll="gls -l --color"
   alias la='gls -A --color'
 fi
+if type "exa" > /dev/null; then
+  alias ls=exa
+fi
+orggrep() {
+  find . -name '*.org' -exec cat {} \; | ag "$@"
+}
+open() {
+  (xdg-open "$@")&
+}

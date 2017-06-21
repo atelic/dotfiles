@@ -1,5 +1,6 @@
 "*":
   core:
+    audioBeep: false
     disabledPackages: [
       "background-tips"
       "exception-reporting"
@@ -17,8 +18,8 @@
     ]
     telemetryConsent: "no"
   editor:
-    fontFamily: "Menlo"
-    fontSize: 15
+    fontFamily: "terminus"
+    fontSize: 16
     invisibles: {}
     showIndentGuide: true
     softWrapAtPreferredLineLength: true

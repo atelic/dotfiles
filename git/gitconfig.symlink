@@ -1,33 +1,44 @@
-# Local/private config goes in the include
-[include]
-        path = ~/.gitconfig.local
-[hub]
-        protocol = https
-[alias]
-        co = checkout
-        promote = !$ZSH/bin/git-promote
-        wtf     = !$ZSH/bin/git-wtf
-        rank-contributors = !$ZSH/bin/git-rank-contributors
-        count   = !git shortlog -sn
-[color]
-        diff = auto
-        status = auto
-        branch = auto
-        ui = true
 [core]
-        excludesfile = ~/.gitignore
-        editor = vim
-[apply]
-        whitespace = nowarn
-[mergetool]
-        keepBackup = false
-[difftool]
-        prompt = false
-[help]
-        autocorrect = 1
+	excludesfile = ~/.gitignore
+	editor = vim
+	pager = diff-so-fancy | less --tabs=4 -RFX
+[user]
+	name = Eric Barbour
+	email = atelic@protonmail.com
+	signingkey = 3D6A6B2E08A66DFF
 [push]
-        # See `git help config` (search for push.default)
-        # for more information on different options of the below setting.
-        #
-        # Setting to git 2.0 default to suppress warning message
-        default = simple
+	default = matching
+[alias]
+	up = !git pull --rebase --prune $@ && git submodule update --init --recursive
+	cob = checkout -b
+	unstage = reset HEAD --
+	last = log -1 HEAD
+	gui = !open /Applications/SourceTree.app
+	co = checkout
+	coall = !git status -s | cut -c4- | xargs git checkout --
+	ec = config --global -e
+	undo = reset HEAD~1 --mixed
+	amend = commit -a --amend
+	wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
+	save = !git add -A && git commit -m 'SAVEPOINT'
+	wip = commit -am "WIP"
+	ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+	dlc = diff --cached HEAD^
+	find = "!git ls-files | grep -i"
+	done = "!f() { git branch | grep "$1" | cut -c 3- | grep -v done | xargs -I{} git branch -m {} done-{}; }; f""}"
+	la = "!git config -l | grep alias | cut -c 7-"
+[commit]
+	template = ~/.gitmessage.txt
+	gpgsign = true
+[merge]
+[mergetool]
+	keepBackup = false
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[github]
+	user = atelic
+	password = PASSWORD
