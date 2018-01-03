@@ -9,6 +9,7 @@ Plug 'rstacruz/vim-opinion' " More sensible defaults
 Plug 'ervandew/supertab' " Tab complete everything
 Plug 'ctrlpvim/ctrlp.vim' " Fuzzy-matching go-to file
 Plug 'mhinz/vim-startify'
+Plug 'Valloric/YouCompleteMe'
 nnoremap <C-b> :CtrlPBuffer<CR>
 map <C-t> :CtrlPBufTag<CR>
 " Make ctrlp faster
@@ -63,11 +64,6 @@ let g:airline_theme='tomorrow'
 let g:airline_extensions = ['branch', 'ctrlp', 'tabline', 'neomake', 'whitespace']
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'jszakmeister/vim-togglecursor'  " change cursor shape when entering insert mode
-" Snippets
-if version >= 704 && has('python') || has('python3') | Plug 'SirVer/ultisnips' | endif
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-Plug 'honza/vim-snippets'
 
 Plug 'junegunn/vim-slash' " Better / search
 
@@ -103,8 +99,6 @@ let g:scratch_filetype = 'markdown'
 " Open scratch buffer with space-tab (automatically set syntax to python)
 nnoremap <silent> <leader><tab> :Scratch<cr>
 Plug 'tpope/vim-sleuth'  " Detect indent settings
-Plug 'machakann/vim-highlightedyank'  " Highlight yank
-map y <Plug>(highlightedyank)
 
 " GIT
 Plug 'airblade/vim-gitgutter'
@@ -135,7 +129,7 @@ let g:gist_open_browser_after_post = 1
 
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'sloria/vim-hybrid'  " hybrid with easier-to-read line numbers
-" Plug 'chriskempson/base16-vim'
+Plug 'morhetz/gruvbox'
 
 " LANGUAGE-SPECIFIC
 Plug 'sloria/vim-polyglot'  " fork of sheerun/vim-polyglot with better python highlighting
@@ -156,8 +150,11 @@ let g:jedi#usages_command = "gu"
 let g:jedi#rename_command = "<C-c>r"
 " --- Javascript ---
 Plug 'pangloss/vim-javascript'
+let g:javascript_plugin_flow = 1
 Plug 'heavenshell/vim-jsdoc'  " For making JS docstrings
 let g:jsdoc_default_mapping = 0
+Plug 'mxw/vim-jsx'
+let g:jsx_ext_required = 0
 map <C-c>j :JsDoc<CR>
 " --- Lispy stuff ---
 Plug 'guns/vim-sexp', {'for': 'clojure'}
@@ -174,6 +171,7 @@ set encoding=utf-8
 set relativenumber
 set autoread " reload files when changed on disk, i.e. via `git checkout`
 set clipboard^=unnamedplus,unnamed " Make "yanks" work with system clipboard
+set clipboard=unnamed
 
 " Indents
 set autoindent
@@ -186,7 +184,7 @@ set noerrorbells visualbell t_vb=
 
 """ VISUAL SETTINGS """
 if &term =~ '256color' | set t_ut= | endif
-set background=dark | silent! colorscheme hybrid-sl
+set background=dark | silent! colorscheme gruvbox
 
 " Show trailing whitespace
 set list listchars=tab:▸\ ,trail:▫
@@ -255,6 +253,7 @@ nnoremap <leader>cd :lcd %:p:h<CR>
 " Split lines (opposite of J)
 nnoremap S i<CR><Esc>
 
+
 augroup configgroup
   autocmd!
   " Make sure Vim returns to the same line when you reopen a file.
@@ -283,7 +282,10 @@ augroup configgroup
 augroup END
 
 " GUI settings, e.g. MacVim
-set guifont=Ubuntu\ Mono:h14
+set guifont=Fira\ Code:h14
 " Hide scrollbars and menu
 set guioptions-=T guioptions-=R guioptions-=r guioptions-=m guioptions-=l guioptions-=L
+
+" My settings
 map ; :
+autocmd BufWritePre * %s/\s\+$//e

@@ -41,3 +41,12 @@ done
 unset config_files
 bindkey -e
 source "$HOME/.z.sh"
+
+which src-hilite-lesspipe.sh >/dev/null
+if [[ $? -eq 0 ]]; then
+  export LESSPIPE=`which src-hilite-lesspipe.sh`
+  export LESSOPEN="| ${LESSPIPE} %s"
+  export LESS='-R'
+fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

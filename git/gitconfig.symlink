@@ -4,8 +4,8 @@
 	pager = diff-so-fancy | less --tabs=4 -RFX
 [user]
 	name = Eric Barbour
-	email = atelic@protonmail.com
-	signingkey = 3D6A6B2E08A66DFF
+	email = eric.barbour@willowtreeapps.com
+	signingkey = EC54C91429543FD6
 [push]
 	default = matching
 [alias]
@@ -30,7 +30,7 @@
 	la = "!git config -l | grep alias | cut -c 7-"
 [commit]
 	template = ~/.gitmessage.txt
-	gpgsign = true
+	# gpgsign = true
 [merge]
 [mergetool]
 	keepBackup = false
@@ -42,3 +42,11 @@
 [github]
 	user = atelic
 	password = PASSWORD
+[color]
+	ui = true
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
