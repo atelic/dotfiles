@@ -1,0 +1,187 @@
+// Zed Tasks - Common development workflows
+// Managed via ~/dotfiles
+[
+  // ===== Git =====
+  {
+    "label": "lazygit",
+    "command": "lazygit",
+    "use_new_terminal": true,
+    "reveal_target": "center",
+    "allow_concurrent_runs": false
+  },
+  {
+    "label": "git pull",
+    "command": "git pull --rebase",
+    "hide": "on_success",
+    "use_new_terminal": false
+  },
+  {
+    "label": "git push",
+    "command": "git push",
+    "hide": "on_success"
+  },
+  {
+    "label": "git status",
+    "command": "git status -sb",
+    "hide": "never"
+  },
+  
+  // ===== Node.js =====
+  {
+    "label": "npm install",
+    "command": "npm install",
+    "hide": "on_success"
+  },
+  {
+    "label": "npm run dev",
+    "command": "npm run dev",
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false
+  },
+  {
+    "label": "npm run build",
+    "command": "npm run build",
+    "hide": "on_success"
+  },
+  {
+    "label": "npm test",
+    "command": "npm test",
+    "use_new_terminal": true
+  },
+  {
+    "label": "npm run lint",
+    "command": "npm run lint",
+    "hide": "on_success"
+  },
+  
+  // ===== Bun =====
+  {
+    "label": "bun install",
+    "command": "bun install",
+    "hide": "on_success"
+  },
+  {
+    "label": "bun dev",
+    "command": "bun run dev",
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false
+  },
+  {
+    "label": "bun test",
+    "command": "bun test",
+    "use_new_terminal": true
+  },
+  
+  // ===== Python =====
+  {
+    "label": "python run",
+    "command": "python $ZED_FILE",
+    "use_new_terminal": true
+  },
+  {
+    "label": "pytest",
+    "command": "pytest -v",
+    "use_new_terminal": true
+  },
+  {
+    "label": "ruff check",
+    "command": "ruff check .",
+    "hide": "on_success"
+  },
+  
+  // ===== Rust =====
+  {
+    "label": "cargo run",
+    "command": "cargo run",
+    "use_new_terminal": true
+  },
+  {
+    "label": "cargo build",
+    "command": "cargo build",
+    "hide": "on_success"
+  },
+  {
+    "label": "cargo test",
+    "command": "cargo test",
+    "use_new_terminal": true
+  },
+  {
+    "label": "cargo clippy",
+    "command": "cargo clippy -- -W clippy::all",
+    "hide": "on_success"
+  },
+  {
+    "label": "cargo watch",
+    "command": "cargo watch -x run",
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false
+  },
+  
+  // ===== Go =====
+  {
+    "label": "go run",
+    "command": "go run .",
+    "use_new_terminal": true
+  },
+  {
+    "label": "go build",
+    "command": "go build",
+    "hide": "on_success"
+  },
+  {
+    "label": "go test",
+    "command": "go test -v ./...",
+    "use_new_terminal": true
+  },
+  
+  // ===== Docker =====
+  {
+    "label": "docker compose up",
+    "command": "docker compose up -d",
+    "hide": "on_success"
+  },
+  {
+    "label": "docker compose down",
+    "command": "docker compose down",
+    "hide": "on_success"
+  },
+  {
+    "label": "docker compose logs",
+    "command": "docker compose logs -f",
+    "use_new_terminal": true
+  },
+  
+  // ===== Nix =====
+  {
+    "label": "nix rebuild",
+    "command": "darwin-rebuild switch --flake ~/dotfiles",
+    "use_new_terminal": true
+  },
+  {
+    "label": "nix flake update",
+    "command": "nix flake update",
+    "hide": "on_success"
+  },
+  {
+    "label": "nix develop",
+    "command": "nix develop",
+    "use_new_terminal": true
+  },
+  
+  // ===== Utilities =====
+  {
+    "label": "format file",
+    "command": "prettier --write $ZED_FILE || ruff format $ZED_FILE || nixfmt $ZED_FILE",
+    "hide": "on_success"
+  },
+  {
+    "label": "open in finder",
+    "command": "open .",
+    "hide": "always"
+  },
+  {
+    "label": "copy file path",
+    "command": "echo -n $ZED_FILE | pbcopy",
+    "hide": "always"
+  }
+]

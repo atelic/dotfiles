@@ -1,0 +1,26 @@
+# Secrets - NEVER commit
+.secrets
+*.secret
+*.secrets
+.env
+.env.*
+
+# Nix
+result
+result-*
+.direnv/
+
+# macOS
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Editor
+.idea/
+.vscode/
+*.code-workspace
+
+# Local overrides (for machine-specific tweaks)
+local.nix
+*.local.nix

@@ -1,0 +1,429 @@
+# Home Manager configuration for ericbarbour
+{ config, pkgs, lib, inputs, username, ... }:
+
+{
+  home = {
+    username = username;
+    homeDirectory = "/Users/${username}";
+    stateVersion = "24.05";
+
+    # Packages installed to user profile
+    packages = with pkgs; [
+      # ===== Modern CLI Replacements =====
+      # These replace/improve standard Unix tools
+      
+      ripgrep       # grep replacement (rg)
+      fd            # find replacement
+      sd            # sed replacement - simpler syntax: sd 'find' 'replace'
+      procs         # ps replacement - colorful, human-readable
+      dust          # du replacement - visual disk usage
+      duf           # df replacement - disk free with colors
+      bottom        # htop replacement - graphs, GPU, temp (btm)
+      tealdeer      # tldr - simplified man pages with examples
+      
+      # ===== File & Text Tools =====
+      bat           # cat replacement - syntax highlighting
+      eza           # ls replacement - icons, git status
+      jq            # JSON processor
+      yq            # YAML processor
+      fzf           # Fuzzy finder
+      tree          # Directory tree
+      
+      # ===== Navigation & History =====
+      zoxide        # Smart cd - learns your habits
+      # atuin configured below via programs.atuin
+      
+      # ===== Git Tools =====
+      lazygit       # TUI git client
+      delta         # Better git diffs
+      difftastic    # Structural diff - understands code syntax
+      gh            # GitHub CLI
+      
+      # ===== Network Tools =====
+      gping         # Graphical ping
+      xh            # HTTPie alternative - curl for humans
+      bandwhich     # Bandwidth monitor by process
+      dog           # DNS client (dig replacement)
+      
+      # ===== Dev Tools =====
+      just          # Task runner (better make)
+      watchexec     # File watcher - run commands on changes
+      hyperfine     # Benchmarking tool
+      tokei         # Code statistics
+      
+      # ===== System Tools =====
+      htop          # Fallback process viewer
+      ncdu          # NCurses disk usage
+      pstree        # Process tree
+      
+      # ===== Nix Tools =====
+      nil           # Nix LSP
+      nixfmt-rfc-style
+      nix-tree      # Visualize nix dependencies
+      
+      # ===== Shell Enhancements =====
+      vivid         # LS_COLORS generator
+      carapace      # Multi-shell completion generator
+      zsh-completions
+      
+      # ===== Neovim =====
+      neovim
+      
+      # ===== LSPs (for Neovim/Zed) =====
+      lua-language-server
+      stylua
+      typescript-language-server
+      nodePackages.prettier
+      vscode-langservers-extracted  # HTML, CSS, JSON, ESLint
+      yaml-language-server
+      taplo  # TOML
+      marksman  # Markdown
+      pyright
+      ruff
+      gopls
+      rust-analyzer
+      shellcheck
+      shfmt
+      
+      # ===== Neovim Dependencies =====
+      gcc  # Required for treesitter
+      gnumake  # Required for avante.nvim
+      cargo  # For building rust plugins
+      
+      # ===== Languages & runtimes (migrate from brew/manual) =====
+      # nodejs     # Uncomment when ready to replace nvm
+      # bun
+      # deno
+      # rustup
+    ];
+
+    # Session variables
+    sessionVariables = {
+      EDITOR = "nvim";
+      VISUAL = "nvim";
+      MANPAGER = "sh -c 'col -bx | bat -l man -p'";
+      MANROFFOPT = "-c";
+    };
+  };
+
+  # Config file symlinks
+  xdg.configFile = {
+    # Zed config (managed via dotfiles)
+    "zed/settings.json".source = ../config/zed/settings.json;
+    "zed/keymap.json".source = ../config/zed/keymap.json;
+    "zed/tasks.json".source = ../config/zed/tasks.json;
+    
+    # Neovim config (managed via dotfiles)
+    "nvim/init.lua".source = ../config/nvim/init.lua;
+  };
+
+  # Let home-manager manage itself
+  programs.home-manager.enable = true;
+
+  # ===== Atuin - Better Shell History =====
+  # Syncs history across machines, powerful search
+  programs.atuin = {
+    enable = true;
+    enableZshIntegration = true;
+    flags = [ "--disable-up-arrow" ];  # Keep up-arrow for normal history
+    settings = {
+      auto_sync = false;  # Set true + login to sync across machines
+      sync_frequency = "5m";
+      search_mode = "fuzzy";
+      filter_mode = "global";
+      style = "compact";
+      inline_height = 20;
+      show_preview = true;
+      # Ctrl+R opens atuin search
+    };
+  };
+
+  # Git configuration
+  programs.git = {
+    enable = true;
+    settings = {
+      user = {
+        name = "Eric Barbour";
+        email = "barbour.ericm@gmail.com";
+      };
+      init.defaultBranch = "main";
+      pull.rebase = true;
+      push.autoSetupRemote = true;
+      core.editor = "vim";
+      merge.conflictstyle = "diff3";
+      diff = {
+        colorMoved = "default";
+        # Use difftastic for structural diffs (opt-in)
+        # external = "difft";  # Uncomment to make default
+      };
+      alias = {
+        st = "status";
+        co = "checkout";
+        br = "branch";
+        ci = "commit";
+        lg = "log --oneline --graph --decorate";
+        # Difftastic aliases
+        dft = "difftool";
+        dlog = "!f() { GIT_EXTERNAL_DIFF=difft git log -p --ext-diff $@; }; f";
+      };
+      difftool = {
+        prompt = false;
+        difftastic.cmd = ''difft "$LOCAL" "$REMOTE"'';
+      };
+    };
+  };
+
+  # Delta (better git diffs)
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
+    options = {
+      navigate = true;
+      line-numbers = true;
+      syntax-theme = "Dracula";
+      side-by-side = false;  # Set true for side-by-side view
+      file-style = "bold yellow ul";
+      hunk-header-style = "omit";
+    };
+  };
+
+  # ===== Zsh Configuration =====
+  programs.zsh = {
+    enable = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+    enableCompletion = true;
+    
+    # Completion styling
+    completionInit = ''
+      # Case-insensitive completion
+      zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+      # Menu selection
+      zstyle ':completion:*' menu select
+      # Colors in completion
+      zstyle ':completion:*' list-colors ''${(s.:.)LS_COLORS}
+      # Descriptions
+      zstyle ':completion:*:descriptions' format '%F{yellow}-- %d --%f'
+      zstyle ':completion:*:warnings' format '%F{red}-- no matches --%f'
+      # Group completions
+      zstyle ':completion:*' group-name '''
+    '';
+    
+    history = {
+      size = 100000;
+      save = 100000;
+      ignoreDups = true;
+      ignoreAllDups = true;
+      ignoreSpace = true;
+      extended = true;
+      share = true;
+      expireDuplicatesFirst = true;
+    };
+
+    # Oh My Zsh integration
+    oh-my-zsh = {
+      enable = true;
+      plugins = [
+        "git"
+        "docker"
+        "kubectl"
+        "sudo"          # ESC ESC to prepend sudo
+        "copypath"      # Copy current path
+        "copyfile"      # Copy file contents
+        "dirhistory"    # Alt+arrows for dir history
+        "jsontools"     # pp_json, is_json, etc.
+        "web-search"    # google, github, etc. from terminal
+        "extract"       # Universal archive extractor
+      ];
+    };
+
+    initContent = lib.mkMerge [
+      # Must be at top - Powerlevel10k instant prompt
+      (lib.mkBefore ''
+        if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
+          source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
+        fi
+      '')
+      
+      # Regular init content
+      ''
+        # Powerlevel10k theme
+        source ''${HOME}/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme
+        [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+        # Load secrets (API keys, tokens - never commit)
+        [[ -f ~/.secrets ]] && source ~/.secrets
+
+        # LS_COLORS with vivid
+        export LS_COLORS="$(vivid generate dracula)"
+        
+        # Carapace completions (multi-shell completion engine)
+        export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
+        source <(carapace _carapace)
+
+        # NVM (keep until you migrate to nix-managed node)
+        export NVM_DIR="$HOME/.nvm"
+        [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+        [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+
+        # Bun
+        export BUN_INSTALL="$HOME/.bun"
+        export PATH="$BUN_INSTALL/bin:$PATH"
+        [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+        # OpenCode
+        export PATH=$HOME/.opencode/bin:$PATH
+        
+        # Better keybindings
+        bindkey '^[[A' history-search-backward  # Up arrow
+        bindkey '^[[B' history-search-forward   # Down arrow
+        bindkey '^[^[[D' backward-word          # Alt+Left
+        bindkey '^[^[[C' forward-word           # Alt+Right
+      ''
+    ];
+
+    shellAliases = {
+      # === Nix ===
+      rebuild = "darwin-rebuild switch --flake ~/dotfiles";
+      
+      # === Modern Replacements ===
+      ls = "eza --icons";
+      ll = "eza -la --icons --git";
+      la = "eza -a --icons";
+      lt = "eza --tree --icons --level=2";
+      lta = "eza --tree --icons -a --level=2";
+      cat = "bat";
+      grep = "rg";
+      find = "fd";
+      sed = "sd";
+      ps = "procs";
+      du = "dust";
+      df = "duf";
+      top = "btm";
+      htop = "btm";
+      ping = "gping";
+      dig = "dog";
+      curl = "xh";
+      man = "tldr";  # Quick reference; use `command man` for full man
+      
+      # === Git ===
+      g = "git";
+      gs = "git status";
+      gd = "git diff";
+      gds = "git diff --staged";
+      gc = "git commit";
+      gca = "git commit --amend";
+      gp = "git push";
+      gl = "git pull";
+      gco = "git checkout";
+      gb = "git branch";
+      glog = "git log --oneline --graph --decorate -20";
+      gdft = "git difftool";  # Difftastic
+      
+      # === Tools ===
+      zj = "zellij";
+      lg = "lazygit";
+      j = "just";
+      v = "nvim";
+      vi = "nvim";
+      vim = "nvim";
+      
+      # === Navigation ===
+      ".." = "cd ..";
+      "..." = "cd ../..";
+      "...." = "cd ../../..";
+      
+      # === Safety ===
+      rm = "rm -i";
+      cp = "cp -i";
+      mv = "mv -i";
+      
+      # === Misc ===
+      ports = "lsof -i -P -n | grep LISTEN";
+      myip = "curl -s ifconfig.me";
+      weather = "curl -s wttr.in";
+      path = "echo $PATH | tr ':' '\n'";
+    };
+  };
+
+  # FZF - fuzzy finder
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
+    defaultCommand = "fd --type f --hidden --exclude .git";
+    defaultOptions = [
+      "--height=40%"
+      "--layout=reverse"
+      "--border"
+      "--preview 'bat --color=always --style=numbers --line-range=:500 {}'"
+    ];
+    colors = {
+      # Dracula theme
+      fg = "#f8f8f2";
+      bg = "#282a36";
+      hl = "#bd93f9";
+      "fg+" = "#f8f8f2";
+      "bg+" = "#44475a";
+      "hl+" = "#bd93f9";
+      info = "#ffb86c";
+      prompt = "#50fa7b";
+      pointer = "#ff79c6";
+      marker = "#ff79c6";
+      spinner = "#ffb86c";
+      header = "#6272a4";
+    };
+  };
+
+  # Zoxide (smart cd)
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+    options = [ "--cmd cd" ];  # Replace cd entirely
+  };
+
+  # Bat (better cat)
+  programs.bat = {
+    enable = true;
+    config = {
+      theme = "Dracula";
+      italic-text = "always";
+      pager = "less -FR";
+    };
+    extraPackages = with pkgs.bat-extras; [
+      batdiff    # diff with bat
+      batgrep    # grep with bat
+      batman     # man with bat
+      prettybat  # format and bat
+    ];
+  };
+
+  # Direnv for per-project environments
+  programs.direnv = {
+    enable = true;
+    enableZshIntegration = true;
+    nix-direnv.enable = true;
+  };
+  
+  # Eza (ls replacement) - additional config
+  programs.eza = {
+    enable = true;
+    icons = "auto";
+    git = true;
+    extraOptions = [
+      "--group-directories-first"
+      "--header"
+    ];
+  };
+
+  # Bottom (system monitor)
+  programs.bottom = {
+    enable = true;
+    settings = {
+      flags = {
+        color = "gruvbox";
+        tree = true;
+        battery = true;
+      };
+    };
+  };
+}

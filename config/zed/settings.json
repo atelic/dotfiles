@@ -1,0 +1,222 @@
+// Zed Settings - Speed + AI focused
+// Managed via ~/dotfiles - symlinked to ~/.config/zed/settings.json
+{
+  // ===== Core =====
+  "vim_mode": true,
+  "base_keymap": "VSCode",
+  "relative_line_numbers": true,
+  "cursor_blink": false,
+  "autosave": "on_focus_change",
+  
+  // ===== Performance =====
+  "restore_on_startup": "last_session",
+  "show_completions_on_input": true,
+  "completion_documentation_secondary_query_debounce": 100,
+  
+  // ===== UI =====
+  "theme": {
+    "mode": "system",
+    "light": "One Light",
+    "dark": "One Dark"
+  },
+  "ui_font_size": 15,
+  "ui_font_family": "FiraCode Nerd Font",
+  "buffer_font_size": 14,
+  "buffer_font_family": "FiraCode Nerd Font",
+  "buffer_line_height": "comfortable",
+  
+  // Tab bar
+  "tab_bar": {
+    "show": true,
+    "show_nav_history_buttons": false
+  },
+  "tabs": {
+    "file_icons": true,
+    "git_status": true,
+    "close_position": "right"
+  },
+  
+  // Project panel
+  "project_panel": {
+    "button": true,
+    "default_width": 240,
+    "dock": "left",
+    "file_icons": true,
+    "folder_icons": true,
+    "git_status": true,
+    "indent_size": 16,
+    "auto_reveal_entries": true,
+    "auto_fold_dirs": true,
+    "scrollbar": { "show": "never" }
+  },
+  
+  // Scrolling
+  "vertical_scroll_margin": 8,
+  "scroll_beyond_last_line": "off",
+  "scrollbar": { "show": "auto" },
+  
+  // ===== Editor =====
+  "preferred_line_length": 120,
+  "soft_wrap": "preferred_line_length",
+  "show_whitespaces": "selection",
+  "tab_size": 2,
+  "format_on_save": "on",
+  "formatter": "auto",
+  "remove_trailing_whitespace_on_save": true,
+  "ensure_final_newline_on_save": true,
+  
+  // Inlay hints
+  "inlay_hints": {
+    "enabled": true,
+    "show_type_hints": true,
+    "show_parameter_hints": true,
+    "show_other_hints": true,
+    "edit_debounce_ms": 700,
+    "scroll_debounce_ms": 50
+  },
+  
+  // Git gutter
+  "git": {
+    "inline_blame": { "enabled": true, "delay_ms": 500 },
+    "git_gutter": "tracked_files"
+  },
+  
+  // ===== AI Assistant =====
+  "features": {
+    "inline_completion_provider": "copilot"
+  },
+  "assistant": {
+    "enabled": true,
+    "default_model": {
+      "provider": "anthropic",
+      "model": "claude-sonnet-4-20250514"
+    },
+    "version": "2",
+    "dock": "right",
+    "default_width": 480,
+    "button": true
+  },
+  
+  // Inline AI completions
+  "show_inline_completions": true,
+  "inline_completions": {
+    "disabled_globs": [".env", "*.secret", "*.pem", "*.key"]
+  },
+  
+  // ===== Terminal =====
+  "terminal": {
+    "dock": "bottom",
+    "default_width": 640,
+    "default_height": 320,
+    "working_directory": "current_project_directory",
+    "shell": { "program": "zsh" },
+    "font_family": "FiraCode Nerd Font",
+    "font_size": 13,
+    "line_height": "comfortable",
+    "copy_on_select": true,
+    "button": true,
+    "env": {
+      "EDITOR": "zed --wait"
+    }
+  },
+  
+  // ===== Language-specific =====
+  "languages": {
+    "TypeScript": {
+      "tab_size": 2,
+      "formatter": "prettier"
+    },
+    "JavaScript": {
+      "tab_size": 2,
+      "formatter": "prettier"
+    },
+    "JSON": {
+      "tab_size": 2,
+      "formatter": "prettier"
+    },
+    "Python": {
+      "tab_size": 4,
+      "formatter": { "external": { "command": "ruff", "arguments": ["format", "-"] } }
+    },
+    "Rust": {
+      "tab_size": 4,
+      "formatter": "language_server"
+    },
+    "Go": {
+      "tab_size": 4,
+      "formatter": "language_server",
+      "format_on_save": "on",
+      "code_actions_on_format": { "source.organizeImports": true }
+    },
+    "Nix": {
+      "tab_size": 2,
+      "formatter": { "external": { "command": "nixfmt", "arguments": [] } }
+    },
+    "Markdown": {
+      "soft_wrap": "editor_width",
+      "show_whitespaces": "none",
+      "format_on_save": "off"
+    },
+    "YAML": {
+      "tab_size": 2
+    },
+    "Lua": {
+      "tab_size": 2,
+      "formatter": { "external": { "command": "stylua", "arguments": ["-"] } }
+    }
+  },
+  
+  // ===== LSP =====
+  "lsp": {
+    "rust-analyzer": {
+      "initialization_options": {
+        "checkOnSave": { "command": "clippy" },
+        "cargo": { "allFeatures": true },
+        "procMacro": { "enable": true }
+      }
+    },
+    "typescript-language-server": {
+      "initialization_options": {
+        "preferences": {
+          "importModuleSpecifierPreference": "relative"
+        }
+      }
+    }
+  },
+  
+  // ===== File associations =====
+  "file_types": {
+    "Dockerfile": ["Dockerfile*", "*.dockerfile"],
+    "JSON": [".prettierrc", ".eslintrc", "tsconfig.json", "jsconfig.json"],
+    "YAML": ["*.yml", "*.yaml", "docker-compose*"],
+    "Shell Script": [".envrc", ".env.example"]
+  },
+  
+  // ===== Search =====
+  "search": {
+    "whole_word": false,
+    "case_sensitive": false,
+    "include_ignored": false,
+    "regex": false
+  },
+  
+  // File scan exclusions
+  "file_scan_exclusions": [
+    "**/.git",
+    "**/.svn",
+    "**/.hg",
+    "**/CVS",
+    "**/.DS_Store",
+    "**/Thumbs.db",
+    "**/node_modules",
+    "**/target",
+    "**/.direnv",
+    "**/dist",
+    "**/build",
+    "**/__pycache__",
+    "**/.next",
+    "**/.nuxt",
+    "**/coverage",
+    "**/.turbo"
+  ]
+}
