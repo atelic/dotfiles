@@ -1,10 +1,16 @@
 # System-level macOS configuration
-{ pkgs, inputs, username, hostname, ... }:
+{
+  pkgs,
+  inputs,
+  username,
+  hostname,
+  ...
+}:
 
 {
   # Required for nix-darwin
   nixpkgs.hostPlatform = "aarch64-darwin";
-  
+
   # Primary user (required for user-specific settings like dock, finder, homebrew)
   system.primaryUser = username;
 
@@ -31,12 +37,14 @@
     enable = true;
     onActivation = {
       autoUpdate = true;
-      cleanup = "zap";  # Remove unlisted packages
+      cleanup = "zap"; # Remove unlisted packages
       upgrade = true;
     };
-    
+
     taps = [
       # homebrew/services is deprecated and now built-in
+      "nikitabobko/tap" # AeroSpace tiling window manager
+      "FelixKratz/formulae" # SketchyBar (optional status bar)
     ];
 
     # CLI tools - migrate your brew formulas here over time
@@ -44,23 +52,70 @@
       # Essential tools you currently have via brew
       "zsh-syntax-highlighting"
       "nvm"
-      # Add more as you migrate...
+      # SketchyBar (custom menu bar)
+      "sketchybar"
     ];
 
     # GUI apps
     casks = [
+      # ===== Terminals =====
       "iterm2"
       "warp"
-      "discord"
+      "ghostty" # GPU-accelerated terminal (Mitchell Hashimoto)
+
+      # ===== Productivity - Core =====
+      "raycast" # Launcher (replaces Spotlight)
+      "aerospace" # i3-like tiling window manager
+      "orbstack" # Docker Desktop replacement (10x faster)
+      "obsidian" # Knowledge management / PKM
+      "granola" # AI meeting notes (no bot joins)
+
+      # ===== Productivity - Recommended =====
+      "notion-calendar" # Calendar management (formerly Cron)
+      "loom" # Async video messages
+      "arc" # Modern browser for devs
+      "cleanshot" # Screenshots & screen recording
+      "jordanbaird-ice" # Menu bar management (free)
+
+      # ===== macOS UI Enhancements =====
+      "karabiner-elements" # Keyboard remapping & Hyper Key
+      "linearmouse" # Fix mouse acceleration, per-device settings
+      "dockdoor" # Window previews on Dock hover
+      "alt-tab" # Windows-style Alt+Tab with previews
+      "hazeover" # Dim inactive windows for focus
+      "stats" # System stats in menu bar
+      "bettertouchtool" # Trackpad gestures & window snapping
+      "ubersicht" # Desktop widgets (HTML/CSS)
+
+      # ===== Quick Look Plugins =====
+      "syntax-highlight" # Code syntax in Quick Look
+      "qlmarkdown" # Markdown preview in Finder
+      "qlstephen" # Plain text files without extension
+      "qlvideo" # Video thumbnails & previews
+
+      # ===== Screencasting & Demo =====
+      "keycastr" # Show keystrokes on screen
+
+      # ===== Fonts =====
+      "font-jetbrains-mono-nerd-font"
+      "font-fira-code-nerd-font"
+      "font-hack-nerd-font"
+      "font-meslo-lg-nerd-font"
+
+      # ===== Dev Tools =====
       "postman"
-      # Add more as you migrate...
+      "proxyman" # HTTP debugging proxy (Charles alternative)
+
+      # ===== Communication =====
+      "discord"
+      "slack"
     ];
   };
 
   # macOS system preferences
   system = {
     stateVersion = 5;
-    
+
     defaults = {
       # Dock
       dock = {
@@ -71,22 +126,22 @@
         show-recents = false;
         tilesize = 48;
       };
-      
+
       # Finder
       finder = {
         AppleShowAllExtensions = true;
         AppleShowAllFiles = true;
-        FXDefaultSearchScope = "SCcf";  # Current folder
+        FXDefaultSearchScope = "SCcf"; # Current folder
         FXEnableExtensionChangeWarning = false;
-        FXPreferredViewStyle = "Nlsv";  # List view
+        FXPreferredViewStyle = "Nlsv"; # List view
         ShowPathbar = true;
         ShowStatusBar = true;
       };
-      
+
       # Global
       NSGlobalDomain = {
-        AppleKeyboardUIMode = 3;  # Full keyboard access
-        ApplePressAndHoldEnabled = false;  # Key repeat instead of accents
+        AppleKeyboardUIMode = 3; # Full keyboard access
+        ApplePressAndHoldEnabled = false; # Key repeat instead of accents
         InitialKeyRepeat = 15;
         KeyRepeat = 2;
         NSAutomaticCapitalizationEnabled = false;
@@ -95,18 +150,18 @@
         NSAutomaticQuoteSubstitutionEnabled = false;
         NSAutomaticSpellingCorrectionEnabled = false;
       };
-      
+
       # Trackpad
       trackpad = {
-        Clicking = true;  # Tap to click
+        Clicking = true; # Tap to click
         TrackpadRightClick = true;
       };
     };
-    
+
     # Keyboard settings
     keyboard = {
       enableKeyMapping = true;
-      remapCapsLockToControl = false;  # Set to true if you want this
+      remapCapsLockToControl = false; # Set to true if you want this
     };
   };
 

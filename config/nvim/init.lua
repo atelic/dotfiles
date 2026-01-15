@@ -24,7 +24,7 @@ vim.g.maplocalleader = "\\"
 local opt = vim.opt
 
 -- Performance
-opt.lazyredraw = false -- Don't redraw during macros
+opt.lazyredraw = true  -- Don't redraw during macros (faster)
 opt.updatetime = 200   -- Faster completion
 opt.timeoutlen = 300   -- Faster key sequences
 
@@ -86,11 +86,18 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.lang.yaml" },
     { import = "lazyvim.plugins.extras.lang.docker" },
     { import = "lazyvim.plugins.extras.lang.markdown" },
-    
+    { import = "lazyvim.plugins.extras.lang.nix" },
+
     -- ===== AI Plugins =====
-    -- GitHub Copilot
+    -- GitHub Copilot (use Nix-provided Node)
     { import = "lazyvim.plugins.extras.ai.copilot" },
     { import = "lazyvim.plugins.extras.ai.copilot-chat" },
+    {
+      "zbirenbaum/copilot.lua",
+      opts = {
+        copilot_node_command = "/etc/profiles/per-user/ericbarbour/bin/node",
+      },
+    },
     
     -- Avante (Cursor-like AI experience)
     {
@@ -101,9 +108,13 @@ require("lazy").setup({
       opts = {
         provider = "claude",
         auto_suggestions_provider = "copilot",
-        claude = {
-          model = "claude-sonnet-4-20250514",
-          max_tokens = 4096,
+        providers = {
+          claude = {
+            model = "claude-opus-4-5-20251101",
+            extra_request_body = {
+              max_tokens = 8192,
+            },
+          },
         },
         behaviour = {
           auto_suggestions = false, -- Use copilot for suggestions
@@ -113,6 +124,11 @@ require("lazy").setup({
           ask = "<leader>aa",
           edit = "<leader>ae",
           refresh = "<leader>ar",
+          toggle = {
+            default = "<leader>at",
+            debug = "<leader>ad",
+            hint = "<leader>ah",
+          },
           diff = {
             ours = "co",
             theirs = "ct",
@@ -160,12 +176,20 @@ require("lazy").setup({
     
     -- ===== Coding =====
     { import = "lazyvim.plugins.extras.coding.mini-surround" },
-    
+    { import = "lazyvim.plugins.extras.coding.yanky" },
+
+    -- ===== LSP =====
+    { import = "lazyvim.plugins.extras.editor.inc-rename" },
+
+    -- ===== Util =====
+    { import = "lazyvim.plugins.extras.util.persistence" },
+
     -- ===== Formatting =====
     { import = "lazyvim.plugins.extras.formatting.prettier" },
     
     -- ===== UI =====
     { import = "lazyvim.plugins.extras.ui.mini-animate" },
+    { import = "lazyvim.plugins.extras.ui.treesitter-context" },
     
     -- ===== Custom Overrides =====
     -- Faster startup - disable some heavy plugins
@@ -201,6 +225,15 @@ require("lazy").setup({
     -- Faster file navigation
     {
       "nvim-telescope/telescope.nvim",
+      dependencies = {
+        {
+          "nvim-telescope/telescope-fzf-native.nvim",
+          build = "make",
+          config = function()
+            require("telescope").load_extension("fzf")
+          end,
+        },
+      },
       opts = {
         defaults = {
           file_ignore_patterns = {
@@ -331,13 +364,6 @@ map("n", "<leader>sv", "<cmd>vsplit<cr>", { desc = "Split vertical" })
 map("n", "<leader>sh", "<cmd>split<cr>", { desc = "Split horizontal" })
 
 -- ===== AI Keymaps =====
--- Avante
-map("n", "<leader>aa", "<cmd>AvanteAsk<cr>", { desc = "Avante Ask" })
-map("v", "<leader>aa", "<cmd>AvanteAsk<cr>", { desc = "Avante Ask" })
-map("n", "<leader>ae", "<cmd>AvanteEdit<cr>", { desc = "Avante Edit" })
-map("v", "<leader>ae", "<cmd>AvanteEdit<cr>", { desc = "Avante Edit" })
-map("n", "<leader>at", "<cmd>AvanteToggle<cr>", { desc = "Avante Toggle" })
-
 -- Copilot
 map("n", "<leader>cp", "<cmd>Copilot panel<cr>", { desc = "Copilot Panel" })
 
@@ -390,4 +416,31 @@ autocmd("FileType", {
     vim.bo[event.buf].buflisted = false
     vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
   end,
+})
+
+-- Auto-switch Node version when .nvmrc is present
+local function load_nvmrc()
+  local nvmrc = vim.fn.findfile(".nvmrc", vim.fn.getcwd() .. ";")
+  if nvmrc == "" then return end
+
+  local f = io.open(nvmrc, "r")
+  if not f then return end
+  local version = f:read("*l"):gsub("%s+", "")
+  f:close()
+
+  -- Resolve actual node path via nvm (must source shell function)
+  local cmd = string.format("bash -c 'source $NVM_DIR/nvm.sh && nvm which %s 2>/dev/null'", version)
+  local node_path = vim.fn.system(cmd):gsub("%s+", "")
+
+  if vim.v.shell_error == 0 and node_path ~= "" then
+    local node_dir = vim.fn.fnamemodify(node_path, ":h")
+    -- Prepend to PATH (affects LSP servers, terminals, etc.)
+    vim.env.PATH = node_dir .. ":" .. vim.env.PATH
+    vim.notify("Node: " .. version, vim.log.levels.INFO)
+  end
+end
+
+autocmd({ "DirChanged", "VimEnter" }, {
+  group = augroup("nvm_auto", { clear = true }),
+  callback = load_nvmrc,
 })

@@ -1,6 +1,18 @@
 # Home Manager configuration for ericbarbour
-{ config, pkgs, lib, inputs, username, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  username,
+  ...
+}:
 
+let
+  # ===== Zsh Theme Selection =====
+  # Options: "spaceship", "powerlevel10k", "starship"
+  zshTheme = "spaceship";
+in
 {
   home = {
     username = username;
@@ -11,87 +23,155 @@
     packages = with pkgs; [
       # ===== Modern CLI Replacements =====
       # These replace/improve standard Unix tools
-      
-      ripgrep       # grep replacement (rg)
-      fd            # find replacement
-      sd            # sed replacement - simpler syntax: sd 'find' 'replace'
-      procs         # ps replacement - colorful, human-readable
-      dust          # du replacement - visual disk usage
-      duf           # df replacement - disk free with colors
-      bottom        # htop replacement - graphs, GPU, temp (btm)
-      tealdeer      # tldr - simplified man pages with examples
-      
+
+      ripgrep # grep replacement (rg)
+      silver-searcher # ag - fast code search
+      fd # find replacement
+      sd # sed replacement - simpler syntax: sd 'find' 'replace'
+      procs # ps replacement - colorful, human-readable
+      dust # du replacement - visual disk usage
+      duf # df replacement - disk free with colors
+      bottom # htop replacement - graphs, GPU, temp (btm)
+      tealdeer # tldr - simplified man pages with examples
+
       # ===== File & Text Tools =====
-      bat           # cat replacement - syntax highlighting
-      eza           # ls replacement - icons, git status
-      jq            # JSON processor
-      yq            # YAML processor
-      fzf           # Fuzzy finder
-      tree          # Directory tree
-      
+      bat # cat replacement - syntax highlighting
+      eza # ls replacement - icons, git status
+      jq # JSON processor
+      yq # YAML processor
+      fzf # Fuzzy finder
+      tree # Directory tree
+
       # ===== Navigation & History =====
-      zoxide        # Smart cd - learns your habits
+      zoxide # Smart cd - learns your habits
       # atuin configured below via programs.atuin
-      
+
       # ===== Git Tools =====
-      lazygit       # TUI git client
-      delta         # Better git diffs
-      difftastic    # Structural diff - understands code syntax
-      gh            # GitHub CLI
-      
+      lazygit # TUI git client
+      tig # Text-mode interface for git
+      delta # Better git diffs
+      difftastic # Structural diff - understands code syntax
+      gh # GitHub CLI
+
       # ===== Network Tools =====
-      gping         # Graphical ping
-      xh            # HTTPie alternative - curl for humans
-      bandwhich     # Bandwidth monitor by process
-      dog           # DNS client (dig replacement)
-      
+      gping # Graphical ping
+      xh # HTTPie alternative - curl for humans
+      bandwhich # Bandwidth monitor by process
+      dog # DNS client (dig replacement)
+
       # ===== Dev Tools =====
-      just          # Task runner (better make)
-      watchexec     # File watcher - run commands on changes
-      hyperfine     # Benchmarking tool
-      tokei         # Code statistics
-      
+      just # Task runner (better make)
+      watchexec # File watcher - run commands on changes
+      hyperfine # Benchmarking tool
+      tokei # Code statistics
+
       # ===== System Tools =====
-      htop          # Fallback process viewer
-      ncdu          # NCurses disk usage
-      pstree        # Process tree
-      
+      htop # Fallback process viewer
+      ncdu # NCurses disk usage
+      pstree # Process tree
+
+      # ===== Additional Modern Tools =====
+      yazi # Terminal file manager (blazing fast, Rust)
+      zellij # Terminal multiplexer (modern tmux)
+      tmux # Classic terminal multiplexer
+      glow # Markdown renderer in terminal
+      fx # Interactive JSON viewer
+      ouch # Universal archive tool (tar/zip/7z replacement)
+      viddy # Modern watch command with diff highlighting
+      grex # Regex generator from examples
+      mtr # Network diagnostics (ping + traceroute)
+      age # Simple, modern file encryption
+      broot # Interactive directory navigator
+
+      # ===== Shell Prompt & System Info =====
+      spaceship-prompt # Zsh prompt for astronauts
+      zsh-powerlevel10k # Powerlevel10k theme
+      starship # Cross-shell prompt (blazing fast, Rust)
+      nushell # Modern shell with structured data pipelines
+      fastfetch # System info display (fast neofetch replacement)
+      macchina # Minimal system info fetcher
+
+      # ===== Container & Kubernetes =====
+      lazydocker # TUI for Docker management
+      k9s # TUI for Kubernetes clusters
+      dive # Analyze Docker image layers
+      ctop # Top-like container metrics
+
+      # ===== Database Tools =====
+      usql # Universal SQL client (Postgres, MySQL, SQLite, etc.)
+      pgcli # Smart Postgres CLI with autocomplete
+      litecli # SQLite CLI with autocomplete
+
+      # ===== API & HTTP Tools =====
+      hurl # HTTP request testing with assertions
+      posting # TUI API client (Postman alternative)
+
+      # ===== Security Scanning =====
+      trivy # Vulnerability scanner for containers/repos
+      gitleaks # Find secrets in git history
+      trufflehog # Deep secret scanning with verification
+
+      # ===== Data Processing =====
+      miller # CSV/JSON Swiss army knife (mlr)
+      jnv # Interactive jq with live preview
+      dasel # Query JSON/YAML/TOML/XML
+      gron # Make JSON greppable
+
+      # ===== File Sync & Transfer =====
+      rclone # Rsync for cloud storage (S3, GDrive, Dropbox)
+
+      # ===== System Monitoring =====
+      zenith # System monitor with zoomable charts
+      glances # Cross-platform system monitor
+      sampler # Custom CLI dashboards from YAML
+
+      # ===== Demo & Documentation Tools =====
+      vhs # Create terminal GIFs as code
+      gum # Glamorous shell script prompts
+      charm-freeze # Generate images of code/terminal output
+      slides # Terminal-based presentations
+
+      # ===== AI Tools =====
+      aichat # Multi-model AI CLI (20+ providers)
+      claude-code # Anthropic's agentic coding CLI
+      playwright-mcp # Playwright MCP server for browser automation
+
       # ===== Nix Tools =====
-      nil           # Nix LSP
+      nil # Nix LSP
       nixfmt-rfc-style
-      nix-tree      # Visualize nix dependencies
-      
+      nix-tree # Visualize nix dependencies
+
       # ===== Shell Enhancements =====
-      vivid         # LS_COLORS generator
-      carapace      # Multi-shell completion generator
+      vivid # LS_COLORS generator
+      carapace # Multi-shell completion generator
       zsh-completions
-      
+
       # ===== Neovim =====
       neovim
-      
+
       # ===== LSPs (for Neovim/Zed) =====
       lua-language-server
       stylua
       typescript-language-server
       nodePackages.prettier
-      vscode-langservers-extracted  # HTML, CSS, JSON, ESLint
+      vscode-langservers-extracted # HTML, CSS, JSON, ESLint
       yaml-language-server
-      taplo  # TOML
-      marksman  # Markdown
+      taplo # TOML
+      marksman # Markdown
       pyright
       ruff
       gopls
       rust-analyzer
       shellcheck
       shfmt
-      
+
       # ===== Neovim Dependencies =====
-      gcc  # Required for treesitter
-      gnumake  # Required for avante.nvim
-      cargo  # For building rust plugins
-      
-      # ===== Languages & runtimes (migrate from brew/manual) =====
-      # nodejs     # Uncomment when ready to replace nvm
+      gcc # Required for treesitter
+      gnumake # Required for avante.nvim
+      cargo # For building rust plugins
+
+      # ===== Languages & Runtimes =====
+      nodejs_22 # LTS - needed for Copilot, LSPs
       # bun
       # deno
       # rustup
@@ -112,7 +192,7 @@
     "zed/settings.json".source = ../config/zed/settings.json;
     "zed/keymap.json".source = ../config/zed/keymap.json;
     "zed/tasks.json".source = ../config/zed/tasks.json;
-    
+
     # Neovim config (managed via dotfiles)
     "nvim/init.lua".source = ../config/nvim/init.lua;
   };
@@ -125,9 +205,9 @@
   programs.atuin = {
     enable = true;
     enableZshIntegration = true;
-    flags = [ "--disable-up-arrow" ];  # Keep up-arrow for normal history
+    flags = [ "--disable-up-arrow" ]; # Keep up-arrow for normal history
     settings = {
-      auto_sync = false;  # Set true + login to sync across machines
+      auto_sync = false; # Set true + login to sync across machines
       sync_frequency = "5m";
       search_mode = "fuzzy";
       filter_mode = "global";
@@ -181,7 +261,7 @@
       navigate = true;
       line-numbers = true;
       syntax-theme = "Dracula";
-      side-by-side = false;  # Set true for side-by-side view
+      side-by-side = false; # Set true for side-by-side view
       file-style = "bold yellow ul";
       hunk-header-style = "omit";
     };
@@ -193,7 +273,7 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     enableCompletion = true;
-    
+
     # Completion styling
     completionInit = ''
       # Case-insensitive completion
@@ -208,7 +288,7 @@
       # Group completions
       zstyle ':completion:*' group-name '''
     '';
-    
+
     history = {
       size = 100000;
       save = 100000;
@@ -227,36 +307,53 @@
         "git"
         "docker"
         "kubectl"
-        "sudo"          # ESC ESC to prepend sudo
-        "copypath"      # Copy current path
-        "copyfile"      # Copy file contents
-        "dirhistory"    # Alt+arrows for dir history
-        "jsontools"     # pp_json, is_json, etc.
-        "web-search"    # google, github, etc. from terminal
-        "extract"       # Universal archive extractor
+        "sudo" # ESC ESC to prepend sudo
+        "copypath" # Copy current path
+        "copyfile" # Copy file contents
+        "dirhistory" # Alt+arrows for dir history
+        "jsontools" # pp_json, is_json, etc.
+        "web-search" # google, github, etc. from terminal
+        "extract" # Universal archive extractor
       ];
     };
 
     initContent = lib.mkMerge [
-      # Must be at top - Powerlevel10k instant prompt
-      (lib.mkBefore ''
+      # Must be at top - Powerlevel10k instant prompt (only when using p10k)
+      (lib.mkBefore (lib.optionalString (zshTheme == "powerlevel10k") ''
         if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
           source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
         fi
-      '')
-      
+      ''))
+
       # Regular init content
       ''
+        # ===== Theme Configuration =====
+        ${if zshTheme == "spaceship" then ''
+        # Spaceship prompt
+        source ${pkgs.spaceship-prompt}/share/zsh/themes/spaceship.zsh-theme
+        # Spaceship options (customize as needed)
+        # See: https://spaceship-prompt.sh/options/
+        SPACESHIP_PROMPT_ADD_NEWLINE=true
+        SPACESHIP_PROMPT_SEPARATE_LINE=true
+        SPACESHIP_CHAR_SYMBOL="❯ "
+        SPACESHIP_DIR_TRUNC=3
+        '' else if zshTheme == "powerlevel10k" then ''
         # Powerlevel10k theme
-        source ''${HOME}/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme
+        source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
         [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+        '' else if zshTheme == "starship" then ''
+        # Starship prompt (already installed, just needs init)
+        eval "$(starship init zsh)"
+        '' else ''
+        # No theme configured
+        ''}
 
         # Load secrets (API keys, tokens - never commit)
         [[ -f ~/.secrets ]] && source ~/.secrets
 
         # LS_COLORS with vivid
         export LS_COLORS="$(vivid generate dracula)"
-        
+
         # Carapace completions (multi-shell completion engine)
         export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
         source <(carapace _carapace)
@@ -273,7 +370,10 @@
 
         # OpenCode
         export PATH=$HOME/.opencode/bin:$PATH
-        
+
+        # Amp Code
+        export PATH=$HOME/.amp/bin:$PATH
+
         # Better keybindings
         bindkey '^[[A' history-search-backward  # Up arrow
         bindkey '^[[B' history-search-forward   # Down arrow
@@ -285,13 +385,9 @@
     shellAliases = {
       # === Nix ===
       rebuild = "darwin-rebuild switch --flake ~/dotfiles";
-      
+
       # === Modern Replacements ===
-      ls = "eza --icons";
-      ll = "eza -la --icons --git";
-      la = "eza -a --icons";
-      lt = "eza --tree --icons --level=2";
-      lta = "eza --tree --icons -a --level=2";
+      # eza aliases handled by programs.eza with enableZshIntegration
       cat = "bat";
       grep = "rg";
       find = "fd";
@@ -304,8 +400,8 @@
       ping = "gping";
       dig = "dog";
       curl = "xh";
-      man = "tldr";  # Quick reference; use `command man` for full man
-      
+      man = "tldr"; # Quick reference; use `command man` for full man
+
       # === Git ===
       g = "git";
       gs = "git status";
@@ -318,8 +414,8 @@
       gco = "git checkout";
       gb = "git branch";
       glog = "git log --oneline --graph --decorate -20";
-      gdft = "git difftool";  # Difftastic
-      
+      gdft = "git difftool"; # Difftastic
+
       # === Tools ===
       zj = "zellij";
       lg = "lazygit";
@@ -327,17 +423,17 @@
       v = "nvim";
       vi = "nvim";
       vim = "nvim";
-      
+
       # === Navigation ===
       ".." = "cd ..";
       "..." = "cd ../..";
       "...." = "cd ../../..";
-      
+
       # === Safety ===
       rm = "rm -i";
       cp = "cp -i";
       mv = "mv -i";
-      
+
       # === Misc ===
       ports = "lsof -i -P -n | grep LISTEN";
       myip = "curl -s ifconfig.me";
@@ -378,7 +474,7 @@
   programs.zoxide = {
     enable = true;
     enableZshIntegration = true;
-    options = [ "--cmd cd" ];  # Replace cd entirely
+    options = [ "--cmd cd" ]; # Replace cd entirely
   };
 
   # Bat (better cat)
@@ -390,10 +486,10 @@
       pager = "less -FR";
     };
     extraPackages = with pkgs.bat-extras; [
-      batdiff    # diff with bat
-      batgrep    # grep with bat
-      batman     # man with bat
-      prettybat  # format and bat
+      batdiff # diff with bat
+      batgrep # grep with bat
+      batman # man with bat
+      prettybat # format and bat
     ];
   };
 
@@ -403,16 +499,17 @@
     enableZshIntegration = true;
     nix-direnv.enable = true;
   };
-  
-  # Eza (ls replacement) - additional config
+
+  # Eza (ls replacement)
   programs.eza = {
     enable = true;
-    icons = "auto";
+    icons = "always";
     git = true;
     extraOptions = [
       "--group-directories-first"
       "--header"
     ];
+    enableZshIntegration = true;
   };
 
   # Bottom (system monitor)
