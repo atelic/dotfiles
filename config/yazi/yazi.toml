@@ -1,0 +1,132 @@
+# Yazi File Manager Configuration
+# Managed via ~/dotfiles - symlinked to ~/.config/yazi/
+# Docs: https://yazi-rs.github.io/docs/configuration/yazi
+
+[manager]
+# Layout ratio (parent:current:preview)
+ratio = [1, 3, 4]
+
+# Sorting
+sort_by = "natural"
+sort_sensitive = false
+sort_reverse = false
+sort_dir_first = true
+sort_translit = false
+
+# Display
+linemode = "size"
+show_hidden = true
+show_symlink = true
+scrolloff = 5
+
+[preview]
+# Preview settings
+tab_size = 2
+max_width = 1000
+max_height = 1000
+
+# Image preview (requires ueberzugpp or kitty/ghostty)
+image_filter = "triangle"
+image_quality = 75
+
+# Cache
+cache_dir = ""
+
+[opener]
+# Open rules
+edit = [
+  { run = '${EDITOR:-nvim} "$@"', desc = "Edit", block = true, for = "unix" },
+]
+open = [
+  { run = 'open "$@"', desc = "Open", for = "macos" },
+]
+reveal = [
+  { run = 'open -R "$@"', desc = "Reveal in Finder", for = "macos" },
+]
+extract = [
+  { run = 'ouch decompress "$@"', desc = "Extract with ouch", for = "unix" },
+]
+play = [
+  { run = 'open "$@"', desc = "Play", for = "macos" },
+]
+
+[open]
+rules = [
+  # Folders
+  { name = "*/", use = ["edit", "open", "reveal"] },
+  
+  # Text files
+  { mime = "text/*", use = ["edit", "reveal"] },
+  { mime = "*/json", use = ["edit", "reveal"] },
+  { mime = "*/javascript", use = ["edit", "reveal"] },
+  { mime = "*/x-*", use = ["edit", "reveal"] },
+  
+  # Images
+  { mime = "image/*", use = ["open", "reveal"] },
+  
+  # Videos
+  { mime = "video/*", use = ["play", "reveal"] },
+  { mime = "audio/*", use = ["play", "reveal"] },
+  
+  # Archives
+  { mime = "application/zip", use = ["extract", "reveal"] },
+  { mime = "application/gzip", use = ["extract", "reveal"] },
+  { mime = "application/x-tar", use = ["extract", "reveal"] },
+  { mime = "application/x-bzip*", use = ["extract", "reveal"] },
+  { mime = "application/x-7z-compressed", use = ["extract", "reveal"] },
+  { mime = "application/x-rar", use = ["extract", "reveal"] },
+  
+  # PDFs
+  { mime = "application/pdf", use = ["open", "reveal"] },
+  
+  # Fallback
+  { name = "*", use = ["open", "reveal"] },
+]
+
+[tasks]
+micro_workers = 10
+macro_workers = 25
+bizarre_retry = 5
+image_alloc = 536870912  # 512MB
+image_bound = [0, 0]
+suppress_preload = false
+
+[plugin]
+preloaders = [
+  { name = "*", cond = "!mime", run = "mime", multi = true, prio = "high" },
+  { mime = "image/*", run = "image" },
+  { mime = "video/*", run = "video" },
+  { mime = "application/pdf", run = "pdf" },
+]
+previewers = [
+  { name = "*/", run = "folder", sync = true },
+  { mime = "text/*", run = "code" },
+  { mime = "*/json", run = "code" },
+  { mime = "*/javascript", run = "code" },
+  { mime = "*/x-*", run = "code" },
+  { mime = "image/*", run = "image" },
+  { mime = "video/*", run = "video" },
+  { mime = "application/pdf", run = "pdf" },
+  { name = "*", run = "file" },
+]
+
+[input]
+cd_title = "Change directory:"
+create_title = "Create:"
+rename_title = "Rename:"
+trash_title = "Move {n} file(s) to trash? (y/N)"
+delete_title = "Delete {n} file(s) permanently? (y/N)"
+filter_title = "Filter:"
+find_title = ["Find next:", "Find previous:"]
+search_title = "Search via {n}:"
+shell_title = ["Shell:", "Shell (block):"]
+overwrite_title = "Overwrite file? (y/N)"
+quit_title = "Quit? (y/N)"
+
+[select]
+open_title = "Open with:"
+open_origin = "hovered"
+open_offset = [0, 1, 50, 7]
+
+[log]
+enabled = false

@@ -1,0 +1,125 @@
+# Lazygit Configuration
+# Managed via ~/dotfiles - symlinked to ~/.config/lazygit/config.yml
+# Docs: https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
+
+gui:
+  # Theme (matches terminal theme)
+  theme:
+    activeBorderColor:
+      - '#cba6f7'  # Catppuccin mauve
+      - bold
+    inactiveBorderColor:
+      - '#6c7086'  # Catppuccin overlay0
+    optionsTextColor:
+      - '#89b4fa'  # Catppuccin blue
+    selectedLineBgColor:
+      - '#313244'  # Catppuccin surface0
+    cherryPickedCommitBgColor:
+      - '#45475a'  # Catppuccin surface1
+    cherryPickedCommitFgColor:
+      - '#cba6f7'  # Catppuccin mauve
+    unstagedChangesColor:
+      - '#f38ba8'  # Catppuccin red
+    defaultFgColor:
+      - '#cdd6f4'  # Catppuccin text
+    searchingActiveBorderColor:
+      - '#f9e2af'  # Catppuccin yellow
+
+  # Show file icons (requires nerd font)
+  showFileIcons: true
+  
+  # Show random tip on startup
+  showRandomTip: false
+  
+  # Nerd fonts version (v3)
+  nerdFontsVersion: "3"
+  
+  # Border style
+  border: rounded
+  
+  # Mouse support
+  mouseEvents: true
+
+  # Show command log
+  showCommandLog: true
+  
+  # Commit length warning
+  commitLength:
+    show: true
+
+git:
+  # Use delta for diffs (if installed)
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never
+  
+  # Commit settings
+  commit:
+    signOff: false
+    autoWrapCommitMessage: true
+    autoWrapWidth: 72
+  
+  # Auto-fetch interval (0 = disabled)
+  autoFetch: true
+  autoFetchInterval: 120
+  
+  # Branch log command
+  branchLogCmd: "git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName}} --"
+  
+  # All branches log
+  allBranchesLogCmd: "git log --graph --all --color=always --abbrev-commit --decorate --date=relative --pretty=medium"
+
+  # Pull with rebase by default
+  pull:
+    mode: rebase
+
+  # Skip hook confirmation
+  skipHookPrefix: WIP
+
+  # Parse emoji in commits
+  parseEmoji: true
+
+os:
+  # Open command
+  open: open {{filename}}
+  openLink: open {{link}}
+
+  # Editor (uses $EDITOR by default, override here if needed)
+  # editPreset: nvim
+
+refresher:
+  refreshInterval: 10
+  fetchInterval: 60
+
+keybinding:
+  universal:
+    quit: q
+    quit-alt1: <c-c>
+    return: <esc>
+    togglePanel: <tab>
+    prevItem: <up>
+    nextItem: <down>
+    prevItem-alt: k
+    nextItem-alt: j
+    prevPage: ','
+    nextPage: '.'
+    scrollLeft: H
+    scrollRight: L
+    gotoTop: <
+    gotoBottom: '>'
+    toggleRangeSelect: v
+    prevBlock: <left>
+    nextBlock: <right>
+    prevBlock-alt: h
+    nextBlock-alt: l
+    nextMatch: n
+    prevMatch: N
+    startSearch: /
+    copyToClipboard: <c-o>
+    openRecentRepos: <c-r>
+    submitEditorText: <enter>
+    extrasMenu: '@'
+    
+  # Custom: open in GitHub
+  commits:
+    openInBrowser: O

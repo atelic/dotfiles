@@ -1,0 +1,68 @@
+# Starship Prompt Configuration
+# Managed via ~/dotfiles - symlinked to ~/.config/starship.toml
+# Docs: https://starship.rs/config/
+
+# Fast, minimal prompt
+format = """
+$directory$git_branch$git_status$nodejs$python$rust$golang$nix_shell$cmd_duration$line_break$character"""
+
+# Don't add blank line between prompts
+add_newline = false
+
+[character]
+success_symbol = "[>](bold green)"
+error_symbol = "[>](bold red)"
+vimcmd_symbol = "[<](bold green)"
+
+[directory]
+truncation_length = 3
+truncation_symbol = ".../"
+style = "bold cyan"
+read_only = " ro"
+
+[git_branch]
+symbol = " "
+style = "bold purple"
+truncation_length = 20
+
+[git_status]
+style = "bold yellow"
+format = '([$all_status$ahead_behind]($style) )'
+conflicted = "="
+ahead = "^${count}"
+behind = "v${count}"
+diverged = "^${ahead_count}v${behind_count}"
+untracked = "?"
+stashed = "$"
+modified = "!"
+staged = "+"
+renamed = "r"
+deleted = "x"
+
+[nodejs]
+symbol = " "
+style = "bold green"
+detect_files = ["package.json", ".nvmrc"]
+detect_folders = ["node_modules"]
+
+[python]
+symbol = " "
+style = "bold yellow"
+
+[rust]
+symbol = " "
+style = "bold red"
+
+[golang]
+symbol = " "
+style = "bold cyan"
+
+[nix_shell]
+symbol = " "
+style = "bold blue"
+format = '[$symbol$state]($style) '
+
+[cmd_duration]
+min_time = 2000
+format = "[$duration]($style) "
+style = "bold yellow"

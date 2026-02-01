@@ -27,6 +27,9 @@ cd ~/dotfiles
 
 # Update username/hostname in flake.nix, then apply
 darwin-rebuild switch --flake ~/dotfiles
+
+# Run post-install setup (secrets, auth, permissions)
+./scripts/bootstrap.sh
 ```
 
 ## Usage
@@ -43,9 +46,16 @@ darwin-rebuild switch --rollback  # Rollback to previous state
 flake.nix           # Entry point, inputs, module wiring
 hosts/darwin.nix    # System config, Homebrew packages, macOS defaults
 home/default.nix    # User packages, shell config, program settings
+scripts/
+└── bootstrap.sh    # Post-rebuild setup (auth, secrets, permissions)
 config/             # Dotfiles (symlinked to ~/.config/)
-├── nvim/init.lua
-└── zed/
+├── nvim/init.lua   # Neovim with LazyVim
+├── zed/            # Zed editor settings
+├── starship.toml   # Shell prompt
+├── ghostty/        # Ghostty terminal
+├── aerospace.toml  # Tiling window manager
+├── lazygit/        # Git TUI
+└── yazi/           # File manager
 ```
 
 ## Adding Packages

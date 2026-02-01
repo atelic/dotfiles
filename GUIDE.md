@@ -98,8 +98,21 @@ A `flake.nix` is a standardized way to define Nix projects:
 │   │   ├── keymap.json     # Vim keybindings
 │   │   └── tasks.json      # Dev workflow tasks
 │   │
-│   └── nvim/
-│       └── init.lua        # Neovim config (LazyVim)
+│   ├── nvim/
+│   │   └── init.lua        # Neovim config (LazyVim)
+│   │
+│   ├── starship.toml       # Shell prompt config
+│   ├── aerospace.toml      # Tiling window manager
+│   ├── ghostty/
+│   │   └── config          # Ghostty terminal settings
+│   ├── lazygit/
+│   │   └── config.yml      # Git TUI settings
+│   └── yazi/
+│       ├── yazi.toml       # File manager settings
+│       └── keymap.toml     # File manager keybindings
+│
+├── scripts/
+│   └── bootstrap.sh        # Post-rebuild setup wizard
 │
 ├── .gitignore          # Excludes secrets, build outputs
 └── GUIDE.md            # This file
@@ -120,6 +133,11 @@ When you run `rebuild` (alias for `darwin-rebuild switch --flake ~/dotfiles`):
 4. Symlinks dotfiles to their destinations:
    - config/zed/* → ~/.config/zed/*
    - config/nvim/* → ~/.config/nvim/*
+   - config/starship.toml → ~/.config/starship.toml
+   - config/ghostty/* → ~/.config/ghostty/*
+   - config/lazygit/* → ~/.config/lazygit/*
+   - config/yazi/* → ~/.config/yazi/*
+   - config/aerospace.toml → ~/.aerospace.toml
 5. Updates shell environment
 6. Creates a new "generation" (rollback point)
 ```
@@ -309,6 +327,25 @@ programs.zsh.shellAliases = {
 ```
 
 Then rebuild.
+
+## New Machine Setup
+
+After cloning and running `darwin-rebuild switch`, run the bootstrap script:
+
+```bash
+./scripts/bootstrap.sh
+```
+
+The bootstrap script interactively guides you through:
+
+1. **Secrets file** - Creates `~/.secrets` template for API keys
+2. **GitHub CLI** - Runs `gh auth login`
+3. **SSH keys** - Generates ed25519 key and shows public key for GitHub
+4. **Neovim plugins** - Triggers LazyVim plugin installation
+5. **GitHub Copilot** - Authenticates Copilot in Neovim
+6. **Atuin sync** - Optional shell history cloud sync
+7. **macOS permissions** - Reminds about Accessibility/Input Monitoring grants
+8. **Raycast setup** - Instructions to replace Spotlight
 
 ## Secrets Management
 

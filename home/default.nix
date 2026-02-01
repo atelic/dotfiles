@@ -11,7 +11,8 @@
 let
   # ===== Zsh Theme Selection =====
   # Options: "spaceship", "powerlevel10k", "starship"
-  zshTheme = "spaceship";
+  # Starship is the fastest (Rust-based, ~10ms vs 100-200ms for spaceship)
+  zshTheme = "starship";
 in
 {
   home = {
@@ -133,7 +134,7 @@ in
 
       # ===== AI Tools =====
       aichat # Multi-model AI CLI (20+ providers)
-      claude-code # Anthropic's agentic coding CLI
+      crush # Charmbracelet AI coding agent (glamorous terminal TUI)
       playwright-mcp # Playwright MCP server for browser automation
 
       # ===== Nix Tools =====
@@ -188,13 +189,32 @@ in
 
   # Config file symlinks
   xdg.configFile = {
-    # Zed config (managed via dotfiles)
+    # Zed
     "zed/settings.json".source = ../config/zed/settings.json;
     "zed/keymap.json".source = ../config/zed/keymap.json;
     "zed/tasks.json".source = ../config/zed/tasks.json;
 
-    # Neovim config (managed via dotfiles)
+    # Neovim
     "nvim/init.lua".source = ../config/nvim/init.lua;
+
+    # Starship prompt
+    "starship.toml".source = ../config/starship.toml;
+
+    # Ghostty terminal
+    "ghostty/config".source = ../config/ghostty/config;
+
+    # Lazygit
+    "lazygit/config.yml".source = ../config/lazygit/config.yml;
+
+    # Yazi file manager
+    "yazi/yazi.toml".source = ../config/yazi/yazi.toml;
+    "yazi/keymap.toml".source = ../config/yazi/keymap.toml;
+  };
+
+  # Home directory files (not in .config)
+  home.file = {
+    # AeroSpace (expects ~/.aerospace.toml)
+    ".aerospace.toml".source = ../config/aerospace.toml;
   };
 
   # Let home-manager manage itself
@@ -300,79 +320,112 @@ in
       expireDuplicatesFirst = true;
     };
 
-    # Oh My Zsh integration
+    # Oh My Zsh integration (minimal plugins for speed)
+    # docker/kubectl completions handled by carapace instead
     oh-my-zsh = {
       enable = true;
       plugins = [
         "git"
-        "docker"
-        "kubectl"
         "sudo" # ESC ESC to prepend sudo
-        "copypath" # Copy current path
-        "copyfile" # Copy file contents
-        "dirhistory" # Alt+arrows for dir history
-        "jsontools" # pp_json, is_json, etc.
-        "web-search" # google, github, etc. from terminal
         "extract" # Universal archive extractor
       ];
     };
 
     initContent = lib.mkMerge [
       # Must be at top - Powerlevel10k instant prompt (only when using p10k)
-      (lib.mkBefore (lib.optionalString (zshTheme == "powerlevel10k") ''
-        if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
-          source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
-        fi
-      ''))
+      (lib.mkBefore (
+        lib.optionalString (zshTheme == "powerlevel10k") ''
+          if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
+            source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
+          fi
+        ''
+      ))
 
       # Regular init content
       ''
         # ===== Theme Configuration =====
-        ${if zshTheme == "spaceship" then ''
-        # Spaceship prompt
-        source ${pkgs.spaceship-prompt}/share/zsh/themes/spaceship.zsh-theme
-        # Spaceship options (customize as needed)
-        # See: https://spaceship-prompt.sh/options/
-        SPACESHIP_PROMPT_ADD_NEWLINE=true
-        SPACESHIP_PROMPT_SEPARATE_LINE=true
-        SPACESHIP_CHAR_SYMBOL="❯ "
-        SPACESHIP_DIR_TRUNC=3
-        '' else if zshTheme == "powerlevel10k" then ''
-        # Powerlevel10k theme
-        source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
-        [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-        '' else if zshTheme == "starship" then ''
-        # Starship prompt (already installed, just needs init)
-        eval "$(starship init zsh)"
-        '' else ''
-        # No theme configured
-        ''}
+        ${
+          if zshTheme == "spaceship" then
+            ''
+              # Spaceship prompt
+              source ${pkgs.spaceship-prompt}/share/zsh/themes/spaceship.zsh-theme
+              # Spaceship options (customize as needed)
+              # See: https://spaceship-prompt.sh/options/
+              SPACESHIP_PROMPT_ADD_NEWLINE=true
+              SPACESHIP_PROMPT_SEPARATE_LINE=true
+              SPACESHIP_CHAR_SYMBOL="❯ "
+              SPACESHIP_DIR_TRUNC=3
+            ''
+          else if zshTheme == "powerlevel10k" then
+            ''
+              # Powerlevel10k theme
+              source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
+              [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+            ''
+          else if zshTheme == "starship" then
+            ''
+              # Starship prompt (already installed, just needs init)
+              eval "$(starship init zsh)"
+            ''
+          else
+            ''
+              # No theme configured
+            ''
+        }
 
         # Load secrets (API keys, tokens - never commit)
         [[ -f ~/.secrets ]] && source ~/.secrets
 
-        # LS_COLORS with vivid
-        export LS_COLORS="$(vivid generate dracula)"
+        # LS_COLORS with vivid (cached for speed)
+        _vivid_cache="$HOME/.cache/vivid-ls-colors"
+        if [[ ! -f "$_vivid_cache" ]] || [[ $(find "$_vivid_cache" -mtime +7 2>/dev/null) ]]; then
+          mkdir -p "$(dirname "$_vivid_cache")"
+          vivid generate dracula > "$_vivid_cache"
+        fi
+        export LS_COLORS="$(<$_vivid_cache)"
 
-        # Carapace completions (multi-shell completion engine)
+        # Carapace completions (cached for speed)
+        _carapace_cache="$HOME/.cache/carapace-init.zsh"
+        if [[ ! -f "$_carapace_cache" ]] || [[ $(find "$_carapace_cache" -mtime +7 2>/dev/null) ]]; then
+          mkdir -p "$(dirname "$_carapace_cache")"
+          carapace _carapace > "$_carapace_cache"
+        fi
         export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
-        source <(carapace _carapace)
+        source "$_carapace_cache"
 
-        # NVM (keep until you migrate to nix-managed node)
+        # NVM (lazy-loaded for fast shell startup)
         export NVM_DIR="$HOME/.nvm"
-        [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
-        [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+        _nvm_lazy_load() {
+          unset -f nvm node npm npx
+          [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
+        }
+        nvm() { _nvm_lazy_load; nvm "$@"; }
+        node() { _nvm_lazy_load; node "$@"; }
+        npm() { _nvm_lazy_load; npm "$@"; }
+        npx() { _nvm_lazy_load; npx "$@"; }
 
-        # Bun
+        # Bun (lazy-loaded PATH only, skip completions for speed)
         export BUN_INSTALL="$HOME/.bun"
         export PATH="$BUN_INSTALL/bin:$PATH"
-        [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
         # OpenCode
         export PATH=$HOME/.opencode/bin:$PATH
 
         # Amp Code
         export PATH=$HOME/.amp/bin:$PATH
+
+        # Native CLI tools (Claude Code, etc.)
+        export PATH=$HOME/.local/bin:$PATH
+
+        # Yazi: cd to directory on exit
+        function ya() {
+          local tmp="$(mktemp -t "yazi-cwd.XXXXX")"
+          yazi "$@" --cwd-file="$tmp"
+          if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+            cd -- "$cwd"
+          fi
+          rm -f -- "$tmp"
+        }
 
         # Better keybindings
         bindkey '^[[A' history-search-backward  # Up arrow

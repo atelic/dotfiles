@@ -102,14 +102,26 @@
       "font-hack-nerd-font"
       "font-meslo-lg-nerd-font"
 
+      # ===== Editors =====
+      "zed"
+      "visual-studio-code"
+
       # ===== Dev Tools =====
+      "mactex-no-gui"
       "postman"
-      "proxyman" # HTTP debugging proxy (Charles alternative)
+      "proxyman"
 
       # ===== Communication =====
       "discord"
       "slack"
     ];
+
+    # Mac App Store apps (requires: mas CLI installed and signed into App Store)
+    # Find app IDs: mas search <app> or https://apps.apple.com
+    masApps = {
+      # "Xcode" = 497799835;  # Uncomment if needed (large download)
+      # "1Password for Safari" = 1569813296;
+    };
   };
 
   # macOS system preferences

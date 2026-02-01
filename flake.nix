@@ -19,6 +19,9 @@
 
     # Fixes Spotlight indexing for Nix-installed apps
     mac-app-util.url = "github:hraban/mac-app-util";
+
+    # Clawdbot - AI assistant gateway
+    nix-clawdbot.url = "github:clawdbot/nix-clawdbot";
   };
 
   outputs =
@@ -29,6 +32,7 @@
       home-manager,
       nix-homebrew,
       mac-app-util,
+      nix-clawdbot,
     }:
     let
       username = "ericbarbour";
@@ -70,6 +74,7 @@
               users.${username} = import ./home/default.nix;
               sharedModules = [
                 mac-app-util.homeManagerModules.default
+                nix-clawdbot.homeManagerModules.clawdbot
               ];
             };
           }
