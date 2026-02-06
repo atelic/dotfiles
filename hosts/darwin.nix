@@ -52,6 +52,7 @@
       # Essential tools you currently have via brew
       "zsh-syntax-highlighting"
       "nvm"
+      "mole"
       # SketchyBar (custom menu bar)
       "sketchybar"
     ];

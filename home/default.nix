@@ -437,7 +437,7 @@ in
 
     shellAliases = {
       # === Nix ===
-      rebuild = "darwin-rebuild switch --flake ~/dotfiles";
+      rebuild = "sudo darwin-rebuild switch --flake ~/dotfiles";
 
       # === Modern Replacements ===
       # eza aliases handled by programs.eza with enableZshIntegration

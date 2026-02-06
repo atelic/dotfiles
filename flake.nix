@@ -35,8 +35,8 @@
       nix-clawdbot,
     }:
     let
-      username = "ericbarbour";
-      hostname = "Erics-Laptop";
+      username = "eric";
+      hostname = "Erics-Mac-mini";
       system = "aarch64-darwin"; # Apple Silicon
     in
     {
