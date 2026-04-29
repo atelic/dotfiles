@@ -15,9 +15,9 @@
   
   // ===== UI =====
   "theme": {
-    "mode": "system",
+    "mode": "dark",
     "light": "One Light",
-    "dark": "One Dark"
+    "dark": "NERV"
   },
   "ui_font_size": 15,
   "ui_font_family": "FiraCode Nerd Font",
@@ -92,7 +92,7 @@
       "model": "claude-sonnet-4-20250514"
     },
     "version": "2",
-    "dock": "right",
+    "dock": "left",
     "default_width": 480,
     "button": true
   },
