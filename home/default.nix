@@ -135,6 +135,7 @@ in
       # ===== AI Tools =====
       aichat # Multi-model AI CLI (20+ providers)
       crush # Charmbracelet AI coding agent (glamorous terminal TUI)
+      opencode # AI coding agent for the terminal
       playwright-mcp # Playwright MCP server for browser automation
 
       # ===== Nix Tools =====
@@ -393,16 +394,20 @@ in
         export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
         source "$_carapace_cache"
 
-        # NVM (lazy-loaded for fast shell startup)
+        # NVM (lazy-loaded for fast shell startup).
+        # Helper is named without a leading underscore because some tools
+        # (e.g. Claude Code's shell snapshot) filter out underscore-prefixed
+        # functions — the wrappers would then call an undefined helper and
+        # recurse into themselves until FUNCNEST triggers.
         export NVM_DIR="$HOME/.nvm"
-        _nvm_lazy_load() {
+        nvm_lazy_load() {
           unset -f nvm node npm npx
-          [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
+          [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && source "/opt/homebrew/opt/nvm/nvm.sh"
         }
-        nvm() { _nvm_lazy_load; nvm "$@"; }
-        node() { _nvm_lazy_load; node "$@"; }
-        npm() { _nvm_lazy_load; npm "$@"; }
-        npx() { _nvm_lazy_load; npx "$@"; }
+        nvm() { nvm_lazy_load; nvm "$@"; }
+        node() { nvm_lazy_load; node "$@"; }
+        npm() { nvm_lazy_load; npm "$@"; }
+        npx() { nvm_lazy_load; npx "$@"; }
 
         # Bun (lazy-loaded PATH only, skip completions for speed)
         export BUN_INSTALL="$HOME/.bun"

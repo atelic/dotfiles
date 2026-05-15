@@ -18,7 +18,7 @@ vimcmd_symbol = "[<](bold green)"
 truncation_length = 3
 truncation_symbol = ".../"
 style = "bold cyan"
-read_only = " ro"
+read_only = ""
 
 [git_branch]
 symbol = " "

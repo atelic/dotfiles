@@ -82,7 +82,7 @@
       "karabiner-elements" # Keyboard remapping & Hyper Key
       "linearmouse" # Fix mouse acceleration, per-device settings
       "dockdoor" # Window previews on Dock hover
-      "alt-tab" # Windows-style Alt+Tab with previews
+      # "alt-tab" # Windows-style Alt+Tab with previews (disabled: broken upstream cask definition)
       "hazeover" # Dim inactive windows for focus
       "stats" # System stats in menu bar
       "bettertouchtool" # Trackpad gestures & window snapping
@@ -115,6 +115,13 @@
       # ===== Communication =====
       "discord"
       "slack"
+
+      # ===== Gaming =====
+      "steam"
+
+      # ===== Home Server =====
+      "tailscale" # VPN mesh network
+      "lm-studio" # Local LLM inference
     ];
 
     # Mac App Store apps (requires: mas CLI installed and signed into App Store)
@@ -174,7 +181,7 @@
     # Keyboard settings
     keyboard = {
       enableKeyMapping = true;
-      remapCapsLockToControl = false; # Set to true if you want this
+      remapCapsLockToControl = true;
     };
   };
 

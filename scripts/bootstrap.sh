@@ -34,13 +34,17 @@ else
 		cat >~/.secrets <<'EOF'
 # API Keys and Secrets
 # This file is sourced by your shell - never commit it!
+#
+# Only uncomment an export once you have a real value for it. An empty
+# `export FOO=""` line will shadow per-project .env files (dotenv and
+# similar tools refuse to overwrite an already-defined variable).
 
 # AI
-export ANTHROPIC_API_KEY=""
-export OPENAI_API_KEY=""
+# export ANTHROPIC_API_KEY=""
+# export OPENAI_API_KEY=""
 
 # GitHub (for tools that need it beyond gh auth)
-export GITHUB_TOKEN=""
+# export GITHUB_TOKEN=""
 
 # Add more secrets as needed
 EOF
