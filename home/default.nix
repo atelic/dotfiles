@@ -134,6 +134,7 @@ in
 
       # ===== AI Tools =====
       aichat # Multi-model AI CLI (20+ providers)
+      codex # OpenAI's lightweight coding agent for the terminal
       crush # Charmbracelet AI coding agent (glamorous terminal TUI)
       opencode # AI coding agent for the terminal
       playwright-mcp # Playwright MCP server for browser automation
@@ -155,7 +156,7 @@ in
       lua-language-server
       stylua
       typescript-language-server
-      nodePackages.prettier
+      prettier
       vscode-langservers-extracted # HTML, CSS, JSON, ESLint
       yaml-language-server
       taplo # TOML
@@ -173,7 +174,7 @@ in
       cargo # For building rust plugins
 
       # ===== Languages & Runtimes =====
-      nodejs_22 # LTS - needed for Copilot, LSPs
+      nodejs_25 # Needed for Copilot, LSPs
       # bun
       # deno
       # rustup
@@ -186,6 +187,11 @@ in
       MANPAGER = "sh -c 'col -bx | bat -l man -p'";
       MANROFFOPT = "-c";
     };
+
+    # Extra directories to add to PATH
+    sessionPath = [
+      "$HOME/.npm-global/bin"
+    ];
   };
 
   # Config file symlinks
@@ -216,6 +222,12 @@ in
   home.file = {
     # AeroSpace (expects ~/.aerospace.toml)
     ".aerospace.toml".source = ../config/aerospace.toml;
+
+    # tmux (expects ~/.tmux.conf)
+    ".tmux.conf".source = ../config/tmux.conf;
+
+    # npm: writable global prefix (nodejs in nixpkgs ships read-only)
+    ".npmrc".text = "prefix=${config.home.homeDirectory}/.npm-global\n";
   };
 
   # Let home-manager manage itself
@@ -408,16 +420,6 @@ in
         node() { nvm_lazy_load; node "$@"; }
         npm() { nvm_lazy_load; npm "$@"; }
         npx() { nvm_lazy_load; npx "$@"; }
-
-        # Bun (lazy-loaded PATH only, skip completions for speed)
-        export BUN_INSTALL="$HOME/.bun"
-        export PATH="$BUN_INSTALL/bin:$PATH"
-
-        # OpenCode
-        export PATH=$HOME/.opencode/bin:$PATH
-
-        # Amp Code
-        export PATH=$HOME/.amp/bin:$PATH
 
         # Native CLI tools (Claude Code, etc.)
         export PATH=$HOME/.local/bin:$PATH
