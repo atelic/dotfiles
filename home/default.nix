@@ -263,6 +263,7 @@ in
       pull.rebase = true;
       push.autoSetupRemote = true;
       core.editor = "vim";
+      credential.helper = "!gh auth git-credential";
       merge.conflictstyle = "diff3";
       diff = {
         colorMoved = "default";
