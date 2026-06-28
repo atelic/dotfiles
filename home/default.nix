@@ -26,7 +26,7 @@ in
       # These replace/improve standard Unix tools
 
       ripgrep # grep replacement (rg)
-      silver-searcher # ag - fast code search
+      silver-searcher-ng # ag - fast code search
       fd # find replacement
       sd # sed replacement - simpler syntax: sd 'find' 'replace'
       procs # ps replacement - colorful, human-readable
@@ -160,7 +160,7 @@ in
       vscode-langservers-extracted # HTML, CSS, JSON, ESLint
       yaml-language-server
       taplo # TOML
-      marksman # Markdown
+      markdown-oxide # Markdown
       pyright
       ruff
       gopls
@@ -174,7 +174,7 @@ in
       cargo # For building rust plugins
 
       # ===== Languages & Runtimes =====
-      nodejs_25 # Needed for Copilot, LSPs
+      nodejs_24 # Needed for Copilot, LSPs
       # bun
       # deno
       # rustup

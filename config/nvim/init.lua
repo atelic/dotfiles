@@ -95,7 +95,7 @@ require("lazy").setup({
     {
       "zbirenbaum/copilot.lua",
       opts = {
-        copilot_node_command = "/etc/profiles/per-user/ericbarbour/bin/node",
+        copilot_node_command = vim.fn.exepath("node"),
       },
     },
     
@@ -107,7 +107,6 @@ require("lazy").setup({
       version = false,
       opts = {
         provider = "claude",
-        auto_suggestions_provider = "copilot",
         providers = {
           claude = {
             model = "claude-opus-4-5-20251101",
@@ -180,9 +179,15 @@ require("lazy").setup({
 
     -- ===== LSP =====
     { import = "lazyvim.plugins.extras.editor.inc-rename" },
-
-    -- ===== Util =====
-    { import = "lazyvim.plugins.extras.util.persistence" },
+    {
+      "neovim/nvim-lspconfig",
+      opts = {
+        servers = {
+          marksman = { enabled = false },
+          markdown_oxide = { mason = false },
+        },
+      },
+    },
 
     -- ===== Formatting =====
     { import = "lazyvim.plugins.extras.formatting.prettier" },
