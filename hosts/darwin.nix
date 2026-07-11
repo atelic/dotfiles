@@ -52,7 +52,8 @@
       # Essential tools you currently have via brew
       "zsh-syntax-highlighting"
       "nvm"
-      "mole"
+      "starship"
+      "watchexec"
       # SketchyBar (custom menu bar)
       "sketchybar"
     ];
@@ -82,7 +83,7 @@
       "karabiner-elements" # Keyboard remapping & Hyper Key
       "linearmouse" # Fix mouse acceleration, per-device settings
       "dockdoor" # Window previews on Dock hover
-      # "alt-tab" # Windows-style Alt+Tab with previews (disabled: broken upstream cask definition)
+      "alt-tab" # Windows-style Alt+Tab with previews
       "hazeover" # Dim inactive windows for focus
       "stats" # System stats in menu bar
       "bettertouchtool" # Trackpad gestures & window snapping
@@ -91,8 +92,7 @@
       # ===== Quick Look Plugins =====
       "syntax-highlight" # Code syntax in Quick Look
       "qlmarkdown" # Markdown preview in Finder
-      "qlstephen" # Plain text files without extension
-      "qlvideo" # Video thumbnails & previews
+      "quicklook-video" # Video thumbnails & previews
 
       # ===== Screencasting & Demo =====
       "keycastr" # Show keystrokes on screen
@@ -111,17 +111,12 @@
       "mactex-no-gui"
       "postman"
       "proxyman"
+      "codex" # OpenAI Codex CLI
+      "codex-app"
 
       # ===== Communication =====
       "discord"
       "slack"
-
-      # ===== Gaming =====
-      "steam"
-
-      # ===== Home Server =====
-      "tailscale" # VPN mesh network
-      "lm-studio" # Local LLM inference
     ];
 
     # Mac App Store apps (requires: mas CLI installed and signed into App Store)
@@ -135,6 +130,17 @@
   # macOS system preferences
   system = {
     stateVersion = 5;
+
+    # Homebrew requires explicit trust for third-party tap content. Do this
+    # before nix-darwin runs `brew bundle`, including on a fresh machine.
+    activationScripts.preActivation.text = ''
+      if [ -x /opt/homebrew/bin/brew ]; then
+        /usr/bin/sudo -H -u ${username} /opt/homebrew/bin/brew trust \
+          --formula felixkratz/formulae/sketchybar
+        /usr/bin/sudo -H -u ${username} /opt/homebrew/bin/brew trust \
+          --cask nikitabobko/tap/aerospace
+      fi
+    '';
 
     defaults = {
       # Dock
@@ -181,7 +187,7 @@
     # Keyboard settings
     keyboard = {
       enableKeyMapping = true;
-      remapCapsLockToControl = true;
+      remapCapsLockToControl = false; # Set to true if you want this
     };
   };
 

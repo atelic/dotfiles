@@ -109,7 +109,7 @@ require("lazy").setup({
         provider = "claude",
         providers = {
           claude = {
-            model = "claude-opus-4-5-20251101",
+            model = "claude-opus-4-6",
             extra_request_body = {
               max_tokens = 8192,
             },
@@ -195,10 +195,137 @@ require("lazy").setup({
     -- ===== UI =====
     { import = "lazyvim.plugins.extras.ui.mini-animate" },
     { import = "lazyvim.plugins.extras.ui.treesitter-context" },
-    
-    -- ===== Custom Overrides =====
-    -- Faster startup - disable some heavy plugins
-    { "folke/noice.nvim", enabled = true },
+    { import = "lazyvim.plugins.extras.ui.mini-indentscope" },
+
+    -- ===== Visual Swag =====
+    -- Rainbow delimiters - colorful nested brackets
+    {
+      "HiPhish/rainbow-delimiters.nvim",
+      event = "BufReadPost",
+      config = function()
+        local rainbow = require("rainbow-delimiters")
+        vim.g.rainbow_delimiters = {
+          strategy = {
+            [""] = rainbow.strategy["global"],
+            vim = rainbow.strategy["local"],
+          },
+          query = {
+            [""] = "rainbow-delimiters",
+            lua = "rainbow-blocks",
+          },
+          highlight = {
+            "RainbowDelimiterRed",
+            "RainbowDelimiterYellow",
+            "RainbowDelimiterBlue",
+            "RainbowDelimiterOrange",
+            "RainbowDelimiterGreen",
+            "RainbowDelimiterViolet",
+            "RainbowDelimiterCyan",
+          },
+        }
+      end,
+    },
+
+    -- Inline color previews (hex, CSS, Tailwind)
+    {
+      "brenoprata10/nvim-highlight-colors",
+      event = "BufReadPost",
+      opts = {
+        render = "virtual",
+        virtual_symbol = "■",
+        enable_tailwind = true,
+      },
+    },
+
+    -- Smooth scrolling with easing
+    {
+      "karb94/neoscroll.nvim",
+      event = "VeryLazy",
+      opts = {
+        hide_cursor = true,
+        stop_eof = true,
+        respect_scrolloff = true,
+        cursor_scrolls_alone = true,
+        easing = "quintic",
+        duration_multiplier = 0.5,
+      },
+    },
+
+    -- Zen mode + Twilight (distraction-free coding)
+    {
+      "folke/zen-mode.nvim",
+      cmd = "ZenMode",
+      keys = {
+        { "<leader>z", "<cmd>ZenMode<cr>", desc = "Zen Mode" },
+      },
+      opts = {
+        window = {
+          width = 90,
+          options = {
+            signcolumn = "no",
+            number = false,
+            relativenumber = false,
+            cursorline = false,
+          },
+        },
+        plugins = {
+          twilight = { enabled = true },
+          gitsigns = { enabled = false },
+        },
+      },
+      dependencies = {
+        {
+          "folke/twilight.nvim",
+          opts = {
+            dimming = { alpha = 0.25 },
+            context = 10,
+          },
+        },
+      },
+    },
+
+    -- Dashboard
+    {
+      "folke/snacks.nvim",
+      opts = {
+        dashboard = {
+          preset = {
+            header = [[
+  ███╗   ██╗██╗   ██╗██╗███╗   ███╗
+  ████╗  ██║██║   ██║██║████╗ ████║
+  ██╔██╗ ██║██║   ██║██║██╔████╔██║
+  ██║╚██╗██║╚██╗ ██╔╝██║██║╚██╔╝██║
+  ██║ ╚████║ ╚████╔╝ ██║██║ ╚═╝ ██║
+  ╚═╝  ╚═══╝  ╚═══╝  ╚═╝╚═╝     ╚═╝]],
+            keys = {
+              { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
+              { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
+              { icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
+              { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
+              { icon = " ", key = "c", desc = "Config", action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})" },
+              { icon = " ", key = "s", desc = "Restore Session", section = "session" },
+              { icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy" },
+              { icon = " ", key = "q", desc = "Quit", action = ":qa" },
+            },
+          },
+        },
+      },
+    },
+
+    -- Noice - command palette style cmdline
+    {
+      "folke/noice.nvim",
+      opts = {
+        cmdline = {
+          view = "cmdline_popup",
+        },
+        presets = {
+          command_palette = true,
+          long_message_to_split = true,
+          lsp_doc_border = true,
+        },
+      },
+    },
     { "rcarriga/nvim-notify", enabled = true },
     
     -- Theme
@@ -213,9 +340,16 @@ require("lazy").setup({
           cmp = true,
           gitsigns = true,
           nvimtree = true,
-          telescope = true,
+          telescope = { enabled = true },
           treesitter = true,
+          treesitter_context = true,
           mini = true,
+          rainbow_delimiters = true,
+          noice = true,
+          notify = true,
+          indent_blankline = { enabled = true, scope_color = "lavender" },
+          which_key = true,
+          flash = true,
           native_lsp = {
             enabled = true,
             underlines = {
@@ -358,9 +492,7 @@ map("n", "<leader>w", "<cmd>w<cr>", { desc = "Save file" })
 map("n", "<leader>q", "<cmd>q<cr>", { desc = "Quit" })
 map("n", "<leader>Q", "<cmd>qa!<cr>", { desc = "Quit all" })
 
--- Center cursor after movements
-map("n", "<C-d>", "<C-d>zz")
-map("n", "<C-u>", "<C-u>zz")
+-- Center cursor after search jumps (scroll centering handled by neoscroll)
 map("n", "n", "nzzzv")
 map("n", "N", "Nzzzv")
 

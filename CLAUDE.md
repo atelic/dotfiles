@@ -10,14 +10,14 @@ This is a declarative macOS development environment using Nix with nix-darwin an
 
 ```bash
 # Apply configuration changes (primary command)
-rebuild                                    # alias for darwin-rebuild switch --flake ~/dotfiles
+rebuild                                    # alias for sudo darwin-rebuild switch --flake ~/dotfiles
 
 # Update dependencies
 nix flake update && rebuild               # update all inputs and apply
 nix flake lock --update-input nixpkgs     # update specific input
 
 # Rollback
-darwin-rebuild switch --rollback          # revert to previous generation
+sudo darwin-rebuild switch --rollback     # revert to previous generation
 
 # Search for packages
 nix search nixpkgs <package-name>

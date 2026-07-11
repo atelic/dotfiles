@@ -31,8 +31,8 @@
       mac-app-util,
     }:
     let
-      username = "eric";
-      hostname = "Erics-Mac-mini";
+      username = "ericbarbour";
+      hostname = "Erics-Laptop";
       system = "aarch64-darwin"; # Apple Silicon
     in
     {
@@ -57,7 +57,16 @@
           ./hosts/darwin.nix
 
           # Allow unfree packages (e.g., claude-code)
-          { nixpkgs.config.allowUnfree = true; }
+          {
+            nixpkgs.config.allowUnfree = true;
+            nixpkgs.overlays = [
+              (final: prev: {
+                nushell = prev.nushell.overrideAttrs (_: {
+                  doCheck = false;
+                });
+              })
+            ];
+          }
 
           # Home Manager
           home-manager.darwinModules.home-manager

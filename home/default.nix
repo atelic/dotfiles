@@ -13,6 +13,17 @@ let
   # Options: "spaceship", "powerlevel10k", "starship"
   # Starship is the fastest (Rust-based, ~10ms vs 100-200ms for spaceship)
   zshTheme = "starship";
+
+  ghui = pkgs.writeShellApplication {
+    name = "ghui";
+    runtimeInputs = with pkgs; [
+      bun
+      gh
+    ];
+    text = ''
+      exec bunx --bun @kitlangton/ghui@0.3.0 "$@"
+    '';
+  };
 in
 {
   home = {
@@ -26,7 +37,7 @@ in
       # These replace/improve standard Unix tools
 
       ripgrep # grep replacement (rg)
-      silver-searcher-ng # ag - fast code search
+      silver-searcher-ng # ag - fast code search (maintained PCRE2 fork)
       fd # find replacement
       sd # sed replacement - simpler syntax: sd 'find' 'replace'
       procs # ps replacement - colorful, human-readable
@@ -49,6 +60,7 @@ in
 
       # ===== Git Tools =====
       lazygit # TUI git client
+      ghui # Terminal UI for GitHub pull requests
       tig # Text-mode interface for git
       delta # Better git diffs
       difftastic # Structural diff - understands code syntax
@@ -62,7 +74,7 @@ in
 
       # ===== Dev Tools =====
       just # Task runner (better make)
-      watchexec # File watcher - run commands on changes
+      # watchexec is installed through Homebrew to use its prebuilt macOS bottle
       hyperfine # Benchmarking tool
       tokei # Code statistics
 
@@ -87,7 +99,7 @@ in
       # ===== Shell Prompt & System Info =====
       spaceship-prompt # Zsh prompt for astronauts
       zsh-powerlevel10k # Powerlevel10k theme
-      starship # Cross-shell prompt (blazing fast, Rust)
+      # starship is installed through Homebrew to use its prebuilt macOS bottle
       nushell # Modern shell with structured data pipelines
       fastfetch # System info display (fast neofetch replacement)
       macchina # Minimal system info fetcher
@@ -134,14 +146,12 @@ in
 
       # ===== AI Tools =====
       aichat # Multi-model AI CLI (20+ providers)
-      codex # OpenAI's lightweight coding agent for the terminal
       crush # Charmbracelet AI coding agent (glamorous terminal TUI)
-      opencode # AI coding agent for the terminal
       playwright-mcp # Playwright MCP server for browser automation
 
       # ===== Nix Tools =====
       nil # Nix LSP
-      nixfmt-rfc-style
+      nixfmt
       nix-tree # Visualize nix dependencies
 
       # ===== Shell Enhancements =====
@@ -160,7 +170,7 @@ in
       vscode-langservers-extracted # HTML, CSS, JSON, ESLint
       yaml-language-server
       taplo # TOML
-      markdown-oxide # Markdown
+      marksman # Markdown
       pyright
       ruff
       gopls
@@ -174,7 +184,7 @@ in
       cargo # For building rust plugins
 
       # ===== Languages & Runtimes =====
-      nodejs_24 # Needed for Copilot, LSPs
+      nodejs_22 # LTS - needed for Copilot, LSPs
       # bun
       # deno
       # rustup
@@ -187,11 +197,6 @@ in
       MANPAGER = "sh -c 'col -bx | bat -l man -p'";
       MANROFFOPT = "-c";
     };
-
-    # Extra directories to add to PATH
-    sessionPath = [
-      "$HOME/.npm-global/bin"
-    ];
   };
 
   # Config file symlinks
@@ -222,12 +227,6 @@ in
   home.file = {
     # AeroSpace (expects ~/.aerospace.toml)
     ".aerospace.toml".source = ../config/aerospace.toml;
-
-    # tmux (expects ~/.tmux.conf)
-    ".tmux.conf".source = ../config/tmux.conf;
-
-    # npm: writable global prefix (nodejs in nixpkgs ships read-only)
-    ".npmrc".text = "prefix=${config.home.homeDirectory}/.npm-global\n";
   };
 
   # Let home-manager manage itself
@@ -263,7 +262,6 @@ in
       pull.rebase = true;
       push.autoSetupRemote = true;
       core.editor = "vim";
-      credential.helper = "!gh auth git-credential";
       merge.conflictstyle = "diff3";
       diff = {
         colorMoved = "default";
@@ -407,20 +405,26 @@ in
         export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
         source "$_carapace_cache"
 
-        # NVM (lazy-loaded for fast shell startup).
-        # Helper is named without a leading underscore because some tools
-        # (e.g. Claude Code's shell snapshot) filter out underscore-prefixed
-        # functions — the wrappers would then call an undefined helper and
-        # recurse into themselves until FUNCNEST triggers.
+        # NVM (lazy-loaded for fast shell startup)
         export NVM_DIR="$HOME/.nvm"
-        nvm_lazy_load() {
+        _nvm_lazy_load() {
           unset -f nvm node npm npx
-          [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && source "/opt/homebrew/opt/nvm/nvm.sh"
+          [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
         }
-        nvm() { nvm_lazy_load; nvm "$@"; }
-        node() { nvm_lazy_load; node "$@"; }
-        npm() { nvm_lazy_load; npm "$@"; }
-        npx() { nvm_lazy_load; npx "$@"; }
+        nvm() { _nvm_lazy_load; nvm "$@"; }
+        node() { _nvm_lazy_load; node "$@"; }
+        npm() { _nvm_lazy_load; npm "$@"; }
+        npx() { _nvm_lazy_load; npx "$@"; }
+
+        # Bun (lazy-loaded PATH only, skip completions for speed)
+        export BUN_INSTALL="$HOME/.bun"
+        export PATH="$BUN_INSTALL/bin:$PATH"
+
+        # OpenCode
+        export PATH=$HOME/.opencode/bin:$PATH
+
+        # Amp Code
+        export PATH=$HOME/.amp/bin:$PATH
 
         # Native CLI tools (Claude Code, etc.)
         export PATH=$HOME/.local/bin:$PATH
@@ -445,7 +449,8 @@ in
 
     shellAliases = {
       # === Nix ===
-      rebuild = "sudo darwin-rebuild switch --flake ~/dotfiles";
+      rebuild = "sudo darwin-rebuild switch --flake ~/dotfiles#Erics-Laptop";
+      update-all = "~/dotfiles/scripts/update-everything.sh";
 
       # === Modern Replacements ===
       # eza aliases handled by programs.eza with enableZshIntegration
@@ -507,6 +512,8 @@ in
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
+    # Atuin owns Ctrl-R; keep FZF available without replacing that binding.
+    historyWidget.command = "";
     defaultCommand = "fd --type f --hidden --exclude .git";
     defaultOptions = [
       "--height=40%"

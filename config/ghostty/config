@@ -13,15 +13,15 @@ theme = catppuccin-mocha
 # ===== Window =====
 window-padding-x = 12
 window-padding-y = 12
-window-decoration = false
-macos-titlebar-style = hidden
+window-decoration = true
+macos-titlebar-style = native
 window-save-state = always
 confirm-close-surface = false
 
 # ===== Cursor =====
 cursor-style = block
 cursor-style-blink = false
-shell-integration-features = cursor
+shell-integration-features = cursor,ssh-env,ssh-terminfo
 
 # ===== Behavior =====
 copy-on-select = clipboard

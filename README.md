@@ -26,7 +26,7 @@ git clone https://github.com/yourusername/dotfiles ~/dotfiles
 cd ~/dotfiles
 
 # Update username/hostname in flake.nix, then apply
-darwin-rebuild switch --flake ~/dotfiles
+sudo darwin-rebuild switch --flake ~/dotfiles
 
 # Run post-install setup (secrets, auth, permissions)
 ./scripts/bootstrap.sh
@@ -37,7 +37,7 @@ darwin-rebuild switch --flake ~/dotfiles
 ```bash
 rebuild                    # Apply configuration changes
 nix flake update && rebuild  # Update all packages
-darwin-rebuild switch --rollback  # Rollback to previous state
+sudo darwin-rebuild switch --rollback  # Rollback to previous state
 ```
 
 ## Structure

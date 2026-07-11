@@ -122,7 +122,7 @@ A `flake.nix` is a standardized way to define Nix projects:
 
 ### 1. The Rebuild Process
 
-When you run `rebuild` (alias for `darwin-rebuild switch --flake ~/dotfiles`):
+When you run `rebuild` (alias for `sudo darwin-rebuild switch --flake ~/dotfiles`):
 
 ```
 1. Nix reads flake.nix
@@ -209,7 +209,7 @@ This generates `~/.zshrc` with:
 ```bash
 rebuild
 # Or explicitly:
-darwin-rebuild switch --flake ~/dotfiles
+sudo darwin-rebuild switch --flake ~/dotfiles
 ```
 
 ### Update All Packages
@@ -234,7 +234,7 @@ rebuild
 darwin-rebuild --list-generations
 
 # Rollback
-darwin-rebuild switch --rollback
+sudo darwin-rebuild switch --rollback
 ```
 
 ### Search for Packages
@@ -330,7 +330,7 @@ Then rebuild.
 
 ## New Machine Setup
 
-After cloning and running `darwin-rebuild switch`, run the bootstrap script:
+After cloning and running `sudo darwin-rebuild switch`, run the bootstrap script:
 
 ```bash
 ./scripts/bootstrap.sh
@@ -404,7 +404,7 @@ Find available options:
 
 ```bash
 # Ensure you're in the dotfiles directory or specify the flake
-darwin-rebuild switch --flake ~/dotfiles
+sudo darwin-rebuild switch --flake ~/dotfiles
 ```
 
 ### "collision between X and Y"
@@ -455,7 +455,7 @@ nvim  # Wait for Lazy to install plugins
 | `nix flake update`                          | Update all inputs              |
 | `nix search nixpkgs <pkg>`                  | Search for packages            |
 | `darwin-rebuild --list-generations`         | List system generations        |
-| `darwin-rebuild switch --rollback`          | Rollback to previous           |
+| `sudo darwin-rebuild switch --rollback`     | Rollback to previous           |
 | `nix-collect-garbage -d`                    | Remove old packages            |
 | `nix why-depends /run/current-system <pkg>` | Debug dependencies             |
 | `nix-tree`                                  | Visualize package dependencies |
@@ -481,7 +481,7 @@ nix search nixpkgs <name>  # Find packages
 # Add to home/default.nix → rebuild
 
 # Troubleshooting
-darwin-rebuild switch --rollback  # Undo last change
+sudo darwin-rebuild switch --rollback  # Undo last change
 nix-collect-garbage -d            # Free disk space
 
 # Secrets
